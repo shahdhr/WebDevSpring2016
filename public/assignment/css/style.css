@@ -1,0 +1,12 @@
+.my-styling {
+    font-size: 30px;
+    color:red;
+}
+
+.my-styling:hover {
+    color:darkred;
+}
+
+.no-breaking {
+    white-space: nowrap;
+}

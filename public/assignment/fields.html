@@ -14,10 +14,10 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
 
 </head>
 
@@ -60,71 +60,87 @@
                 <li><a href="forms.html">Forms</a></li>
                 <li class="active"><a href="#">Fields</a></li>
             </ul>
+
             <form  onsubmit="return checkRegistration()" action="login.html">
                 <br>
                 <fieldset class="form-group">
-                    <div class="col-xs-4">
-                        <label for="inputFirstName">First Name</label>
-                        <div class="form-inline ">
-                        <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
-                            <div class="span-6 pull-right ">
-                                <a href="#" class="glyphicon glyphicon-pencil"></a>
-                                <a href="#" class="glyphicon glyphicon-plus"></a>
-                                <a href="#" class="glyphicon glyphicon-remove"></a>
-                                <a href="#" class="glyphicon glyphicon-align-justify"></a>
+                    <label for="inputFirstName">First Name</label>
+                    <div class="row">
+                        <div class="form-group col-xs-6">
+                            <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <div class="text-right no-breaking " >
+                                <a href="#" class="glyphicon glyphicon-pencil my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-plus my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-remove my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-align-justify my-styling"></a>
                             </div>
                         </div>
                     </div>
-
-
                 </fieldset>
                 <fieldset class="form-group">
-                    <div class="col-xs-4">
+
                     <label for="inputLastName">Last Name</label>
-                        <div class="form-inline">
-                    <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
-                        <div class="span-6 pull-right ">
-                            <a href="#" class="glyphicon glyphicon-pencil"></a>
-                            <a href="#" class="glyphicon glyphicon-plus"></a>
-                            <a href="#" class="glyphicon glyphicon-remove"></a>
-                            <a href="#" class="glyphicon glyphicon-align-justify"></a>
+                    <div class="row">
+                        <div class="form-group col-xs-6">
+                            <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
                         </div>
-                    </div>
-                    </div>
-                </fieldset>
-                <fieldset class="form-group">
-                    <div class="col-xs-4">
-                    <label for="inputDob">Date of Birth</label>
-                        <div class="form-inline">
-                    <input type="date" class="form-control" id="inputDob" placeholder="Date of Birth">
-                            <div class="span-6 pull-right">
-                                <a href="#" class="glyphicon glyphicon-pencil"></a>
-                                <a href="#" class="glyphicon glyphicon-plus"></a>
-                                <a href="#" class="glyphicon glyphicon-remove"></a>
-                                <a href="#" class="glyphicon glyphicon-align-justify"></a>
+                        <div class="form-group col-xs-6">
+                            <div class="text-right no-breaking ">
+                                <a href="#" class="glyphicon glyphicon-pencil my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-plus my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-remove my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-align-justify my-styling"></a>
                             </div>
                         </div>
-                        </div>
+                    </div>
                 </fieldset>
                 <fieldset class="form-group">
-                    <div class="col-xs-4">
-                    <label for="inputGender">Gender</label>
-                        <div class="dropdown">
-
-                            <button class="btn btn-default dropdown-toggle" type="button" id="inputGender" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Male
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="inputGender">
-                                <li><a href="#">Male</a></li>
-                                <li><a href="#">Female</a></li>
-                            </ul>
+                    <label for="inputDob">Date of Birth</label>
+                    <div class="row">
+                        <div class="form-group col-xs-6">
+                            <input type="date" class="form-control" id="inputDob" placeholder="Date of Birth">
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <div class="text-right no-breaking">
+                                <a href="#" class="glyphicon glyphicon-pencil my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-plus my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-remove my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-align-justify my-styling"></a>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
                 <fieldset class="form-group">
-                    <div class="col-xs-4">
-                        <label>Roles:</label>
+                    <label for="inputGender">Gender</label>
+                    <div class="row">
+                        <div class="form-group col-xs-6">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="inputGender" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Male
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="inputGender">
+                                    <li><a href="#">Male</a></li>
+                                    <li><a href="#">Female</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <div class="text-right no-breaking">
+                                <a href="#" class="glyphicon glyphicon-pencil my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-plus my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-remove my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-align-justify my-styling"></a>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label>Roles:</label>
+                    <div class="row">
+                        <div class="form-group col-xs-6">
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox"> Admin
@@ -138,11 +154,21 @@
                                 <input type="checkbox"> User
                             </label>
                         </div>
-                    </div>
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <div class="text-right no-breaking">
+                                <a href="#" class="glyphicon glyphicon-pencil my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-plus my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-remove my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-align-justify my-styling"></a>
+                            </div>
+                        </div>
+                        </div>
                 </fieldset>
                 <fieldset class="form-group">
-                    <div class="col-xs-4">
                         <label>License Agreement:</label>
+                    <div class="row">
+                        <div class="form-group col-xs-6">
                         <div class="radio">
                             <label>
                                 <input type="radio"> Yes
@@ -152,13 +178,23 @@
                                 <input type="radio"> No
                             </label>
                         </div>
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <div class="text-right no-breaking">
+                                <a href="#" class="glyphicon glyphicon-pencil my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-plus my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-remove my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-align-justify my-styling"></a>
+                            </div>
+                        </div>
+                        </div>
 
-                    </div>
                 </fieldset>
                 <hr class="form-group" />
                 <fieldset class="form-group">
-                    <div class="col-xs-4">
-                        <label for="inputAddField">Add New Field:</label>
+                    <label for="inputAddField">Add New Field:</label>
+                    <div class="row">
+                        <div class="form-group col-xs-6">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle" type="button" id="inputAddField" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 Single Line Text
@@ -173,7 +209,19 @@
                                 <li><a href="#">Paragraph Text Field</a></li>
                             </ul>
                         </div>
-                    </div>
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <div class="text-right no-breaking">
+                                <a href="#" class="glyphicon glyphicon-plus my-styling" style="visibility: hidden"></a>
+                                <a href="#" class="glyphicon glyphicon-plus my-styling"></a>
+                                <a href="#" class="glyphicon glyphicon-plus my-styling" style="visibility: hidden"></a>
+                                <a href="#" class="glyphicon glyphicon-plus my-styling" style="visibility: hidden"></a>
+
+
+                            </div>
+                        </div>
+                        </div>
+
                 </fieldset>
             </form>
 
