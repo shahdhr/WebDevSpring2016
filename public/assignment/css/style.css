@@ -27,3 +27,7 @@
 .no-breaking {
     white-space: nowrap;
 }
+
+.invisible-link {
+    visibility: hidden;
+}
