@@ -1,10 +1,27 @@
 .my-styling {
     font-size: 30px;
-    color:red;
+    color:#0033cc;
+}
+.my-styling-pencil {
+    font-size: 30px;
+    color:#0033cc;
+}
+
+.my-styling-plus {
+    font-size: 30px;
+    color:#0066ff;
+}
+.my-styling-remove {
+    font-size: 30px;
+    color:#6699ff;
+}
+.my-styling-lines {
+    font-size: 30px;
+    color:#9999ff;
 }
 
 .my-styling:hover {
-    color:darkred;
+    color:#000066;
 }
 
 .no-breaking {
