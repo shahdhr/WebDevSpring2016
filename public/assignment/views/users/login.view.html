@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Login</h1>
+            <script>
+                function checkRegistration(){
+                    var form_validEmail = (document.getElementById('inputEmail').value != "" );
+                    var form_validUsername = (document.getElementById('inputUsername').value != "" );
+                    var form_validPassword = (document.getElementById('inputPassword').value != "" );
+                    var form_validReEnterPassword = (document.getElementById('inputReEnterPassword').value != "" );
+                    if(!form_validEmail || !form_validUsername || !form_validPassword || !form_validReEnterPassword ){
+                        alert('All fields are required.');
+                        return false;
+                    }
+                    if(document.getElementById('inputPassword').value != document.getElementById('inputReEnterPassword').value)
+                    {
+                        alert('Both Password values do not match.');
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputUsername" class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-10">
+                        <input ng-model="user.username" type="text" class="form-control" id="inputUsername" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input ng-model="user.password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button ng-click="login(user)" type="submit" class="btn btn-block">Login</button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
