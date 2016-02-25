@@ -20,10 +20,10 @@
 
                 <tr>
                     <td>
-                        <input type="text" class="form-control" id="inputName" placeholder="name">
+                        <input ng-model="form.title" type="text" class="form-control" id="inputName" placeholder="name">
                     </td>
                     <td>
-                        <a href="#" class="glyphicon glyphicon-plus my-styling" title="Add form" ></a>
+                        <a  ng-click="addForm(form)" class="glyphicon glyphicon-plus my-styling" title="Add form" ></a>
                         <a href="#" class="glyphicon glyphicon-ok my-styling" title="Update form" ></a>
                     </td>
                 </tr>
