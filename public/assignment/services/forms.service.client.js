@@ -13,6 +13,15 @@
             {"_id": "020", "title": "CDs",      "userId": 234},
         ];
 
+        var api = {
+            createFormForUser:createFormForUser,
+            findAllFormsForUser:findAllFormsForUser,
+            deleteFormById:deleteFormById,
+            updateFormById:updateFormById
+        }
+
+        return api;
+
         function createFormForUser(userId, form, callback) {
             form._id = (new Date).getTime();
             form.userId  = userId;
