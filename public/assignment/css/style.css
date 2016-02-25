@@ -31,3 +31,7 @@
 .invisible-link {
     visibility: hidden;
 }
+
+.highlight-row {
+    background: red;
+}

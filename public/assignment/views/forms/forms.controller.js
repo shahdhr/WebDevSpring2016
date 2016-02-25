@@ -10,25 +10,41 @@
     function FormController($scope, $location, $rootScope, UserService, FormService) {
         var currentUser = $rootScope.newUser;
         $scope.addForm = addForm;
+        $scope.deleteForm = deleteForm;
+
+        FormService.findAllFormsForUser(currentUser._id,FormsForCurrentUser);
 
 
-        FormService.findAllFormsForUser(currentUser._id,FromsForCurrentUser);
-
-
-        function FromsForCurrentUser(formsCurrentUser) {
+        function FormsForCurrentUser(formsCurrentUser) {
             $scope.forms = formsCurrentUser;
 
         }
 
         function addForm(form) {
             form.userId = currentUser._id;
-            form._id = (new Date).getTime();
-            FormService.createFormForUser(currentUser._id,form,newFormAdded)
+            form._id = (new Date()).getTime();
+            FormService.createFormForUser(currentUser._id,form,addFormCallback)
         }
 
-        function newFormAdded(form) {
+        function addFormCallback(form) {
             console.log(form);
-            FormService.findAllFormsForUser(currentUser._id,FromsForCurrentUser);
+            FormService.findAllFormsForUser(currentUser._id,FormsForCurrentUser);
+        }
+
+        function deleteForm(index) {
+            var formId = $scope.forms[index]._id;
+            FormService.deleteFormById(formId,deleteFormCallback)
+
+        }
+
+        function deleteFormCallback(forms) {
+            FormService.findAllFormsForUser(currentUser._id,FormsForCurrentUser);
+        }
+
+        function selectForm(index) {
+            $scope.selectedRow = index;
+
+
         }
 
 

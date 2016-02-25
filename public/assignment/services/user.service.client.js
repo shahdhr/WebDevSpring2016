@@ -47,7 +47,7 @@
         }
 
         function createUser(user,callback) {
-            user._id = (new Date).getTime();
+            user._id = (new Date()).getTime();
             users[users.length] = user;
             callback(user);
         }

@@ -23,10 +23,14 @@
         return api;
 
         function createFormForUser(userId, form, callback) {
-            form._id = (new Date).getTime();
-            form.userId  = userId;
-            forms.push(form);
-            callback(form);
+            var newForm = {
+                _id: (new Date).getTime(),
+                userId: userId,
+                title: form.title
+            }
+
+            forms.push(newForm);
+            callback(newForm);
         }
 
         function findAllFormsForUser(userId, callback) {
@@ -42,7 +46,7 @@
         function deleteFormById(formId, callback) {
             for(index=0;index<forms.length;index++) {
                 if(forms[index]._id == formId) {
-                    forms.remove(index);
+                    forms.splice(index,1);
                     break;
                 }
             }
