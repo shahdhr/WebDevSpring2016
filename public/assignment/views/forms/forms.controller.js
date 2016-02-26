@@ -18,9 +18,10 @@
         $scope.selectForm = selectForm;
 
         //Fetching all forms for current user to display
-        FormService.findAllFormsForUser(currentUser._id,findAllFormsForUserCallback);
-
-
+        function init() {
+            FormService.findAllFormsForUser(currentUser._id, findAllFormsForUserCallback);
+        }
+        init();
 
         //Event handler implementations
         function addForm(form) {
@@ -36,8 +37,13 @@
         }
 
         function selectForm(index) {
+            console.log(index);
             $scope.selectedRow = index;
-
+            $scope.form = {
+                _id: $scope.forms[index]._id,
+                title: $scope.forms[index].title,
+                userId: $scope.forms[index].start
+            };
 
         }
 
@@ -50,11 +56,11 @@
 
         function addFormCallback(form) {
             console.log(form);
-            FormService.findAllFormsForUser(currentUser._id,findAllFormsForUserCallback);
+            init();
         }
 
         function deleteFormCallback(forms) {
-            FormService.findAllFormsForUser(currentUser._id,findAllFormsForUserCallback);
+            init();
         }
 
 

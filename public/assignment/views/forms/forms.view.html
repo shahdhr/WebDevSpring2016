@@ -27,7 +27,7 @@
                         <a ng-click="deleteForm($index)" class="glyphicon glyphicon-ok my-styling" title="Update form" ></a>
                     </td>
                 </tr>
-                <tr ng-repeat="form in forms">
+                <tr ng-repeat="form in forms" ng-class="{'success' : $index == selectedRow }">
                     <td>{{form.title}}</td>
                     <td>
                         <a ng-click="deleteForm($index)" class="glyphicon glyphicon-remove my-styling" title="delete form" ></a>
