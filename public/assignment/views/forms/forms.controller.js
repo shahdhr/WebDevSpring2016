@@ -56,11 +56,7 @@
 
         function updateForm(form) {
              FormService.updateFormById(form._id,form,updateFormCallback);
-            $scope.form = {
-                _id: "",
-                title: "",
-                userId: ""
-            };
+            $scope.form = null;
         }
 
 
