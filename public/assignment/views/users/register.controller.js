@@ -7,16 +7,24 @@
         .controller("RegisterController",RegisterController)
 
     function RegisterController($location, UserService, $scope, $rootScope) {
+
+        //Event handler declarations;
         $scope.register =register;
 
+
+
+        //Event handler implementations
         function register (user) {
-            UserService.createUser(user,createdUser);
+            UserService.createUser(user,registerCallback);
         }
 
-        function createdUser(user) {
+
+
+        //Callback functions
+        function registerCallback(user) {
             $rootScope.newUser = user;
             $location.path('/profile');
            console.log(user);
         }
     }
-})()
+})();

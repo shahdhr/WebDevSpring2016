@@ -7,17 +7,25 @@
         .controller("ProfileController",ProfileController)
 
     function ProfileController($scope, $location, UserService, $rootScope) {
+
+        // currently logged in user
         var currentUser = $rootScope.newUser;
         $scope.user = currentUser;
+
+
+        //Even handler declarations
         $scope.update = update;
 
 
+        //Event handler implementations
         function update(user) {
-            UserService.updateUser(user._id, user, updatedUser);
+            UserService.updateUser(user._id, user, updateCallback);
         }
 
-        function updatedUser(user) {
+
+        //callback functions
+        function updateCallback(user) {
             console.log(user);
         }
     }
-})()
+})();

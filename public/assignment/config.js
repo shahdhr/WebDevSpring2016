@@ -5,6 +5,7 @@
     angular
         .module("FormBuilderApp")
         .config(function($routeProvider) {
+
         $routeProvider
             .when("/", {
                     redirectTo: "/home"

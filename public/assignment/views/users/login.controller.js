@@ -7,14 +7,19 @@
         .controller("LoginController",LoginController)
 
     function LoginController($scope, $location, UserService, $rootScope) {
+
+        //Even handler declarations
         $scope.login = login;
 
 
+        //Event handler implemntations
         function login(user) {
-            UserService.findUserByCredentials(user.username,user.password,loginResponse);
+            UserService.findUserByCredentials(user.username,user.password,loginCallback);
         }
 
-        function loginResponse(user) {
+
+        //Callback functions
+        function loginCallback(user) {
             if(user!=null) {
                 $rootScope.newUser = user;
                 $location.path('/profile');
