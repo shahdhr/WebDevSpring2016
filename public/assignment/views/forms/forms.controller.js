@@ -30,11 +30,7 @@
             form.userId = currentUser._id;
             form._id = (new Date()).getTime();
             FormService.createFormForUser(currentUser._id,form,addFormCallback);
-            $scope.form = {
-                _id: "",
-                title: "",
-                userId: ""
-            };
+            $scope.form = null;
         }
 
         function deleteForm(index) {
