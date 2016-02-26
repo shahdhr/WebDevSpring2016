@@ -10,12 +10,14 @@
     function FormController($scope, $location, $rootScope, UserService, FormService) {
 
         //currently logged in user
-        var currentUser = $rootScope.newUser;
+        var currentUser = UserService.getCurrentUser();
+        $scope.$location = $location;
 
         //Event handler declarations
         $scope.addForm = addForm;
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
+        $scope.updateForm = updateForm;
 
         //Fetching all forms for current user to display
         function init() {
@@ -27,7 +29,12 @@
         function addForm(form) {
             form.userId = currentUser._id;
             form._id = (new Date()).getTime();
-            FormService.createFormForUser(currentUser._id,form,addFormCallback)
+            FormService.createFormForUser(currentUser._id,form,addFormCallback);
+            $scope.form = {
+                _id: "",
+                title: "",
+                userId: ""
+            };
         }
 
         function deleteForm(index) {
@@ -37,14 +44,23 @@
         }
 
         function selectForm(index) {
-            console.log(index);
+
             $scope.selectedRow = index;
             $scope.form = {
                 _id: $scope.forms[index]._id,
                 title: $scope.forms[index].title,
-                userId: $scope.forms[index].start
+                userId: $scope.forms[index].userId
             };
 
+        }
+
+        function updateForm(form) {
+             FormService.updateFormById(form._id,form,updateFormCallback);
+            $scope.form = {
+                _id: "",
+                title: "",
+                userId: ""
+            };
         }
 
 
@@ -55,11 +71,14 @@
         }
 
         function addFormCallback(form) {
-            console.log(form);
             init();
         }
 
         function deleteFormCallback(forms) {
+            init();
+        }
+
+        function updateFormCallback(form) {
             init();
         }
 

@@ -9,7 +9,7 @@
     function ProfileController($scope, $location, UserService, $rootScope) {
 
         // currently logged in user
-        var currentUser = $rootScope.newUser;
+        var currentUser = UserService.getCurrentUser();
         $scope.user = currentUser;
 
 

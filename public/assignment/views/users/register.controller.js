@@ -22,7 +22,7 @@
 
         //Callback functions
         function registerCallback(user) {
-            $rootScope.newUser = user;
+           UserService.setCurrentUser(user);
             $location.path('/profile');
            console.log(user);
         }

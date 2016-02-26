@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .factory("UserService",UserService)
 
-    function UserService() {
+    function UserService($rootScope) {
 
         var users = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
@@ -27,7 +27,9 @@
             findAllUsers: findAllUsers,
             createUser:createUser,
             deleteUserById:deleteUserById,
-            updateUser:updateUser
+            updateUser:updateUser,
+            setCurrentUser:setCurrentUser,
+            getCurrentUser:getCurrentUser
         };
         return api;
 
@@ -70,9 +72,25 @@
                     users[index].password = user.password;
                     users[index].roles = user.roles;
                     users[index].username = user.username;
+
                 }
             }
             callback(user);
+        }
+
+        function setCurrentUser(aUser) {
+            if(aUser == null) {
+                $rootScope.newUser = null;
+            }
+            else {
+                $rootScope.newUser = {"_id":aUser._id, "firstName":aUser.firstName, "lastName":aUser.lastName,
+                    "username":aUser.username, "password":aUser.password, "roles": aUser.roles}
+            }
+
+        }
+
+        function getCurrentUser() {
+            return $rootScope.newUser;
         }
     }
 })();

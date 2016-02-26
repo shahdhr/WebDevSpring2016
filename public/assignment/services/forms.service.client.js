@@ -57,7 +57,7 @@
             for(index=0;index<forms.length;index++) {
                 if(forms[index]._id == formId) {
                     forms[index]._id = formId;
-                    newform._id = formId;
+                    newForm._id = formId;
                     forms[index].title = newForm.title;
                     forms[index].userId = newForm.userId;
                     break;

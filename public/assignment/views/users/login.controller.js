@@ -10,6 +10,7 @@
 
         //Even handler declarations
         $scope.login = login;
+        $scope.$location = $location;
 
 
         //Event handler implemntations
@@ -21,7 +22,7 @@
         //Callback functions
         function loginCallback(user) {
             if(user!=null) {
-                $rootScope.newUser = user;
+                UserService.setCurrentUser(user);
                 $location.path('/profile');
             }
 
