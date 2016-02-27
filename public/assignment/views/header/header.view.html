@@ -16,7 +16,7 @@
                 <li ng-show="newUser.roles.indexOf('admin') >= 0" ng-class="{'active': $location.url()=='/admin'}">
                     <a href="#/admin">Admin</a></li>
                 <li ng-show="newUser" ng-class="{'active': $location.url()=='/profile'}">
-                    <a href="#/profile"><span class="capitalize">{{newUser.username}}</span></a></li>
+                    <a href="#/profile">{{newUser.username}}</a></li>
                 <li ng-hide="newUser" ng-class="{'active': $location.url()=='/login'}">
                     <a href="#/login">Login</a></li>
                 <li ng-show="newUser" ng-class="{'active': $location.url()=='/forms'}" class="visible-xs-block">
