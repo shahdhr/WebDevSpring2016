@@ -1,6 +1,7 @@
 /**
  * Created by Dhruv on 2/23/2016.
  */
+"use strict";
 (function() {
     angular
         .module("FormBuilderApp")
@@ -35,7 +36,7 @@
 
         function findAllFormsForUser(userId, callback) {
             var userForms = [];
-            for(index=0;index<forms.length;index++) {
+            for(var index=0;index<forms.length;index++) {
                 if(forms[index].userId == userId) {
                     userForms.push(forms[index]);
                 }
@@ -44,7 +45,7 @@
         }
 
         function deleteFormById(formId, callback) {
-            for(index=0;index<forms.length;index++) {
+            for(var index=0;index<forms.length;index++) {
                 if(forms[index]._id == formId) {
                     forms.splice(index,1);
                     break;
@@ -54,7 +55,7 @@
         }
 
         function updateFormById(formId, newForm, callback) {
-            for(index=0;index<forms.length;index++) {
+            for(var index=0;index<forms.length;index++) {
                 if(forms[index]._id == formId) {
                     forms[index]._id = formId;
                     newForm._id = formId;

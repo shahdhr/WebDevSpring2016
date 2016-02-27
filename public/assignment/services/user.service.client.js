@@ -1,6 +1,7 @@
 /**
  * Created by Dhruv on 2/22/2016.
  */
+"use strict";
 (function(){
     angular
         .module("FormBuilderApp")
@@ -34,7 +35,7 @@
         return api;
 
         function findUserByCredentials(username, password, callback) {
-            for(index=0;index<users.length;index++) {
+            for(var index=0;index<users.length;index++) {
                 if(users[index].username == username) {
                     if(users[index].password==password) {
                         callback(users[index]);
@@ -55,7 +56,7 @@
         }
 
         function deleteUserById(userId,callback) {
-            for(index=0;index<users.length;index++) {
+            for(var index=0;index<users.length;index++) {
                 if(users[index]._id == userId) {
                     users.remove(index);
                 }
@@ -65,7 +66,7 @@
         }
 
         function updateUser(userId, user, callback) {
-            for(index=0;index<users.length;index++) {
+            for(var index=0;index<users.length;index++) {
                 if(users[index]._id == userId) {
                     users[index].firstName = user.firstName;
                     users[index].lastName = user.lastName;
