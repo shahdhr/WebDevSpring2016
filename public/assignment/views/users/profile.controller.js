@@ -20,12 +20,14 @@
         //Event handler implementations
         function update(user) {
             UserService.updateUser(user._id, user, updateCallback);
+
         }
 
 
         //callback functions
         function updateCallback(user) {
             console.log(user);
+            $scope.updateMessage = "Profile updated successfully."
         }
     }
 })();

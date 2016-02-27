@@ -19,6 +19,9 @@
                     <a href="#/profile">Username</a></li>
                 <li ng-hide="newUser" ng-class="{'active': $location.url()=='/login'}">
                     <a href="#/login">Login</a></li>
+                <li ng-show="newUser" ng-class="{'active': $location.url()=='/forms'}" class="visible-xs-block">
+                    <a href="#/forms">Forms</a>
+                </li>
                 <li ng-show="newUser">
                     <a href="" ng-click="logout()">Logout</a></li>
             </ul>

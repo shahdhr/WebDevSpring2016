@@ -25,6 +25,9 @@
                 UserService.setCurrentUser(user);
                 $location.path('/profile');
             }
+            else {
+                $scope.loginFailed = "Login failed. Invalid username or password."
+            }
 
         }
     }

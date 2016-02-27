@@ -1,6 +1,5 @@
 <div class="container-fluid">
     <div class="row">
-
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Login</h1>
             <script>
@@ -38,11 +37,11 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button ng-click="login(user)" type="submit" class="btn btn-block">Login</button>
+                        <br>
+                        {{loginFailed}}
                     </div>
-
                 </div>
             </form>
-
         </div>
     </div>
 </div>
