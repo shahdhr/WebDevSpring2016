@@ -1,0 +1,11 @@
+body {
+    padding-top: 51px;
+}
+
+.no-breaking {
+    white-space: nowrap;
+}
+
+.padding-search-bar {
+    padding-right: 30px;
+}
