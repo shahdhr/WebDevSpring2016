@@ -12,6 +12,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
     <script src="app.js"></script>
     <script src="main.controller.js"></script>
+    <script src="config.js"></script>
+    <script src="client/views/home/home.controller.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -19,12 +21,6 @@
 
 
 <div ng-include="'client/views/header/header.view.html'"></div>
-<div class="container">
-    <div class="text-center">
-        <h1>Project Home page</h1>
-    </div>
-</div><!-- /.container -->
-<!-- script references -->
-
+<div ng-view></div>
 </body>
 </html>
