@@ -12,13 +12,13 @@
 
         function searchPlaces(search) {
             var url = SEARCH_URL.replace("SEARCHQUERY",search.query);
-            $http.get("/hello")
+            $http.get("/api/search/place")
                 .success(renderDetails);
         }
 
         function  renderDetails(response) {
             console.log(response);
-            $scope.displayResponse = response;
+            $scope.places = response.places;
         }
     }
 })();
