@@ -12,7 +12,7 @@
 
         function searchPlaces(search) {
             var url = SEARCH_URL.replace("SEARCHQUERY",search.query);
-            $http.get(url)
+            $http.get("/hello")
                 .success(renderDetails);
         }
 
