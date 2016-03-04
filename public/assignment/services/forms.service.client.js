@@ -19,7 +19,7 @@
             findAllFormsForUser:findAllFormsForUser,
             deleteFormById:deleteFormById,
             updateFormById:updateFormById
-        }
+        };
 
         return api;
 

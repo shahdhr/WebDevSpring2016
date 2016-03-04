@@ -37,7 +37,7 @@
             </div>
         </fieldset>
     </form>
-<table class="table table-striped">
+<table class="table table-striped" ng-show="places">
     <thead>
     <tr>
         <th>Thumbnail</th>
@@ -45,7 +45,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="place in places">
+    <tr ng-repeat="place in places" ng-click="findDetailsById(place.place.place_details.id)">
         <td><img ng-src="{{place.place.place_details.featured_photo.medium}}"> </td>
         <td>{{place.place.place_details.name}}</td>
     </tr>

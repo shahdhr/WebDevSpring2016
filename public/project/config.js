@@ -37,6 +37,10 @@
                 templateUrl: "client/views/home/home.view.html",
                 controller: "HomeController"
             })
+            .when("/details/:apartmentId", {
+                templateUrl: "client/views/apartment/details.view.html",
+                controller: "ApartmentDetailsController"
+            })
             .otherwise({
                     redirectTo: "/"
                 })
