@@ -11,8 +11,9 @@
         $scope.searchPlaces = searchPlaces;
 
         function searchPlaces(search) {
-            var url = SEARCH_URL.replace("SEARCHQUERY",search.query);
-            $http.get("/api/search/place")
+            var query = search.place;
+
+            $http.get("/api/search/place/"+query)
                 .success(renderDetails);
         }
 

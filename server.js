@@ -4,25 +4,24 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-app.get('/api/search/place', function(req, res){
-
+var SEARCH_QUERY_URL = "https://api.9flats.com/api/v4/places?client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l&search[query]=SEARCHQUERY";
+app.get('/api/search/place/:query', function(req, res){
+    var url = SEARCH_QUERY_URL.replace("SEARCHQUERY",req.params.query);
+    console.log(url);
     callback = function(response) {
-        console.log(response);
+
         var str = '';
         response.on('data', function (chunk) {
             str += chunk;
-            console.log(chunk);
         });
 
         response.on('end', function () {
-            console.log(str);
             res.send(str);
         });
+
     };
 
-    http.get('https://api.9flats.com/api/v4/places?client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l&search[query]=Mumbai', callback).end();
-
-
+    http.get(url, callback).end();
 });
 
 var options = {
