@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="HeaderController">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,9 +23,21 @@
                 </form>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/register">Register</a></li>
-                <li><a href="#/login">Login</a></li>
+                <li ng-hide="newUser" ng-class="{'active': $location.url()=='/register'}">
+                    <a href="#/register">Register</a></li>
+                <li ng-show="newUser.roles.indexOf('admin') >= 0" ng-class="{'active': $location.url()=='/admin'}">
+                    <a href="#/admin">Admin</a></li>
+                <li ng-hide="newUser" ng-class="{'active': $location.url()=='/login'}">
+                    <a href="#/login">Login</a></li>
+                <li ng-show="newUser" ng-class="{'active': $location.url()=='/profile'}">
+                    <a href="#/profile">{{newUser.firstName}}</a></li>
+                <li ng-show="newUser">
+                    <a href="" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
     </div>
 </div>
+
+
+
+
