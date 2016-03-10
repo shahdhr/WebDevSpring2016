@@ -47,34 +47,33 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" ng-click="listApartment()" class="btn btn-block">Manage Apartments</button>
+                        <br>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" ng-click="showFavourites()" class="btn btn-block">View Favourite Apartments</button>
                         <br>
                     </div>
                 </div>
-                <!--<div class="form-group">-->
-                    <!--<div class="col-sm-offset-2 col-sm-10">-->
-                        <!--<ul ng-show="favoritedApartments">-->
-                            <!--<li ng-repeat="apartment in favoritedApartments track by $index">-->
-                                <!--{{apartment.name}}-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                <!--</div>-->
             </form>
             <table class="table table-striped" ng-show="favoritedApartments.length">
                 <thead>
-                <tr>
-                    <th>Thumbnail</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
+                    <tr>
+                        <th>Thumbnail</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="apartment in favoritedApartments" ng-click="findDetailsById(place.place.place_details.id)">
-                    <td><img ng-src="{{apartment.featured_photo.medium}}"> </td>
-                    <td>{{apartment.name}}</td>
-                    <td><a href="" ng-click="removeFavourite(apartment.id)" class="glyphicon glyphicon-remove my-styling" title="remove favourite" ></a></td>
-                </tr>
+                    <tr ng-repeat="apartment in favoritedApartments"
+                        ng-click="findDetailsById(place.place.place_details.id)">
+                        <td><img ng-src="{{apartment.featured_photo.medium}}"> </td>
+                        <td>{{apartment.name}}</td>
+                        <td><a href="" ng-click="removeFavourite(apartment.id)"
+                               class="glyphicon glyphicon-remove my-styling" title="remove favourite" ></a></td>
+                    </tr>
                 </tbody>
             </table>
 

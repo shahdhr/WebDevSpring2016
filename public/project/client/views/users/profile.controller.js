@@ -19,6 +19,7 @@
         $scope.update = update;
         $scope.showFavourites = showFavourites;
         $scope.removeFavourite = removeFavourite;
+        $scope.listApartment = listApartment;
 
 
         //Event handler implementations
@@ -45,6 +46,10 @@
             user.favourites = user.favourites.splice(id,1);
             UserService.updateUser(user._id,user,removeFavouriteCallback);
 
+        }
+
+        function listApartment() {
+            $location.path("/apartment")
         }
 
 
