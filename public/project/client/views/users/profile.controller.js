@@ -18,6 +18,7 @@
         //Even handler declarations
         $scope.update = update;
         $scope.showFavourites = showFavourites;
+        $scope.removeFavourite = removeFavourite;
 
 
         //Event handler implementations
@@ -28,15 +29,25 @@
 
         function showFavourites() {
             var user = UserService.getCurrentUser();
-
-            for(var index = 0; index<user.favourites.length;index++) {
-                var id=user.favourites[index];
-                ApartmentService.findApartmentDetailsById(user.favourites[0],showFavouritesCallback);
-                console.log("Hello loop");
+            if(user.favourites.length > 0) {
+                for(var index = 0; index<user.favourites.length;index++) {
+                    var id=user.favourites[index];
+                    ApartmentService.findApartmentDetailsById(user.favourites[0],showFavouritesCallback);
+                    console.log("Hello loop");
+                }
+            } else {
+                $scope.favoritedApartments = [];
             }
+        }
 
+        function removeFavourite(id) {
+            var user = UserService.getCurrentUser();
+            user.favourites = user.favourites.splice(id,1);
+            UserService.updateUser(user._id,user,removeFavouriteCallback);
 
         }
+
+
 
 
         //callback functions
@@ -47,6 +58,10 @@
 
         function showFavouritesCallback(apartment) {
             $scope.favoritedApartments.push(apartment.place.place_details);
+        }
+
+        function removeFavouriteCallback(user) {
+            showFavourites();
         }
     }
 })();
