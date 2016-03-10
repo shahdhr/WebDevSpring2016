@@ -11,15 +11,15 @@
 
         var users = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "roles": ["student"], "email":""		},
+                "username":"alice",  "password":"alice",   "roles": ["student"], "email":"", "favourites":[]	},
             {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-                "username":"bob",    "password":"bob",     "roles": ["admin"], "email":""		},
+                "username":"bob",    "password":"bob",     "roles": ["admin"], "email":"", "favourites":[] },
             {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "roles": ["faculty"], "email":""		},
+                "username":"charlie","password":"charlie", "roles": ["faculty"], "email":"", "favourites":[]	},
             {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"], "email":""},
+                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"], "email":"", "favourites":[] },
             {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "roles": ["student"], "email":""		}
+                "username":"ed",     "password":"ed",      "roles": ["student"], "email":"", "favourites":[] }
         ];
 
 
@@ -30,7 +30,8 @@
             deleteUserById:deleteUserById,
             updateUser:updateUser,
             setCurrentUser:setCurrentUser,
-            getCurrentUser:getCurrentUser
+            getCurrentUser:getCurrentUser,
+
         };
         return api;
 
@@ -38,6 +39,7 @@
             for(var index=0;index<users.length;index++) {
                 if(users[index].username == username) {
                     if(users[index].password==password) {
+                        console.log(users[index]);
                         callback(users[index]);
                     }
                 }
@@ -74,6 +76,7 @@
                     users[index].roles = user.roles;
                     users[index].username = user.username;
                     users[index].email = user.email;
+                    users[index].favourites = user.favourites;
                 }
             }
             callback(user);
@@ -85,7 +88,7 @@
             }
             else {
                 $rootScope.newUser = {"_id":aUser._id, "firstName":aUser.firstName, "lastName":aUser.lastName,
-                    "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email}
+                    "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email, "favourites":aUser.favourites}
             }
 
         }
@@ -93,5 +96,7 @@
         function getCurrentUser() {
             return $rootScope.newUser;
         }
+
+
     }
 })();

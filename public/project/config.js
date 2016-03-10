@@ -12,10 +12,7 @@
                     redirectTo: "/home"
 
                 })
-                //.when("/profile", {
-                //        templateUrl: "views/users/profile.view.html",
-                //        controller: "ProfileController"
-                //    })
+
                 //.when("/admin", {
                 //        templateUrl: "views/admin/admin.view.html"
                 //    })
@@ -41,6 +38,10 @@
                 .when("/register", {
                     templateUrl: "client/views/users/register.view.html",
                     controller: "RegisterController"
+                })
+                .when("/profile", {
+                    templateUrl: "client/views/users/profile.view.html",
+                    controller: "ProfileController"
                 })
                 .otherwise({
                     redirectTo: "/"
