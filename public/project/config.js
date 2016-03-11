@@ -48,12 +48,16 @@
                     controller: "ApartmentController"
                 })
                 .when("/booking", {
-                    templateUrl: "client/views/apartment/booking.view.html",
+                    templateUrl: "client/views/booking/booking.view.html",
                     controller: "BookingController"
                 })
                 .when("/review", {
-                    templateUrl: "client/views/apartment/review.view.html",
+                    templateUrl: "client/views/review/review.view.html",
                     controller: "ReviewController"
+                })
+                .when("/admin", {
+                    templateUrl: "client/views/admin/admin.view.html",
+                    controller: "AdminController"
                 })
                 .otherwise({
                     redirectTo: "/"

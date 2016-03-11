@@ -3,37 +3,38 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1>Your Apartments</h1>
-
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Bedrooms</th>
-                    <th>Description</th>
-                    <th>Action</th>
-                </tr>
-                <tr>
-                    <th><input ng-model="apartment.title" class="form-control"/></th>
-                    <th><input ng-model="apartment.bedrooms" class="form-control"/></th>
-                    <th><input ng-model="apartment.description"  class="form-control"/></th>
-                    <th>
-                        <button ng-click="addApartment(apartment)" class="btn btn-primary">Add</button>
-                        <button ng-click="updateApartment(apartment)" class="btn btn-primary btn-success">Update</button>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="apartment in apartments">
-                    <td>{{apartment.title}}</td>
-                    <td>{{apartment.bedrooms | number:0 }}</td>
-                    <td>{{apartment.description}}</td>
-                    <td>
-                        <button ng-click="removeApartment($index)" class="btn btn-danger">Remove</button>
-                        <button ng-click="selectApartment($index)" class="btn btn-info">Select</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Bedrooms</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <th><input ng-model="apartment.title" class="form-control"/></th>
+                        <th><input ng-model="apartment.bedrooms" class="form-control"/></th>
+                        <th><input ng-model="apartment.description"  class="form-control"/></th>
+                        <th>
+                            <button ng-click="addApartment(apartment)" class="btn btn-primary">Add</button>
+                            <button ng-click="updateApartment(apartment)" class="btn btn-primary btn-success">Update</button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="apartment in apartments">
+                        <td>{{apartment.title}}</td>
+                        <td>{{apartment.bedrooms | number:0 }}</td>
+                        <td>{{apartment.description}}</td>
+                        <td>
+                            <button ng-click="removeApartment($index)" class="btn btn-danger">Remove</button>
+                            <button ng-click="selectApartment($index)" class="btn btn-info">Select</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

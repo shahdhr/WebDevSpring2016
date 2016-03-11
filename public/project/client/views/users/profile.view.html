@@ -52,25 +52,26 @@
                     </div>
                 </div>
             </form>
-            <table class="table table-striped" ng-show="favoritedApartments.length">
-                <thead>
-                <tr>
-                    <th>Thumbnail</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="apartment in favoritedApartments"
-                    ng-click="findDetailsById(place.place.place_details.id)">
-                    <td><img ng-src="{{apartment.featured_photo.medium}}"> </td>
-                    <td>{{apartment.name}}</td>
-                    <td><a href="" ng-click="removeFavourite(apartment.id)"
-                           class="glyphicon glyphicon-remove my-styling" title="remove favourite" ></a></td>
-                </tr>
-                </tbody>
-            </table>
-
+            <div class="table-responsive">
+                <table class="table table-striped" ng-show="favoritedApartments.length">
+                    <thead>
+                    <tr>
+                        <th>Thumbnail</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="apartment in favoritedApartments"
+                        ng-click="findDetailsById(place.place.place_details.id)">
+                        <td><img ng-src="{{apartment.featured_photo.medium}}"> </td>
+                        <td>{{apartment.name}}</td>
+                        <td><a href="" ng-click="removeFavourite(apartment.id)"
+                               class="glyphicon glyphicon-remove my-styling" title="remove favourite" ></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

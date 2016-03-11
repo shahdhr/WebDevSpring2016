@@ -8,7 +8,8 @@
                     <label for="inputPlace">Place</label>
                     <div class="row">
                         <div class="form-group col-xs-12">
-                            <input ng-model="search.place" type="text" class="form-control" id="inputPlace" placeholder="Where to you want to go?">
+                            <input ng-model="search.place" type="text" class="form-control" id="inputPlace"
+                                   placeholder="Where to you want to go?">
                         </div>
                     </div>
                 </fieldset>
@@ -40,20 +41,22 @@
                     </div>
                 </fieldset>
             </form>
-            <table class="table table-striped" ng-show="places">
-                <thead>
-                <tr>
-                    <th>Thumbnail</th>
-                    <th>Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="place in places" ng-click="findDetailsById(place.place.place_details.id)">
-                    <td><img ng-src="{{place.place.place_details.featured_photo.medium}}"> </td>
-                    <td>{{place.place.place_details.name}}</td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-striped" ng-show="places">
+                    <thead>
+                    <tr>
+                        <th>Thumbnail</th>
+                        <th>Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="place in places" ng-click="findDetailsById(place.place.place_details.id)">
+                        <td><img ng-src="{{place.place.place_details.featured_photo.medium}}"> </td>
+                        <td>{{place.place.place_details.name}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

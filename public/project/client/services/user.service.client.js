@@ -11,15 +11,15 @@
 
         var users = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "roles": ["student"], "email":"", "favourites":["150320"]	},
+                "username":"alice",  "password":"alice",   "roles": ["general"], "email":"", "favourites":["150320"]	},
             {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
                 "username":"bob",    "password":"bob",     "roles": ["admin"], "email":"", "favourites":["150320"] },
             {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "roles": ["faculty"], "email":"", "favourites":["150320"]	},
+                "username":"charlie","password":"charlie", "roles": ["general"], "email":"", "favourites":["150320"]	},
             {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"], "email":"", "favourites":["150320"] },
+                "username":"dan",    "password":"dan",     "roles": ["general", "admin"], "email":"", "favourites":["150320"] },
             {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "roles": ["student"], "email":"", "favourites":["150320"] }
+                "username":"ed",     "password":"ed",      "roles": ["general"], "email":"", "favourites":["150320"] }
         ];
 
 

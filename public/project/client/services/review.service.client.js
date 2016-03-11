@@ -34,7 +34,7 @@
 
         function findAllReviewsForUser (reviewedBy,callback) {
             var userReviews = [];
-            for(var index=0;index<reviews.length;index++) {
+            for(var index=0; index<reviews.length; index++) {
                 if(reviews[index].reviewed_by == reviewedBy) {
                     userReviews.push(reviews[index]);
                 }
@@ -53,7 +53,7 @@
         }
 
         function deleteReviewById(review_id, callback) {
-            for(var index=0;index<reviews.length;index++) {
+            for(var index=0; index<reviews.length; index++) {
                 if(reviews[index]._id == review_id) {
                     reviews.splice(index,1);
                     break;
@@ -63,7 +63,7 @@
         }
 
         function updateReviewById(reviewId, newReview, callback) {
-            for(var index=0;index<reviews.length;index++) {
+            for(var index=0; index<reviews.length; index++) {
                 if(reviews[index]._id == reviewId) {
                     reviews[index]._id = reviewId;
                     newReview._id = reviewId;

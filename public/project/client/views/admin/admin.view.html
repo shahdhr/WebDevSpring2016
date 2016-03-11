@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Manage Users</h1>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <th><input ng-model="user.username" class="form-control"/></th>
+                        <th>
+                            <button ng-click="addUser(user)" class="btn btn-primary">Add</button>
+                            <button ng-click="updateUser(user)" class="btn btn-primary btn-success">Update</button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="user in users">
+                        <td>{{user.username}}</td>
+                        <!--<td>{{review.description}}</td>-->
+                        <!--<td>{{review.rating}}</td>-->
+                        <td>
+                            <button ng-click="removeUser($index)" class="btn btn-danger">Remove</button>
+                            <button ng-click="selectUser($index)" class="btn btn-info">Select</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

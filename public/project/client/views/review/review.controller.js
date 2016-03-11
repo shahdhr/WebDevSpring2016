@@ -37,10 +37,10 @@
         {
             $scope.selectedReviewIndex = index;
             $scope.review = {
-                _id: $scope.reviews[index]._id,
-                apartmentId: $scope.reviews[index].apartmentId,
-                description: $scope.reviews[index].description,
-                rating: $scope.reviews[index].rating
+                _id: $scope.users[index]._id,
+                apartmentId: $scope.users[index].apartmentId,
+                description: $scope.users[index].description,
+                rating: $scope.users[index].rating
             };
 
             //$scope.apartment = $scope.apartments[index];
@@ -48,7 +48,7 @@
 
         function removeReview(index)
         {
-            var reviewId = $scope.reviews[index]._id;
+            var reviewId = $scope.users[index]._id;
             ReviewService.deleteReviewById(reviewId,removeReviewCallback);
             //$scope.apartments.splice(index, 1);
         }
@@ -68,7 +68,7 @@
         //callback functions
 
         function findAllReviewsForUserCallback(reviewsCurrentUser) {
-            $scope.reviews = reviewsCurrentUser;
+            $scope.users = reviewsCurrentUser;
             console.log(reviewsCurrentUser);
 
         }
