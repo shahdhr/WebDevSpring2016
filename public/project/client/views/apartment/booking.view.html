@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1>Your Bookings</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ApartmentId</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <th><input ng-model="booking.apartmentId" class="form-control"/></th>
+                    <th><input ng-model="booking.startDate" class="form-control"/></th>
+                    <th><input ng-model="booking.endDate"  class="form-control"/></th>
+                    <th>
+                        <button ng-click="addBooking(booking)" class="btn btn-primary">Add</button>
+                        <button ng-click="updateBooking(booking)" class="btn btn-primary btn-success">Update</button>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="booking in bookings">
+                    <td>{{booking.apartmentId}}</td>
+                    <td>{{booking.startDate | number:0 }}</td>
+                    <td>{{booking.endDate}}</td>
+                    <td>
+                        <button ng-click="removeBooking($index)" class="btn btn-danger">Remove</button>
+                        <button ng-click="selectBooking($index)" class="btn btn-info">Select</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

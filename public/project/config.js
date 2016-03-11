@@ -47,6 +47,14 @@
                     templateUrl: "client/views/apartment/apartment.view.html",
                     controller: "ApartmentController"
                 })
+                .when("/booking", {
+                    templateUrl: "client/views/apartment/booking.view.html",
+                    controller: "BookingController"
+                })
+                .when("/review", {
+                    templateUrl: "client/views/apartment/review.view.html",
+                    controller: "ReviewController"
+                })
                 .otherwise({
                     redirectTo: "/"
                 })

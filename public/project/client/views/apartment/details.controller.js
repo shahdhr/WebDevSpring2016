@@ -1,6 +1,7 @@
 /**
  * Created by Dhruv on 3/3/2016.
  */
+"use strict";
 (function() {
     angular
         .module("RentOutApp")

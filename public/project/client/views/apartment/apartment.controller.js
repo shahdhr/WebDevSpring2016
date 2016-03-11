@@ -1,6 +1,7 @@
 /**
  * Created by Dhruv on 3/10/2016.
  */
+"use strict";
 (function()
 {
     angular
