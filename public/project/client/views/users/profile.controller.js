@@ -30,11 +30,10 @@
 
         function showFavourites() {
             var user = UserService.getCurrentUser();
+            $scope.favoritedApartments = [];
             if(user.favourites.length > 0) {
                 for(var index = 0; index<user.favourites.length;index++) {
-                    var id=user.favourites[index];
-                    ApartmentService.findApartmentDetailsById(user.favourites[0],showFavouritesCallback);
-                    console.log("Hello loop");
+                    ApartmentService.findApartmentDetailsById(user.favourites[index],showFavouritesCallback)
                 }
             } else {
                 $scope.favoritedApartments = [];
@@ -42,9 +41,12 @@
         }
 
         function removeFavourite(id) {
+            console.log(id);
             var user = UserService.getCurrentUser();
-            user.favourites = user.favourites.splice(id,1);
+            var index = user.favourites.indexOf(id);
+            user.favourites.splice(index,1);
             UserService.updateUser(user._id,user,removeFavouriteCallback);
+
 
         }
 
@@ -66,6 +68,8 @@
         }
 
         function removeFavouriteCallback(user) {
+            console.log("remove callback")
+            console.log(user.favourites);
             showFavourites();
         }
     }

@@ -18,9 +18,9 @@
             $scope.apartment = apartmentDetails.place.place_details;
         }
 
-        function addApartmentToFavourites(apartment) {
+        function addApartmentToFavourites() {
             var user = UserService.getCurrentUser();
-            user.favourites.push(apartment.id);
+            user.favourites.push(apartmentId);
             UserService.updateUser(user._id, user, addApartmentToFavouritesCallback);
 
         }

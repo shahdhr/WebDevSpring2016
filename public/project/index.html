@@ -25,10 +25,11 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="client/css/style.css" rel="stylesheet">
+    <link href="client/css/dashboard.css" rel="stylesheet">
 </head>
 <body ng-controller="MainController">
 
-
+<div ng-include="'client/views/sidebar/sidebar.view.html'"></div>
 <div ng-include="'client/views/header/header.view.html'"></div>
 <div ng-view></div>
 </body>
