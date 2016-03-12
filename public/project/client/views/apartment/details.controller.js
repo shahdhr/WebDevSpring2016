@@ -10,6 +10,7 @@
     function ApartmentDetailsController($scope, $location, $routeParams, ApartmentService,UserService) {
         var apartmentId = $routeParams.apartmentId;
         $scope.addApartmentToFavourites = addApartmentToFavourites;
+        $scope.favouriteButton = "Mark as favourite";
         console.log(apartmentId);
         ApartmentService.findApartmentDetailsById(apartmentId,renderDetails);
 
@@ -27,6 +28,7 @@
         }
         function addApartmentToFavouritesCallback(user) {
             console.log(user.favourites);
+            $scope.favouriteButton = "Marked";
         }
     }
 
