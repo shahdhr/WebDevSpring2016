@@ -52,7 +52,7 @@
                     <tbody>
                     <tr ng-repeat="place in places" ng-click="findDetailsById(place.place.place_details.id)">
                         <td><img ng-src="{{place.place.place_details.featured_photo.medium}}"> </td>
-                        <td>{{place.place.place_details.name}}</td>
+                        <td><a href="">{{place.place.place_details.name}}</a></td>
                     </tr>
                     </tbody>
                 </table>

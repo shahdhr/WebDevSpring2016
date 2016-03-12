@@ -9,7 +9,7 @@
 
             $routeProvider
                 .when("/", {
-                    redirectTo: "/login"
+                    redirectTo: "/home"
 
                 })
 
