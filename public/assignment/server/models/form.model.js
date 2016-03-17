@@ -8,7 +8,8 @@ module.exports = function() {
         findAllFormsForUser:findAllFormsForUser,
         deleteFormById:deleteFormById,
         updateFormById:updateFormById,
-        findFormByTitle:findFormByTitle
+        findFormByTitle:findFormByTitle,
+        findFromById: findFromById
     };
 
     return api;
@@ -65,6 +66,16 @@ module.exports = function() {
             }
         }
         return forms
+    }
+
+    function findFromById (formId) {
+        for(var index=0;index<forms.length;index++) {
+            if (forms[index]._id == formId) {
+                return forms[index];
+            }
+        }
+
+        return null;
     }
 
 
