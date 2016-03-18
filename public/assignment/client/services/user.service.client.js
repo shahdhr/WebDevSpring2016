@@ -9,18 +9,18 @@
 
     function UserService($rootScope) {
 
-        var users = [
-            {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "roles": ["student"], "email":""		},
-            {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-                "username":"bob",    "password":"bob",     "roles": ["admin"], "email":""		},
-            {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "roles": ["faculty"], "email":""		},
-            {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"], "email":""},
-            {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "roles": ["student"], "email":""		}
-        ];
+        //var users = [
+        //    {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
+        //        "username":"alice",  "password":"alice",   "roles": ["student"], "email":""		},
+        //    {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
+        //        "username":"bob",    "password":"bob",     "roles": ["admin"], "email":""		},
+        //    {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
+        //        "username":"charlie","password":"charlie", "roles": ["faculty"], "email":""		},
+        //    {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
+        //        "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"], "email":""},
+        //    {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
+        //        "username":"ed",     "password":"ed",      "roles": ["student"], "email":""		}
+        //];
 
 
         var api = {
@@ -34,15 +34,16 @@
         };
         return api;
 
-        function findUserByCredentials(username, password, callback) {
-            for(var index=0;index<users.length;index++) {
-                if(users[index].username == username) {
-                    if(users[index].password==password) {
-                        callback(users[index]);
-                    }
-                }
-            }
-            callback(null);
+        function findUserByCredentials(username, password) {
+            //for(var index=0;index<users.length;index++) {
+            //    if(users[index].username == username) {
+            //        if(users[index].password==password) {
+            //            callback(users[index]);
+            //        }
+            //    }
+            //}
+            //callback(null);
+            return $http.get("/api/assignment/user?username="+username+"&password="+password);
         }
 
         function findAllUsers(callback){

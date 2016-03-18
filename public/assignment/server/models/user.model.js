@@ -39,7 +39,7 @@ module.exports = function() {
     function findUserById(userId) {
         for(var index=0;index<users.length;index++) {
             if (users[index]._id == userId) {
-                return user[index];
+                return users[index];
             }
         }
         return null;

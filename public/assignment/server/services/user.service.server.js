@@ -17,12 +17,25 @@ module.exports = function (app, model) {
     }
 
     function getAllUsers (req, res) {
-        var users = model.findAllUsers();
-        res.json(users);
+
+        if(req.query.username) {
+            if(req.query.password) {
+                getUserByCredentials(req,res);
+            }
+            else {
+                getUserByUsername(req,res);
+            }
+        }
+        else {
+            var users = model.findAllUsers();
+            res.json(users);
+        }
+
     }
 
     function getUserById (req, res) {
         var id = req.params.id;
+        console.log(req.params);
         var user = model.findUserById(id);
         if(user) {
             res.json(user);
@@ -32,8 +45,8 @@ module.exports = function (app, model) {
     }
 
     function getUserByCredentials (req, res) {
-        var username = req.params.username;
-        var password = req.params.password;
+        var username = req.query.username;
+        var password = req.query.password;
         var credentials = {
             username: username,
             password: password
@@ -47,7 +60,8 @@ module.exports = function (app, model) {
     }
 
     function getUserByUsername (req, res) {
-        var username = req.params.username;
+        var username = req.query.username;
+        console.log(username);
         var user = model.findUserByUsername(username);
         if(user) {
             res.json(user);
