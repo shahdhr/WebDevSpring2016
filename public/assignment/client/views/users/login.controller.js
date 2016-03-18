@@ -16,7 +16,9 @@
 
         //Event handler implemntations
         function login(user) {
-            UserService.findUserByCredentials(user.username,user.password,loginCallback);
+            UserService
+                .findUserByCredentials(user.username,user.password)
+                .then(loginCallback);
         }
 
 

@@ -20,7 +20,9 @@
 
         //Event handler implementations
         function update(user) {
-            UserService.updateUser(user._id, user, updateCallback);
+            UserService
+                .updateUser(user._id, user)
+                .then(updateCallback);
 
         }
 
