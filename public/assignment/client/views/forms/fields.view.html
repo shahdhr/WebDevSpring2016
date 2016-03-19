@@ -8,157 +8,170 @@
                 <li class="active"><a href="#/fields">Fields</a></li>
             </ul>
 
-            <form  onsubmit="return checkRegistration()" action="../users/login.view.html">
-                <br>
-                <fieldset class="form-group">
-                    <label for="inputFirstName">First Name</label>
-                    <div class="row">
-                        <div class="form-group col-xs-6">
-                            <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
-                        </div>
-                        <div class="form-group col-xs-6">
-                            <div class=" no-breaking " >
-                                <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                <a href="#" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder" ></a>
+            <div ng-repeat="field in fields" ng-switch on="field.type">
+                <div ng-switch-when="TEXT">
+                    <fieldset class="form-group">
+                        <label for="{{field._id}}">{{field.label}}</label>
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <input type="text" class="form-control" id="{{field._id}}" placeholder="{{field.placeholder}}">
+                            </div>
+                            <div class="form-group col-xs-6">
+                                <div class=" no-breaking " >
+                                    <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                    <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                    <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                    <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder" ></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </fieldset>
-                <fieldset class="form-group">
+                    </fieldset>
+                </div>
+                <div ng-switch-when="EMAIL">
+                    <fieldset class="form-group">
 
-                    <label for="inputLastName">Last Name</label>
-                    <div class="row">
-                        <div class="form-group col-xs-6">
-                            <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
-                        </div>
-                        <div class="form-group col-xs-6">
-                            <div class=" no-breaking ">
-                                <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                <a href="#" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
+                        <label for="{{field._id}}">{{field.label}}</label>
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <input type="email" class="form-control" id="{{field._id}}" placeholder="{{field.placeholder}}">
+                            </div>
+                            <div class="form-group col-xs-6">
+                                <div class=" no-breaking ">
+                                    <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                    <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                    <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                    <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
+                                </div>
                             </div>
                         </div>
+                    </fieldset>
+                </div>
+                <div ng-switch-when="TEXTAREA">
+                    <fieldset class="form-group">
+                        <label for="{{field._id}}">{{field.label}}</label>
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <textarea class="form-control" id="{{field._id}}" placeholder={{field.placeholder}}></textarea>
+                            </div>
+                            <div class="form-group col-xs-6">
+                                <div class=" no-breaking">
+                                    <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                    <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                    <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                    <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div ng-switch-when="OPTIONS">
+                    <fieldset class="form-group">
+                        <label for="{{field._id}}">{{field.label}}</label>
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <select id="{{field._id}}" class="form-control">
+                                    <option ng-repeat="option in field.options" value="{{option.value}}">{{option.label}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-6">
+                                <div class=" no-breaking">
+                                    <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                    <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                    <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                    <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div ng-switch-when="DATE">
+                    <fieldset class="form-group">
+                        <label for="{{field._id}}">{{field.label}}</label>
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <input type="date" class="form-control" id="{{field._id}}" placeholder="{{field.placeholder}}">
+                            </div>
+                            <div class="form-group col-xs-6">
+                                <div class=" no-breaking ">
+                                    <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                    <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                    <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                    <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div ng-switch-when="RADIOS">
+                    <fieldset class="form-group">
+                        <label for="{{field._id}}">{{field.label}}</label>
+                        <div class="row">
+                            <div id="{{field._id}}" class="col-xs-6">
+                                <div class="radio" ng-repeat="option in field.options">
+                                    <label>
+                                        <input type="radio" name="{{field.label}}" value="{{option.value}}" checked>
+                                        {{option.label}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-6">
+                                <div class=" no-breaking ">
+                                    <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                    <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                    <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                    <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div ng-switch-when="CHECKBOXES">
+                    <fieldset class="form-group">
+                        <label for="{{field._id}}" class="control-label">{{field.label}}</label>
+                        <div class="row">
+                            <div id="{{field._id}}" class="col-xs-6">
+                                <div class="checkbox" ng-repeat="option in field.options">
+                                    <label>
+                                        <input type="checkbox" value="{{option.value}}">
+                                        {{option.label}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class=" no-breaking ">
+                                    <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                    <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                    <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                    <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <hr class="form-group" />
+            <fieldset class="form-group">
+                <label for="inputAddField">Add New Field:</label>
+                <div class="row">
+                    <div class="form-group col-xs-6">
+                        <select ng-model="model.fieldType" id="inputAddField"  class="form-control">
+                            <option ng-repeat="option in model.availableOptions" value="{{option.name}}">{{option.name}}</option>
+                        </select>
                     </div>
-                </fieldset>
-                <fieldset class="form-group">
-                    <label for="inputDob">Date of Birth</label>
-                    <div class="row">
-                        <div class="form-group col-xs-6">
-                            <input type="date" class="form-control" id="inputDob" placeholder="Date of Birth">
-                        </div>
-                        <div class="form-group col-xs-6">
-                            <div class=" no-breaking">
-                                <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                <a href="#" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset class="form-group">
-                    <label for="inputGender">Gender</label>
-                    <div class="row">
-                        <div class="form-group col-xs-6">
-                            <select id="inputGender" class="form-control">
-                                <option>Male</option>
-                                <option>Female</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-xs-6">
-                            <div class=" no-breaking">
-                                <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                <a href="#" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset class="form-group">
-                    <label>Roles:</label>
-                    <div class="row">
-                        <div class="form-group col-xs-6">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Admin
-                                </label>
-                                <br>
-                                <label>
-                                    <input type="checkbox"> Student
-                                </label>
-                                <br>
-                                <label>
-                                    <input type="checkbox"> User
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group col-xs-6">
-                            <div class=" no-breaking">
-                                <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                <a href="#" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset class="form-group">
-                    <label>License Agreement:</label>
-                    <div class="row">
-                        <div class="form-group col-xs-6">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio"> Yes
-                                </label>
-                                <br>
-                                <label>
-                                    <input type="radio"> No
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group col-xs-6">
-                            <div class=" no-breaking">
-                                <a href="#" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                <a href="#" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="form-group col-xs-6">
+                        <div class=" no-breaking">
+                            <a href="#" class="glyphicon glyphicon-plus my-styling invisible-link" ></a>
+                            <a ng-click="addField(model.fieldType)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                            <a href="#" class="glyphicon glyphicon-plus my-styling invisible-link" ></a>
+                            <a href="#" class="glyphicon glyphicon-plus my-styling invisible-link" ></a>
 
-                </fieldset>
-                <hr class="form-group" />
-                <fieldset class="form-group">
-                    <label for="inputAddField">Add New Field:</label>
-                    <div class="row">
-                        <div class="form-group col-xs-6">
-                            <select id="inputAddField" class="form-control">
-                                <option>Single Line Text</option>
-                                <option>Date</option>
-                                <option>Dropdown</option>
-                                <option>Checkboxes</option>
-                                <option>Radio Buttons</option>
-                                <option>Paragraph Text Field</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-xs-6">
-                            <div class=" no-breaking">
-                                <a href="#" class="glyphicon glyphicon-plus my-styling invisible-link" ></a>
-                                <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                <a href="#" class="glyphicon glyphicon-plus my-styling invisible-link" ></a>
-                                <a href="#" class="glyphicon glyphicon-plus my-styling invisible-link" ></a>
 
-
-                            </div>
                         </div>
                     </div>
+                </div>
 
-                </fieldset>
-            </form>
+            </fieldset>
+
 
         </div>
     </div>

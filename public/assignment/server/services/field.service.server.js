@@ -11,7 +11,7 @@ module.exports = function (app, model) {
     function createFieldForForm(req, res) {
         var formId = req.params.formId;
         var field = req.body;
-        var newField = model.createFiled(formId,field);
+        var newField = model.createField(formId,field);
         res.send (200);
     }
 
@@ -47,11 +47,11 @@ module.exports = function (app, model) {
     function deleteFieldById (req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        if(model.deleteFormById(fieldId)) {
+        if(model.deleteFieldById(formId,fieldId)) {
             res.send(200);
             return;
         }
-        res.json ({message: "Form not found"});
+        res.json ({message: "Field not found"});
     }
 
 };

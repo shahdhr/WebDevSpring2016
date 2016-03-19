@@ -13,7 +13,7 @@ module.exports = function (app, model) {
     function createUser (req, res) {
         var user = req.body;
         model.createUser(user);
-        res.send (200);
+        res.send (user);
     }
 
     function getAllUsers (req, res) {

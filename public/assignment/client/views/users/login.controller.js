@@ -25,7 +25,8 @@
         //Callback functions
         function loginCallback(user) {
             if(user!=null) {
-                UserService.setCurrentUser(user);
+                UserService.setCurrentUser(user.data);
+                console.log(user);
                 $location.path('/profile');
             }
             else {

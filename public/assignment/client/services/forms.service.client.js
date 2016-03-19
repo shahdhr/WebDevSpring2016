@@ -23,7 +23,7 @@
         }
 
         function findAllFormsForUser(userId) {
-            return $htpp.get("/api/assignment/user/"+userId+"/form");
+            return $http.get("/api/assignment/user/"+userId+"/form");
         }
 
         function deleteFormById(formId) {

@@ -9,7 +9,13 @@ module.exports = function() {
         deleteFormById:deleteFormById,
         updateFormById:updateFormById,
         findFormByTitle:findFormByTitle,
-        findFromById: findFromById
+        findFromById: findFromById,
+        createField: createField,
+        findAllFieldsForFrom: findAllFieldsForFrom,
+        findFieldById: findFieldById,
+        updateFieldById: updateFieldById,
+        deleteFieldById: deleteFieldById
+
     };
 
     return api;
@@ -78,5 +84,62 @@ module.exports = function() {
         return null;
     }
 
+
+    //Field methods
+    function createField(formId,field) {
+        var form = findFromById(formId);
+        var newField = {
+            _id: (new Date).getTime(),
+            label: field.label,
+            type: field.type,
+            placeholder: field.placeholder
+        };
+        form.fields(newField);
+        return newField;
+    }
+
+    function findAllFieldsForFrom(formId) {
+        var form = findFromById(formId);
+        return form.fields;
+    }
+
+    function findFieldById(formId,fieldId) {
+        var form = findFromById(formId);
+        var fields = form.fields;
+        for(var index = 0;index<fields.length;index++) {
+            if(fields[index]._id == fieldId) {
+                return fields[index];
+            }
+        }
+        return null;
+    }
+
+    function updateFieldById(formId, fieldId, newField) {
+        var form = findFromById(formId);
+        var fields = form.fields;
+        for(var index=0;index<fields.length;index++) {
+            if(fields[index]._id == fieldId) {
+                fields[index]._id = fieldId;
+                newField._id = fieldId;
+                fields[index].label = newField.label;
+                fields[index].type = newField.type;
+                fields[index].placeholder = newField.placeholder;
+                break;
+            }
+        }
+        return newField;
+    }
+
+    function deleteFieldById(formId,fieldId) {
+        var form = findFromById(formId);
+        var fields = form.fields;
+        for(var index=0;index<forms.length;index++) {
+            if (fields[index]._id == fieldId) {
+                fields.splice(index, 1);
+                break;
+            }
+        }
+        return fields;
+    }
 
 };

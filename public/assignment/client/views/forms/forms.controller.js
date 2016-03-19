@@ -7,7 +7,7 @@
         .module("FormBuilderApp")
         .controller("FormController",FormController);
 
-    function FormController($scope, $location, UserService, FormService) {
+    function FormController($scope, $location, UserService, FormService,$routeParams) {
 
         //currently logged in user
         var currentUser = UserService.getCurrentUser();
@@ -18,6 +18,7 @@
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
         $scope.updateForm = updateForm;
+        $scope.formClick = formClick;
 
         //Fetching all forms for current user to display
         function init() {
@@ -57,16 +58,23 @@
         }
 
         function updateForm(form) {
-             FormService
-                 .updateFormById(form._id,form)
-                 .then(updateFormCallback);
+            FormService
+                .updateFormById(form._id,form)
+                .then(updateFormCallback);
             $scope.form = null;
+        }
+
+        function formClick(form) {
+
+            console.log(form._id);
+            $location.path("/form/"+form._id+"/fields");
         }
 
 
         //callback functions
         function findAllFormsForUserCallback(formsCurrentUser) {
-            $scope.forms = formsCurrentUser;
+            console.log(formsCurrentUser.data);
+            $scope.forms = formsCurrentUser.data;
 
         }
 
