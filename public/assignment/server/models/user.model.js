@@ -50,7 +50,6 @@ module.exports = function() {
     }
 
     function createUser(user) {
-        user._id = (new Date()).getTime();
         users[users.length] = user;
         return user;
     }

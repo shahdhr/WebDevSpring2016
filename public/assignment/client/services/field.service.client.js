@@ -32,7 +32,7 @@
         }
 
         function deleteFieldFromForm(formId,fieldId) {
-            return $htpp.delete("/api/assignment/form/"+formId+"/field/"+fieldId)
+            return $http.delete("/api/assignment/form/"+formId+"/field/"+fieldId)
         }
 
         function updateField(formId,fieldId, field) {

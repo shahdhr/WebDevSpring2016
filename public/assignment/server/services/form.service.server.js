@@ -1,7 +1,7 @@
 /**
  * Created by Dhruv on 3/17/2016.
  */
-module.exports = function (app, model) {
+module.exports = function (app, model,uuid) {
     app.get("/api/assignment/user/:userId/form", getAllFormsByUserId);
     app.get("/api/assignment/form/:formId", getFormById);
     app.put("/api/assignment/form/:formId",updateFormById);
@@ -11,6 +11,7 @@ module.exports = function (app, model) {
     function createFormForUser(req, res) {
         var userId = req.params.userId;
         var form = req.body;
+        form._id=uuid.v4();
         var newForm = model.createFormForUser(userId,form);
         res.send (200);
     }

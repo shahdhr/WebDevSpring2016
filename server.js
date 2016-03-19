@@ -4,6 +4,7 @@ var app = express();
 var bodyParser    = require('body-parser');
 var multer        = require('multer');
 var cookieParser  = require('cookie-parser');
+var uuid = require('node-uuid');
 app.use(express.static(__dirname + '/public'));
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
@@ -16,7 +17,7 @@ app.use(cookieParser());
 var SEARCH_QUERY_URL = "https://api.9flats.com/api/v4/places?client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l&search[query]=SEARCHQUERY";
 var SEARCH_BY_ID_URL = "https://api.9flats.com/api/v4/places/PLACEID?&client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l";
 
-require("./public/assignment/server/app.js")(app);
+require("./public/assignment/server/app.js")(app,uuid);
 //List of Apartments for a given query
 app.get('/api/search/place/:query', function(req, res){
     var url = SEARCH_QUERY_URL.replace("SEARCHQUERY",req.params.query);

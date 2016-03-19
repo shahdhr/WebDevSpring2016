@@ -1,7 +1,7 @@
 /**
  * Created by Dhruv on 3/17/2016.
  */
-module.exports = function (app, model) {
+module.exports = function (app, model,uuid) {
     app.get("/api/assignment/user", getAllUsers);
     app.get("/api/assignment/user/:id", getUserById);
     app.get("/api/assignment/user?username=username", getUserByUsername);
@@ -12,6 +12,7 @@ module.exports = function (app, model) {
 
     function createUser (req, res) {
         var user = req.body;
+        user._id=uuid.v4();
         model.createUser(user);
         res.send (user);
     }

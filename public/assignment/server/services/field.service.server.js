@@ -1,18 +1,19 @@
 /**
  * Created by Dhruv on 3/17/2016.
  */
-module.exports = function (app, model) {
+module.exports = function (app, model,uuid) {
     app.get("/api/assignment/form/:formId/field", getAllFieldsByFormId);
     app.get("/api/assignment/form/:formId/field/:fieldId", getFieldById);
     app.put("/api/assignment/form/:formId/field/:fieldId",updateFieldById);
-    app.post("api/assignment/form/:formId/field",createFieldForForm);
+    app.post("/api/assignment/form/:formId/field",createFieldForForm);
     app.delete("/api/assignment/form/:formId/field/:fieldId",deleteFieldById);
 
     function createFieldForForm(req, res) {
         var formId = req.params.formId;
         var field = req.body;
-        var newField = model.createField(formId,field);
-        res.send (200);
+        field._id = uuid.v4();
+        var form = model.createField(formId,field);
+        res.send (form);
     }
 
     function getAllFieldsByFormId(req, res) {
@@ -47,8 +48,9 @@ module.exports = function (app, model) {
     function deleteFieldById (req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        if(model.deleteFieldById(formId,fieldId)) {
-            res.send(200);
+        var form =model.deleteFieldById(formId,fieldId);
+        if(form) {
+            res.send(form);
             return;
         }
         res.json ({message: "Field not found"});

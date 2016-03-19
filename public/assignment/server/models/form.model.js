@@ -22,14 +22,9 @@ module.exports = function() {
 
 
     function createFormForUser(userId, form) {
-        var newForm = {
-            _id: (new Date).getTime(),
-            userId: userId,
-            title: form.title
-        }
-
-        forms.push(newForm);
-        return newForm
+        form.userId = userId;
+        forms.push(form);
+        return form
     }
 
     function findAllFormsForUser(userId) {
@@ -88,14 +83,9 @@ module.exports = function() {
     //Field methods
     function createField(formId,field) {
         var form = findFromById(formId);
-        var newField = {
-            _id: (new Date).getTime(),
-            label: field.label,
-            type: field.type,
-            placeholder: field.placeholder
-        };
-        form.fields(newField);
-        return newField;
+        form.fields.push(field);
+        updateFormById(formId,form);
+        return form;
     }
 
     function findAllFieldsForFrom(formId) {
@@ -127,19 +117,23 @@ module.exports = function() {
                 break;
             }
         }
-        return newField;
+        form.fields = fields;
+        updateFormById(formId,form);
+        return form;
     }
 
     function deleteFieldById(formId,fieldId) {
         var form = findFromById(formId);
         var fields = form.fields;
-        for(var index=0;index<forms.length;index++) {
+        for(var index=0;index<fields.length;index++) {
             if (fields[index]._id == fieldId) {
                 fields.splice(index, 1);
                 break;
             }
         }
-        return fields;
+        form.fields = fields;
+        updateFormById(formId,form);
+        return form;
     }
 
 };
