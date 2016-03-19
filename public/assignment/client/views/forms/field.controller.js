@@ -3,11 +3,55 @@
  */
 "use strict";
 (function () {
+
+    angular
+        .module('FormBuilderApp')
+        .controller('ModalInstance', function ($scope, $uibModalInstance, editField, popupHeader) {
+
+            $scope.editField = editField;
+            $scope.popupHeader = popupHeader;
+            if(editField.options) {
+
+                console.log(editField.options);
+                var fromattedOptions = null;
+                for (var index =0; index< editField.options.length; index++) {
+                    console.log(editField.options[index]);
+                    var option = editField.options[index];
+                    if (fromattedOptions) {
+
+                        fromattedOptions = fromattedOptions + "\n" + option.value + ":" + option.label;
+                    } else {
+
+                        fromattedOptions = option.value + ":" + option.label;
+                    }
+                }
+
+                $scope.editField.placeholder = fromattedOptions;
+            }
+            $scope.submit = function(updatedOptions) {
+                var temp = updatedOptions.placeholder.split('\n');
+                var newOptions = [];
+                for(var index =0;index<temp.length;index++) {
+                    var tempString = temp[index];
+                    newOptions.push({
+                        value: tempString.split(':')[0],
+                        label: tempString.split(':')[1]
+                    })
+                }
+                updatedOptions.options = newOptions;
+                $uibModalInstance.close(updatedOptions);
+            };
+
+            $scope.cancel = function() {
+                $uibModalInstance.dismiss();
+            };
+        });
+
     angular
         .module("FormBuilderApp")
         .controller("FieldController",FieldController);
 
-    function FieldController($scope, $location, UserService, FormService,$routeParams, FieldService) {
+    function FieldController($scope, $location, UserService, FormService,$routeParams, FieldService,$uibModal) {
 
         //currently logged in user
         var currentUser = UserService.getCurrentUser();
@@ -27,6 +71,128 @@
                 {id: '4', name: 'Checkboxes Field'},
                 {id: '5', name: 'Dropdown Field'},
                 {id: '6', name: 'Radio Buttons Field'}]
+        };
+
+        $scope.open = function (fieldType, field) {
+
+            var modalInstance = null;
+            var currentLabel = field.label,
+                currentPlaceholder = field.placeholder;
+
+            switch (fieldType) {
+                case 'TEXT':
+                    modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'labelPlaceholder.html',
+                        controller: 'ModalInstance',
+                        size: 'sm',
+                        resolve: {
+                            popupHeader: function() {
+                                return 'Single Line Field'
+                            },
+                            editField: field
+                        }
+                    });
+                    break;
+                case 'EMAIL':
+                    modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'labelPlaceholder.html',
+                        controller: 'ModalInstance',
+                        size: 'sm',
+                        resolve: {
+                            popupHeader: function() {
+                                return 'Email Field'
+                            },
+                            editField: field
+                        }
+                    });
+                    break;
+                case 'TEXTAREA':
+                    modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'labelPlaceholder.html',
+                        controller: 'ModalInstance',
+                        size: 'sm',
+                        resolve: {
+                            popupHeader: function() {
+                                return 'Multiple Lines Field'
+                            },
+                            editField: field
+                        }
+                    });
+                    break;
+                case 'DATE':
+                    modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'labelPlaceholderDate.html',
+                        controller: 'ModalInstance',
+                        size: 'sm',
+                        resolve: {
+                            popupHeader: function() {
+                                return 'Date Field'
+                            },
+                            editField: field
+                        }
+                    });
+                    break;
+                case 'OPTIONS':
+                    modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'labelOptions.html',
+                        controller: 'ModalInstance',
+                        size: 'sm',
+                        resolve: {
+                            popupHeader: function() {
+                                return 'Dropdown Field'
+                            },
+                            editField: field
+                        }
+                    });
+                    break;
+                case 'CHECKBOXES':
+                    modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'labelOptions.html',
+                        controller: 'ModalInstance',
+                        size: 'sm',
+                        resolve: {
+                            popupHeader: function() {
+                                return 'Checkbox Field'
+                            },
+                            editField: field
+                        }
+                    });
+                    break;
+                case 'RADIOS':
+                    modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'labelOptions.html',
+                        controller: 'ModalInstance',
+                        size: 'sm',
+                        resolve: {
+                            popupHeader: function() {
+                                return 'Radio Button Field'
+                            },
+                            editField: field
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+
+            modalInstance.result.then(function (model) {
+                field.label = model.label;
+                field.placeholder = model.placeholder;
+                FieldService.updateFields(formId, $scope.fields);
+                console.log(field);
+            }, function () {
+                field.label = currentLabel;
+                field.placeholder = currentPlaceholder;
+                console.log("Cancel Pressed");
+            });
+
         };
 
         //Event handler declarations
@@ -50,6 +216,7 @@
                             .then(function(res) {
                                 $scope.fields = res.data.fields;
                             });
+                        break;
                     case "Date Field":
                         FieldService.createFieldForForm(formId,{"_id": null, "label": "New Date Field", "type": "DATE"})
                             .then(function(res) {

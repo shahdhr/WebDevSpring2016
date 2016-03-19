@@ -5,5 +5,5 @@
 (function()
 {
     angular
-        .module("FormBuilderApp", ["ngRoute","mySortable"]);
+        .module("FormBuilderApp", ["ngRoute","mySortable","ui.bootstrap"]);
 })();
