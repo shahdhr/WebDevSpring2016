@@ -14,7 +14,8 @@ module.exports = function() {
         findAllFieldsForFrom: findAllFieldsForFrom,
         findFieldById: findFieldById,
         updateFieldById: updateFieldById,
-        deleteFieldById: deleteFieldById
+        deleteFieldById: deleteFieldById,
+        updateAllFieldsInForm: updateAllFieldsInForm
 
     };
 
@@ -133,6 +134,13 @@ module.exports = function() {
         }
         form.fields = fields;
         updateFormById(formId,form);
+        return form;
+    }
+
+    function updateAllFieldsInForm(formId, fields) {
+        var form = findFromById(formId);
+        form.fields = fields;
+        updateFormById(form._id, form);
         return form;
     }
 

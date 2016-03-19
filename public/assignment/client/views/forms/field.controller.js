@@ -32,6 +32,7 @@
         //Event handler declarations
         $scope.addField=addField;
         $scope.removeField = removeField;
+        $scope.updateModelOnSort=updateModelOnSort;
 
         //Event handler implementation
         function addField(fieldType) {
@@ -100,6 +101,10 @@
                 .then(function(res) {
                     $scope.fields = res.data.fields;
                 })
+        }
+
+        function updateModelOnSort() {
+            FieldService.updateFields(formId, $scope.fields);
         }
 
         //callbacks
