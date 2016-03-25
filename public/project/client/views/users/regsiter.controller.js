@@ -16,16 +16,17 @@
 
         //Event handler implementations
         function register (user) {
-            UserService.createUser(user,registerCallback);
+            UserService.createUser(user)
+                .then(registerCallback);
         }
 
 
 
         //Callback functions
         function registerCallback(user) {
-            UserService.setCurrentUser(user);
+            UserService.setCurrentUser(user.data);
             $location.path('/profile');
-            console.log(user);
+            console.log(user.data);
         }
     }
 })();
