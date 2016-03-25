@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="RentOutApp">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>RentOut</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="main.controller.js"></script>
+    <script src="config.js"></script>
+    <script src="views/home/home.controller.js"></script>
+    <script src="services/apartment.service.client.js"></script>
+    <script src="views/apartment/details.controller.js"></script>
+    <script src="views/users/login.controller.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="views/users/regsiter.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/users/profile.controller.js"></script>
+    <script src="views/apartment/apartment.controller.js"></script>
+    <script src="views/booking/booking.controller.js"></script>
+    <script src="services/booking.service.client.js"></script>
+    <script src="views/review/review.controller.js"></script>
+    <script src="services/review.service.client.js"></script>
+    <script src="views/admin/admin.controller.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body ng-controller="MainController">
+
+<div ng-include="'views/sidebar/sidebar.view.html'"></div>
+<div ng-include="'views/header/header.view.html'"></div>
+<div ng-view></div>
+</body>
+</html>
