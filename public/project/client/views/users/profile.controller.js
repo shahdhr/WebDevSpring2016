@@ -11,6 +11,7 @@
 
         // currently logged in user
         var currentUser = UserService.getCurrentUser();
+        console.log(currentUser);
         $scope.favoritedApartments = [];
         $scope.user = currentUser;
 

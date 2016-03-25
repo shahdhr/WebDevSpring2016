@@ -18,6 +18,7 @@ var SEARCH_QUERY_URL = "https://api.9flats.com/api/v4/places?client_id=9SDO9JGSY
 var SEARCH_BY_ID_URL = "https://api.9flats.com/api/v4/places/PLACEID?&client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l";
 
 require("./public/assignment/server/app.js")(app,uuid);
+require("./public/project/server/app.js")(app,uuid);
 //List of Apartments for a given query
 app.get('/api/search/place/:query', function(req, res){
     var url = SEARCH_QUERY_URL.replace("SEARCHQUERY",req.params.query);
