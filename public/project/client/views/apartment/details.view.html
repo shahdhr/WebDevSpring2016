@@ -21,7 +21,30 @@
                         {{amenities}}
                     </li>
                 </ul>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Review</th>
+                            <th>No. of Stars(_/5)</th>
+                        </tr>
 
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="review in reviews">
+                            <td>{{review.description}}</td>
+                            <td>{{review.rating}}</td>
+                        </tr>
+                        <tr ng-show="newUser">
+                            <th><input ng-model="review.description" class="form-control"/></th>
+                            <th><input ng-model="review.rating" class="form-control"/></th>
+                            <th>
+                                <button ng-click="addReview(review)" class="btn btn-primary">Add</button>
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

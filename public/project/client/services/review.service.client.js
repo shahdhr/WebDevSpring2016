@@ -16,6 +16,7 @@
 
             addReview : addReview,
             findAllReviewsForUser  : findAllReviewsForUser,
+            findAllReviewsForApartemnt : findAllReviewsForApartemnt,
             deleteReviewById : deleteReviewById,
             updateReviewById : updateReviewById
         };
@@ -27,7 +28,9 @@
             return $http.get("/api/project/user/"+reviewedBy+"/review");
         }
 
-
+        function findAllReviewsForApartemnt(apartmentId) {
+            return $http.get("/api/project/apartment/"+apartmentId+"/review");
+        }
 
         function addReview(review)  {
             return $http.post("/api/project/user/"+review.reviewed_by+"/review",review);

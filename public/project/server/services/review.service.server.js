@@ -7,12 +7,19 @@ module.exports = function (app, model,uuid) {
     app.put("/api/project/review/:reviewId",updateReviewById);
     app.post("/api/project/user/:userId/review",addReview);
     app.delete("/api/project/review/:reviewId",deleteReviewById);
+    app.get("/api/project/apartment/:apartmentId/review", findAllReviewsForApartemnt);
 
     function addReview (req, res) {
         var review = req.body;
         review._id=uuid.v4();
         model.addReview(review);
         res.send (review);
+    }
+
+    function findAllReviewsForApartemnt(req,res) {
+        var apartmentId = req.params.apartmentId;
+        var reviews = model.findAllReviewsForApartemnt(apartmentId);
+        res.json(reviews);
     }
 
     function findAllReviewsForUser (req, res) {

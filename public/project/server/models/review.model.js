@@ -10,11 +10,22 @@ module.exports = function() {
         addReview : addReview,
         findAllReviewsForUser  : findAllReviewsForUser,
         deleteReviewById : deleteReviewById,
-        updateReviewById : updateReviewById
+        updateReviewById : updateReviewById,
+        findAllReviewsForApartemnt : findAllReviewsForApartemnt
     };
     return api;
 
 
+
+    function findAllReviewsForApartemnt(apartmentId) {
+        var apartmentReviews = [];
+        for(var index=0; index<reviews.length; index++) {
+            if(reviews[index].apartmentId == apartmentId) {
+                apartmentReviews.push(reviews[index]);
+            }
+        }
+        return apartmentReviews;
+    }
 
     function findAllReviewsForUser (reviewedBy) {
         var userReviews = [];
