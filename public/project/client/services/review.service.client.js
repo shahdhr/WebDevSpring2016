@@ -10,16 +10,7 @@
         .module("RentOutApp")
         .factory("ReviewService",ReviewService);
 
-    function ReviewService() {
-
-        var reviews = [
-            {	"_id":123,  description: "Very clean",   "rating":"3", "apartmentId":"123",  "reviewed_by":123   },
-            {	"_id":234,  description: "Very clean",   "rating":"3", "apartmentId":"123",  "reviewed_by":234   },
-            {	"_id":345,  description: "Very clean",   "rating":"3", "apartmentId":"123",  "reviewed_by":345   },
-            {	"_id":456,  description: "Very clean",   "rating":"3", "apartmentId":"123",  "reviewed_by":456   },
-            {	"_id":567,  description: "Very clean",   "rating":"3", "apartmentId":"123",  "reviewed_by":567   },
-
-        ];
+    function ReviewService($http) {
 
         var api = {
 
@@ -32,55 +23,22 @@
 
 
 
-        function findAllReviewsForUser (reviewedBy,callback) {
-            var userReviews = [];
-            for(var index=0; index<reviews.length; index++) {
-                if(reviews[index].reviewed_by == reviewedBy) {
-                    userReviews.push(reviews[index]);
-                }
-            }
-            callback(userReviews);
+        function findAllReviewsForUser (reviewedBy) {
+            return $http.get("/api/project/user/"+reviewedBy+"/review");
         }
 
 
 
-        function addReview(review,callback)  {
-            review._id = (new Date()).getTime();
-            reviews[reviews.length] = review;
-            console.log(reviews);
-            callback(review);
-
+        function addReview(review)  {
+            return $http.post("/api/project/user/"+review.reviewed_by+"/review",review);
         }
 
-        function deleteReviewById(review_id, callback) {
-            for(var index=0; index<reviews.length; index++) {
-                if(reviews[index]._id == review_id) {
-                    reviews.splice(index,1);
-                    break;
-                }
-            }
-            callback(reviews);
+        function deleteReviewById(reviewId) {
+            return $http.delete("/api/project/review/"+reviewId);
         }
 
-        function updateReviewById(reviewId, newReview, callback) {
-            for(var index=0; index<reviews.length; index++) {
-                if(reviews[index]._id == reviewId) {
-                    reviews[index]._id = reviewId;
-                    newReview._id = reviewId;
-                    reviews[index].apartmentId = newReview.apartmentId;
-                    reviews[index].description = newReview.description;
-                    reviews[index].rating = newReview.rating;
-                    break;
-                }
-            }
-            callback(newReview);
+        function updateReviewById(reviewId, newReview) {
+            return $http.put("/api/project/review/"+reviewId,newReview);
         }
-
-
-
-
-
-
-
     }
 })();

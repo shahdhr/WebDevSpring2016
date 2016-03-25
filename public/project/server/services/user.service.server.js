@@ -92,4 +92,4 @@ module.exports = function (app, model,uuid) {
         }
         res.json ({message: "User not found"});
     }
-}
+};

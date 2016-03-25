@@ -17,7 +17,9 @@
         var currentUser = UserService.getCurrentUser();
         $scope.$location = $location;
         function init() {
-            ReviewService.findAllReviewsForUser(currentUser._id, findAllReviewsForUserCallback);
+            ReviewService
+                .findAllReviewsForUser(currentUser._id)
+                .then(findAllReviewsForUserCallback);
         }
         init();
 
@@ -29,7 +31,9 @@
         function updateReview(review)
         {
             console.log(review._id);
-            ReviewService.updateReviewById(review._id,review,updateReviewCallback);
+            ReviewService
+                .updateReviewById(review._id,review)
+                .then(updateReviewCallback);
             $scope.review = null;
         }
 
@@ -49,7 +53,9 @@
         function removeReview(index)
         {
             var reviewId = $scope.users[index]._id;
-            ReviewService.deleteReviewById(reviewId,removeReviewCallback);
+            ReviewService
+                .deleteReviewById(reviewId)
+                .then(removeReviewCallback);
             //$scope.apartments.splice(index, 1);
         }
 
@@ -61,14 +67,16 @@
                 rating : review.rating,
                 reviewed_by : currentUser._id
             };
-            ReviewService.addReview(newReview,addReviewCallback);
+            ReviewService
+                .addReview(newReview)
+                .then(addReviewCallback);
             //$scope.apartments.push(newApartment);
         }
 
         //callback functions
 
         function findAllReviewsForUserCallback(reviewsCurrentUser) {
-            $scope.users = reviewsCurrentUser;
+            $scope.users = reviewsCurrentUser.data;
             console.log(reviewsCurrentUser);
 
         }
