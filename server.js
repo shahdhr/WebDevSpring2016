@@ -3,6 +3,7 @@ var http = require('https');
 var app = express();
 var bodyParser    = require('body-parser');
 var multer        = require('multer');
+var session       = require('express-session');
 var cookieParser  = require('cookie-parser');
 var uuid = require('node-uuid');
 app.use(express.static(__dirname + '/public'));
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 app.use(cookieParser());
+app.use(session({ secret: "MySecret"}));
 var SEARCH_QUERY_URL = "https://api.9flats.com/api/v4/places?client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l&search[query]=SEARCHQUERY";
 var SEARCH_BY_ID_URL = "https://api.9flats.com/api/v4/places/PLACEID?&client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l";
 
