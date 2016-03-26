@@ -19,7 +19,9 @@
         //    {title: "1016 CityView", bedrooms: 3,  address: new Date(2015,1,1), amenities:"", description:""},
         //];
         function init() {
-            ApartmentService.findAllApartmentsForUser(currentUser._id, findAllApartmentsForUserCallback);
+            ApartmentService
+                .findAllApartmentsForUser(currentUser._id)
+                .then(findAllApartmentsForUserCallback);
         }
         init();
 
@@ -31,7 +33,9 @@
         function updateApartment(apartment)
         {
             console.log(apartment.id);
-            ApartmentService.updateApartmentById(apartment._id,apartment,updateApartmentCallback);
+            ApartmentService
+                .updateApartmentById(apartment._id,apartment)
+                .then(updateApartmentCallback);
             $scope.apartment = null;
 
         }
@@ -53,7 +57,9 @@
         {
 
             var apartmentId = $scope.apartments[index]._id;
-            ApartmentService.deleteApartmentById(apartmentId,removeApartmentCallback);
+            ApartmentService
+                .deleteApartmentById(apartmentId)
+                .then(removeApartmentCallback);
             //$scope.apartments.splice(index, 1);
         }
 
@@ -65,20 +71,22 @@
                 description : apartment.description,
                 ownerId : currentUser._id
             };
-            ApartmentService.addApartment(newApartment,addApartmentCallback);
+            ApartmentService
+                .addApartment(newApartment)
+                .then(addApartmentCallback);
             //$scope.apartments.push(newApartment);
         }
 
         //callback functions
 
         function findAllApartmentsForUserCallback(apartmentsCurrentUser) {
-            $scope.apartments = apartmentsCurrentUser;
+            $scope.apartments = apartmentsCurrentUser.data;
             console.log(apartmentsCurrentUser);
 
         }
 
         function addApartmentCallback(apartment) {
-            console.log(apartment);
+            console.log(apartment.data);
             init();
         }
 
