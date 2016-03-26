@@ -7,20 +7,20 @@
         .module("RentOutApp")
         .controller("ProfileController",ProfileController)
 
-    function ProfileController($scope, $location, UserService, $rootScope, ApartmentService) {
-
+    function ProfileController($location, UserService, $rootScope, ApartmentService) {
+        var vm = this;
         // currently logged in user
         var currentUser = UserService.getCurrentUser();
         console.log(currentUser);
-        $scope.favoritedApartments = [];
-        $scope.user = currentUser;
+        vm.favoritedApartments = [];
+        vm.user = currentUser;
 
 
         //Even handler declarations
-        $scope.update = update;
-        $scope.showFavourites = showFavourites;
-        $scope.removeFavourite = removeFavourite;
-        $scope.listApartment = listApartment;
+        vm.update = update;
+        vm.showFavourites = showFavourites;
+        vm.removeFavourite = removeFavourite;
+        vm.listApartment = listApartment;
 
 
         //Event handler implementations
@@ -31,13 +31,13 @@
 
         function showFavourites() {
             var user = UserService.getCurrentUser();
-            $scope.favoritedApartments = [];
+            vm.favoritedApartments = [];
             if(user.favourites.length > 0) {
                 for(var index = 0; index<user.favourites.length;index++) {
                     ApartmentService.findApartmentDetailsById(user.favourites[index],showFavouritesCallback)
                 }
             } else {
-                $scope.favoritedApartments = [];
+                vm.favoritedApartments = [];
             }
         }
 
@@ -61,11 +61,11 @@
         //callback functions
         function updateCallback(user) {
             console.log(user);
-            $scope.updateMessage = "Profile updated successfully."
+            vm.updateMessage = "Profile updated successfully."
         }
 
         function showFavouritesCallback(apartment) {
-            $scope.favoritedApartments.push(apartment.place.place_details);
+            vm.favoritedApartments.push(apartment.place.place_details);
         }
 
         function removeFavouriteCallback(user) {
