@@ -6,4 +6,6 @@ module.exports = function (app,uuid) {
     var userService = require("./services/user.service.server.js")(app, userModel, uuid);
     var reviewModel = require("./models/review.model.js")();
     var reviewService = require("./services/review.service.server.js")(app, reviewModel, uuid);
+    var bookingModel = require("./models/booking.model.js")();
+    var bookingService = require("./services/booking.service.server.js")(app, bookingModel, uuid);
 };

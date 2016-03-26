@@ -14,7 +14,9 @@
         var currentUser = UserService.getCurrentUser();
         $scope.$location = $location;
         function init() {
-            BookingService.findAllBookingsForUser(currentUser._id, findAllBookingsForUserCallback);
+            BookingService
+                .findAllBookingsForUser(currentUser._id)
+                .then(findAllBookingsForUserCallback);
         }
         init();
 
@@ -26,7 +28,9 @@
         function updateBooking(booking)
         {
             console.log(booking._id);
-            BookingService.updateBookingById(booking._id,booking,updateBookingCallback);
+            BookingService
+                .updateBookingById(booking._id,booking)
+                .then(updateBookingCallback);
             $scope.booking = null;
         }
 
@@ -46,7 +50,10 @@
         function removeBooking(index)
         {
             var bookingId = $scope.bookings[index]._id;
-            BookingService.deleteBookingById(bookingId,removeBookingCallback);
+            console.log(bookingId);
+            BookingService
+                .deleteBookingById(bookingId)
+                .then(removeBookingCallback);
             //$scope.apartments.splice(index, 1);
         }
 
@@ -58,14 +65,16 @@
                 endDate : booking.endDate,
                 booked_by : currentUser._id
             };
-            BookingService.addBooking(newBooking,addBookingCallback);
+            BookingService
+                .addBooking(newBooking)
+                .then(addBookingCallback);
             //$scope.apartments.push(newApartment);
         }
 
         //callback functions
 
         function findAllBookingsForUserCallback(bookingsCurrentUser) {
-            $scope.bookings = bookingsCurrentUser;
+            $scope.bookings = bookingsCurrentUser.data;
             console.log(bookingsCurrentUser);
 
         }
