@@ -8,11 +8,12 @@
         .module("RentOutApp")
         .controller("ApartmentController", ApartmentController);
 
-    function ApartmentController($scope, ApartmentService, $location, UserService)
+    function ApartmentController(ApartmentService, $location, UserService)
     {
+        var vm = this;
         //currently logged in user
         var currentUser = UserService.getCurrentUser();
-        $scope.$location = $location;
+        vm.$location = $location;
         //$scope.apartments = [
         //    {title: "12 Woodward", bedrooms: 5, address: new Date(2015,1,1), amenities:"", description:""},
         //    {title: "403 Matruchhaya", bedrooms: 2, address: new Date(2015,1,1), amenities:"", description:""},
@@ -25,10 +26,10 @@
         }
         init();
 
-        $scope.addApartment = addApartment;
-        $scope.removeApartment = removeApartment;
-        $scope.selectApartment = selectApartment;
-        $scope.updateApartment = updateApartment;
+        vm.addApartment = addApartment;
+        vm.removeApartment = removeApartment;
+        vm.selectApartment = selectApartment;
+        vm.updateApartment = updateApartment;
 
         function updateApartment(apartment)
         {
@@ -36,18 +37,18 @@
             ApartmentService
                 .updateApartmentById(apartment._id,apartment)
                 .then(updateApartmentCallback);
-            $scope.apartment = null;
+            vm.apartment = null;
 
         }
 
         function selectApartment(index)
         {
-            $scope.selectedApartmentIndex = index;
-            $scope.apartment = {
-                _id: $scope.apartments[index]._id,
-                title: $scope.apartments[index].title,
-                bedrooms: $scope.apartments[index].bedrooms,
-                description: $scope.apartments[index].description
+            vm.selectedApartmentIndex = index;
+            vm.apartment = {
+                _id: vm.apartments[index]._id,
+                title: vm.apartments[index].title,
+                bedrooms: vm.apartments[index].bedrooms,
+                description: vm.apartments[index].description
             };
 
             //$scope.apartment = $scope.apartments[index];
@@ -56,7 +57,7 @@
         function removeApartment(index)
         {
 
-            var apartmentId = $scope.apartments[index]._id;
+            var apartmentId = vm.apartments[index]._id;
             ApartmentService
                 .deleteApartmentById(apartmentId)
                 .then(removeApartmentCallback);
@@ -80,7 +81,7 @@
         //callback functions
 
         function findAllApartmentsForUserCallback(apartmentsCurrentUser) {
-            $scope.apartments = apartmentsCurrentUser.data;
+            vm.apartments = apartmentsCurrentUser.data;
             console.log(apartmentsCurrentUser);
 
         }

@@ -4,11 +4,11 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div class="top-buffer ">
 
-                <img class="img-full"  ng-src="{{apartment.featured_photo.large}}">
+                <img class="img-full"  ng-src="{{model.apartment.featured_photo.large}}">
 
                 <div class="top-buffer ">
-                    <h1 class="page-header">{{apartment.name}}
-                        <button ng-click="addApartmentToFavourites()" ng-show="newUser" type="submit" class="btn ">{{favouriteButton}}</button>
+                    <h1 class="page-header">{{model.apartment.name}}
+                        <button ng-click="model.addApartmentToFavourites()" ng-show="newUser" type="submit" class="btn ">{{model.favouriteButton}}</button>
                     </h1>
                 </div>
                 <br>
@@ -17,7 +17,7 @@
 
                 <h2 class="page-header">Amenities</h2>
                 <ul>
-                    <li ng-repeat="amenities in apartment.amenities_list track by $index">
+                    <li ng-repeat="amenities in model.apartment.amenities_list track by $index">
                         {{amenities}}
                     </li>
                 </ul>
@@ -31,15 +31,15 @@
 
                         </thead>
                         <tbody>
-                        <tr ng-repeat="review in reviews">
+                        <tr ng-repeat="review in model.reviews">
                             <td>{{review.description}}</td>
                             <td>{{review.rating}}</td>
                         </tr>
                         <tr ng-show="newUser">
-                            <th><input ng-model="review.description" class="form-control"/></th>
-                            <th><input ng-model="review.rating" class="form-control"/></th>
+                            <th><input ng-model="model.review.description" class="form-control"/></th>
+                            <th><input ng-model="model.review.rating" class="form-control"/></th>
                             <th>
-                                <button ng-click="addReview(review)" class="btn btn-primary">Add</button>
+                                <button ng-click="model.addReview(model.review)" class="btn btn-primary">Add</button>
                             </th>
                         </tr>
                         </tbody>

@@ -7,14 +7,16 @@
         .module("RentOutApp")
         .controller("ApartmentDetailsController",ApartmentDetailsController);
 
-    function ApartmentDetailsController($scope, $location, $routeParams, ApartmentService,UserService, ReviewService) {
+    function ApartmentDetailsController($location, $routeParams, ApartmentService,UserService, ReviewService) {
+        var vm = this;
+
         var apartmentId = $routeParams.apartmentId;
         var currentUser = UserService.getCurrentUser();
-        $scope.addApartmentToFavourites = addApartmentToFavourites;
+        vm.addApartmentToFavourites = addApartmentToFavourites;
         //$scope.showReviews = showReviews;
-        $scope.addReview = addReview;
+        vm.addReview = addReview;
 
-        $scope.favouriteButton = "Mark as favourite";
+        vm.favouriteButton = "Mark as favourite";
         console.log(apartmentId);
         ApartmentService.findApartmentDetailsById(apartmentId,renderDetails);
 
@@ -24,7 +26,7 @@
                 .findAllReviewsForApartemnt(apartmentId)
                 .then(function(res){
                     console.log(res.data);
-                    $scope.reviews = res.data;
+                    vm.reviews = res.data;
                 });
         }
         showReviews();
@@ -45,7 +47,7 @@
 
         function renderDetails(apartmentDetails) {
             console.log(apartmentDetails.place.place_details);
-            $scope.apartment = apartmentDetails.place.place_details;
+            vm.apartment = apartmentDetails.place.place_details;
         }
 
         function addApartmentToFavourites() {
@@ -58,7 +60,7 @@
         }
         function addApartmentToFavouritesCallback(user) {
             console.log(user.data.favourites);
-            $scope.favouriteButton = "Marked";
+            vm.favouriteButton = "Marked";
         }
 
         function addReviewCallback(review) {
