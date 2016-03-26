@@ -11,11 +11,12 @@
         .module("RentOutApp")
         .controller("ReviewController", ReviewController);
 
-    function ReviewController($scope, ReviewService, $location, UserService)
+    function ReviewController( ReviewService, $location, UserService)
     {
         //currently logged in user
+        var vm = this;
         var currentUser = UserService.getCurrentUser();
-        $scope.$location = $location;
+        vm.$location = $location;
         function init() {
             ReviewService
                 .findAllReviewsForUser(currentUser._id)
@@ -23,10 +24,10 @@
         }
         init();
 
-        $scope.addReview = addReview;
-        $scope.removeReview = removeReview;
-        $scope.selectReview = selectReview;
-        $scope.updateReview = updateReview;
+        vm.addReview = addReview;
+        vm.removeReview = removeReview;
+        vm.selectReview = selectReview;
+        vm.updateReview = updateReview;
 
         function updateReview(review)
         {
@@ -34,17 +35,17 @@
             ReviewService
                 .updateReviewById(review._id,review)
                 .then(updateReviewCallback);
-            $scope.review = null;
+            vm.review = null;
         }
 
         function selectReview(index)
         {
-            $scope.selectedReviewIndex = index;
-            $scope.review = {
-                _id: $scope.users[index]._id,
-                apartmentId: $scope.users[index].apartmentId,
-                description: $scope.users[index].description,
-                rating: $scope.users[index].rating
+            vm.selectedReviewIndex = index;
+            vm.review = {
+                _id: vm.users[index]._id,
+                apartmentId: vm.users[index].apartmentId,
+                description: vm.users[index].description,
+                rating: vm.users[index].rating
             };
 
             //$scope.apartment = $scope.apartments[index];
@@ -52,7 +53,7 @@
 
         function removeReview(index)
         {
-            var reviewId = $scope.users[index]._id;
+            var reviewId = vm.users[index]._id;
             ReviewService
                 .deleteReviewById(reviewId)
                 .then(removeReviewCallback);
@@ -76,7 +77,7 @@
         //callback functions
 
         function findAllReviewsForUserCallback(reviewsCurrentUser) {
-            $scope.users = reviewsCurrentUser.data;
+            vm.users = reviewsCurrentUser.data;
             console.log(reviewsCurrentUser);
 
         }

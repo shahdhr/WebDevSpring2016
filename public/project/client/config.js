@@ -55,22 +55,22 @@
                 .when("/apartment", {
                     templateUrl: "views/apartment/apartment.view.html",
                     controller: "ApartmentController",
-                    controllerAs: "model",
+                    controllerAs: "model"
                 })
                 .when("/booking", {
                     templateUrl: "views/booking/booking.view.html",
                     controller: "BookingController",
-                    controllerAs: "model",
+                    controllerAs: "model"
                 })
                 .when("/review", {
                     templateUrl: "views/review/review.view.html",
                     controller: "ReviewController",
-                    controllerAs: "model",
+                    controllerAs: "model"
                 })
                 .when("/admin", {
                     templateUrl: "views/admin/admin.view.html",
                     controller: "AdminController",
-                    controllerAs: "model",
+                    controllerAs: "model"
                 })
                 .otherwise({
                     redirectTo: "/"
