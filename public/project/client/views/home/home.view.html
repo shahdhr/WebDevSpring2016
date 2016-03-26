@@ -8,7 +8,7 @@
                     <label for="inputPlace">Place</label>
                     <div class="row">
                         <div class="form-group col-xs-12">
-                            <input ng-model="search.place" type="text" class="form-control" id="inputPlace"
+                            <input ng-model="model.search.place" type="text" class="form-control" id="inputPlace"
                                    placeholder="Where to you want to go?">
                         </div>
                     </div>
@@ -17,10 +17,10 @@
                     <label for="inputStartDate">Dates</label>
                     <div class="row">
                         <div class="form-group col-xs-6">
-                            <input type="date" ng-model="search.startDate" class="form-control" id="inputStartDate" placeholder="From">
+                            <input type="date" ng-model="model.search.startDate" class="form-control" id="inputStartDate" placeholder="From">
                         </div>
                         <div class="form-group col-xs-6">
-                            <input type="date" ng-model="search.endDate" class="form-control" id="inputEndDate" placeholder="To">
+                            <input type="date" ng-model="model.search.endDate" class="form-control" id="inputEndDate" placeholder="To">
                         </div>
 
                     </div>
@@ -29,20 +29,20 @@
                     <label for="inputPlace">Number of people</label>
                     <div class="row">
                         <div class="form-group col-xs-12">
-                            <input type="text" ng-model="search.numberOfPeople" class="form-control" id="inputNumberOfMembers" placeholder="How many people?">
+                            <input type="text" ng-model="model.search.numberOfPeople" class="form-control" id="inputNumberOfMembers" placeholder="How many people?">
                         </div>
                     </div>
                 </fieldset>
                 <fieldset class="form-group">
                     <div class="row">
                         <div class="col-sm-12">
-                            <button  type="submit" ng-click="searchPlaces(search)" class="btn btn-block">Search</button>
+                            <button  type="submit" ng-click="model.searchPlaces(model.search)" class="btn btn-block">Search</button>
                         </div>
                     </div>
                 </fieldset>
             </form>
             <div class="table-responsive">
-                <table class="table table-striped" ng-show="places">
+                <table class="table table-striped" ng-show="model.places">
                     <thead>
                     <tr>
                         <th>Thumbnail</th>
@@ -50,7 +50,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="place in places" ng-click="findDetailsById(place.place.place_details.id)">
+                    <tr ng-repeat="place in model.places" ng-click="model.findDetailsById(place.place.place_details.id)">
                         <td><img ng-src="{{place.place.place_details.featured_photo.medium}}"> </td>
                         <td><a href="">{{place.place.place_details.name}}</a></td>
                     </tr>
