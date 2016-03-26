@@ -16,16 +16,12 @@
                 //.when("/admin", {
                 //        templateUrl: "views/admin/admin.view.html"
                 //    })
-                //.when("/forms", {
-                //        templateUrl: "views/forms/forms.view.html"
-                //    })
-                //.when("/fields", {
-                //        templateUrl: "views/forms/fields.view.html"
-                //    })
+
 
                 .when("/home", {
                     templateUrl: "views/home/home.view.html",
                     controller: "HomeController",
+                    controllerAs: "model",
                     resolve: {
                         getLoggedIn : getLoggedIn
                     }
@@ -33,40 +29,48 @@
                 .when("/details/:apartmentId", {
                     templateUrl: "views/apartment/details.view.html",
                     controller: "ApartmentDetailsController",
+                    controllerAs: "model",
                     resolve: {
                         getLoggedIn : getLoggedIn
                     }
                 })
                 .when("/login", {
                     templateUrl: "views/users/login.view.html",
-                    controller: "LoginController"
+                    controller: "LoginController",
+                    controllerAs: "model",
                 })
                 .when("/register", {
                     templateUrl: "views/users/register.view.html",
-                    controller: "RegisterController"
+                    controller: "RegisterController",
+                    controllerAs: "model",
                 })
                 .when("/profile", {
                     templateUrl: "views/users/profile.view.html",
                     controller: "ProfileController",
+                    controllerAs: "model",
                     resolve: {
                         checkLoggedIn : checkLoggedIn
                     }
                 })
                 .when("/apartment", {
                     templateUrl: "views/apartment/apartment.view.html",
-                    controller: "ApartmentController"
+                    controller: "ApartmentController",
+                    controllerAs: "model",
                 })
                 .when("/booking", {
                     templateUrl: "views/booking/booking.view.html",
-                    controller: "BookingController"
+                    controller: "BookingController",
+                    controllerAs: "model",
                 })
                 .when("/review", {
                     templateUrl: "views/review/review.view.html",
-                    controller: "ReviewController"
+                    controller: "ReviewController",
+                    controllerAs: "model",
                 })
                 .when("/admin", {
                     templateUrl: "views/admin/admin.view.html",
-                    controller: "AdminController"
+                    controller: "AdminController",
+                    controllerAs: "model",
                 })
                 .otherwise({
                     redirectTo: "/"
