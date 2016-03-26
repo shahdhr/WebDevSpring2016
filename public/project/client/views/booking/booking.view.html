@@ -13,23 +13,23 @@
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <th><input ng-model="booking.apartmentId" class="form-control"/></th>
-                        <th><input ng-model="booking.startDate" class="form-control"/></th>
-                        <th><input ng-model="booking.endDate"  class="form-control"/></th>
+                        <th><input ng-model="model.booking.apartmentId" class="form-control"/></th>
+                        <th><input ng-model="model.booking.startDate" class="form-control"/></th>
+                        <th><input ng-model="model.booking.endDate"  class="form-control"/></th>
                         <th>
-                            <button ng-click="addBooking(booking)" class="btn btn-primary">Add</button>
-                            <button ng-click="updateBooking(booking)" class="btn btn-primary btn-success">Update</button>
+                            <button ng-click="model.addBooking(model.booking)" class="btn btn-primary">Add</button>
+                            <button ng-click="model.updateBooking(model.booking)" class="btn btn-primary btn-success">Update</button>
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="booking in bookings">
+                    <tr ng-repeat="booking in model.bookings">
                         <td>{{booking.apartmentId}}</td>
                         <td>{{booking.startDate | number:0 }}</td>
                         <td>{{booking.endDate}}</td>
                         <td>
-                            <button ng-click="removeBooking($index)" class="btn btn-danger">Remove</button>
-                            <button ng-click="selectBooking($index)" class="btn btn-info">Select</button>
+                            <button ng-click="model.removeBooking($index)" class="btn btn-danger">Remove</button>
+                            <button ng-click="model.selectBooking($index)" class="btn btn-info">Select</button>
                         </td>
                     </tr>
                     </tbody>

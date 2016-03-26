@@ -8,11 +8,12 @@
         .module("RentOutApp")
         .controller("BookingController", BookingController);
 
-    function BookingController($scope, BookingService, $location, UserService)
+    function BookingController(BookingService, $location, UserService)
     {
         //currently logged in user
+        var vm =this;
         var currentUser = UserService.getCurrentUser();
-        $scope.$location = $location;
+        vm.$location = $location;
         function init() {
             BookingService
                 .findAllBookingsForUser(currentUser._id)
@@ -20,10 +21,10 @@
         }
         init();
 
-        $scope.addBooking = addBooking;
-        $scope.removeBooking = removeBooking;
-        $scope.selectBooking = selectBooking;
-        $scope.updateBooking = updateBooking;
+        vm.addBooking = addBooking;
+        vm.removeBooking = removeBooking;
+        vm.selectBooking = selectBooking;
+        vm.updateBooking = updateBooking;
 
         function updateBooking(booking)
         {
@@ -31,17 +32,17 @@
             BookingService
                 .updateBookingById(booking._id,booking)
                 .then(updateBookingCallback);
-            $scope.booking = null;
+            vm.booking = null;
         }
 
         function selectBooking(index)
         {
-            $scope.selectedBookingIndex = index;
-            $scope.booking = {
-                _id: $scope.bookings[index]._id,
-                apartmentId: $scope.bookings[index].apartmentId,
-                startDate: $scope.bookings[index].startDate,
-                endDate: $scope.bookings[index].endDate
+            vm.selectedBookingIndex = index;
+            vm.booking = {
+                _id: vm.bookings[index]._id,
+                apartmentId: vm.bookings[index].apartmentId,
+                startDate: vm.bookings[index].startDate,
+                endDate: vm.bookings[index].endDate
             };
 
             //$scope.apartment = $scope.apartments[index];
@@ -49,7 +50,7 @@
 
         function removeBooking(index)
         {
-            var bookingId = $scope.bookings[index]._id;
+            var bookingId = vm.bookings[index]._id;
             console.log(bookingId);
             BookingService
                 .deleteBookingById(bookingId)
@@ -74,7 +75,7 @@
         //callback functions
 
         function findAllBookingsForUserCallback(bookingsCurrentUser) {
-            $scope.bookings = bookingsCurrentUser.data;
+            vm.bookings = bookingsCurrentUser.data;
             console.log(bookingsCurrentUser);
 
         }
