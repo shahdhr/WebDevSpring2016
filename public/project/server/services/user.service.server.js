@@ -16,7 +16,9 @@ module.exports = function (app, model,uuid) {
         var user = req.body;
         user._id=uuid.v4();
         model.createUser(user);
-        res.send (user);
+        req.session.newUser = user;
+        res.json(user);
+
     }
 
     function getAllUsers (req, res) {
