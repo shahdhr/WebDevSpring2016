@@ -51,11 +51,13 @@
         function addApartmentToFavourites() {
             var user = UserService.getCurrentUser();
             user.favourites.push(apartmentId);
-            UserService.updateUser(user._id, user, addApartmentToFavouritesCallback);
+            UserService
+                .updateUser(user._id, user)
+                .then(addApartmentToFavouritesCallback);
 
         }
         function addApartmentToFavouritesCallback(user) {
-            console.log(user.favourites);
+            console.log(user.data.favourites);
             $scope.favouriteButton = "Marked";
         }
 
