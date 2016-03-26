@@ -6,6 +6,8 @@ module.exports = function (app, model,uuid) {
     app.get("/api/project/user/:id", getUserById);
     app.get("/api/project/user?username=username", getUserByUsername);
     app.get("/api/project/user?username=alice&password=wonderland",getUserByCredentials);
+    app.get("/api/project/loggedin",loggedin);
+    app.post("/api/project/logout", logout);
     app.put("/api/project/user/:id",updateUserById);
     app.post("/api/project/user",createUser);
     app.delete("/api/project/user/:id",deleteUserById);
@@ -54,10 +56,20 @@ module.exports = function (app, model,uuid) {
         };
         var user = model.findUserByCredentials(credentials);
         if(user) {
+            req.session.newUser = user;
             res.json(user);
             return;
         }
         res.json({message: "User not found"});
+    }
+
+    function loggedin(req, res) {
+        res.json(req.session.newUser);
+    }
+
+    function logout(req, res) {
+        req.session.destroy();
+        res.send(200);
     }
 
     function getUserByUsername (req, res) {

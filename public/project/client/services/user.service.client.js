@@ -16,7 +16,9 @@
             deleteUserById:deleteUserById,
             updateUser:updateUser,
             setCurrentUser:setCurrentUser,
-            getCurrentUser:getCurrentUser
+            getCurrentUser:getCurrentUser,
+            logout: logout,
+            getCurrentSessionUser: getCurrentSessionUser
         };
         return api;
 
@@ -45,18 +47,30 @@
         }
 
         function setCurrentUser(aUser) {
-            if(aUser == null) {
-                $rootScope.newUser = null;
-            }
-            else {
-                $rootScope.newUser = {"_id":aUser._id, "firstName":aUser.firstName, "lastName":aUser.lastName,
-                    "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email, "favourites":aUser.favourites}
-            }
+            //if(aUser == null) {
+            //    $rootScope.newUser = null;
+            //}
+            //else {
+            //    $rootScope.newUser = {"_id":aUser._id, "firstName":aUser.firstName, "lastName":aUser.lastName,
+            //        "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email, "favourites":aUser.favourites}
+            //}
+            $rootScope.newUser = aUser;
 
         }
 
         function getCurrentUser() {
             return $rootScope.newUser;
+            //    return $http.get("/api/project/loggedin");
+        }
+
+        function getCurrentSessionUser() {
+            return $http.get("/api/project/loggedin");
+        }
+
+
+
+        function logout() {
+            return $http.post("/api/project/logout");
         }
     }
 })();

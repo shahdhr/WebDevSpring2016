@@ -25,11 +25,17 @@
 
                 .when("/home", {
                     templateUrl: "views/home/home.view.html",
-                    controller: "HomeController"
+                    controller: "HomeController",
+                    resolve: {
+                        getLoggedIn : getLoggedIn
+                    }
                 })
                 .when("/details/:apartmentId", {
                     templateUrl: "views/apartment/details.view.html",
-                    controller: "ApartmentDetailsController"
+                    controller: "ApartmentDetailsController",
+                    resolve: {
+                        getLoggedIn : getLoggedIn
+                    }
                 })
                 .when("/login", {
                     templateUrl: "views/users/login.view.html",
@@ -41,7 +47,10 @@
                 })
                 .when("/profile", {
                     templateUrl: "views/users/profile.view.html",
-                    controller: "ProfileController"
+                    controller: "ProfileController",
+                    resolve: {
+                        checkLoggedIn : checkLoggedIn
+                    }
                 })
                 .when("/apartment", {
                     templateUrl: "views/apartment/apartment.view.html",
@@ -65,4 +74,33 @@
 
 
         });
+
+    function getLoggedIn(UserService, $q) {
+        var deferred = $q.defer();
+        UserService
+            .getCurrentSessionUser()
+            .then(function (response) {
+                var currentUser = response.data;
+                UserService.setCurrentUser(currentUser);
+                deferred.resolve();
+            });
+        return deferred.promise;
+    }
+
+    function checkLoggedIn(UserService, $q, $location) {
+        var deferred = $q.defer();
+        UserService
+            .getCurrentSessionUser()
+            .then(function (response){
+                var currentUser = response.data;
+                if(currentUser) {
+                    UserService.setCurrentUser(currentUser);
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                    $location.url("/home");
+                }
+            });
+        return deferred.promise;
+    }
 })();
