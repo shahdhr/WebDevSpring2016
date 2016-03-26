@@ -57,7 +57,8 @@ module.exports = function() {
     function deleteUser(userId) {
         for(var index=0;index<users.length;index++) {
             if(users[index]._id == userId) {
-                users.remove(index);
+                users.splice(index,1);
+                break;
             }
         }
         return users;

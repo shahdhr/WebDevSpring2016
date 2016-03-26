@@ -14,34 +14,41 @@
         .module("RentOutApp")
         .controller("AdminController", AdminController);
 
-    function AdminController($scope, $location, UserService)
+    function AdminController( $location, UserService)
     {
         //currently logged in user
+        var vm = this;
+
         var currentUser = UserService.getCurrentUser();
-        $scope.$location = $location;
+        vm.$location = $location;
         function init() {
-            UserService.findAllUsers(findAllUsersCallback);
+            UserService
+                .findAllUsers()
+                .then(findAllUsersCallback);
+
         }
         init();
 
-        $scope.addUser = addUser;
-        $scope.removeUser = removeUser;
-        $scope.selectUser = selectUser;
-        $scope.updateUser = updateUser;
+        vm.addUser = addUser;
+        vm.removeUser = removeUser;
+        vm.selectUser = selectUser;
+        vm.updateUser = updateUser;
 
         function updateUser(user)
         {
             console.log(user._id);
-            UserService.updateUser(user._id,user,updateUserCallback);
-            $scope.user = null;
+            UserService
+                .updateUser(user._id,user)
+                .then(updateUserCallback);
+            vm.user = null;
         }
 
         function selectUser(index)
         {
-            $scope.selectedUserIndex = index;
-            $scope.user = {
-                _id: $scope.users[index]._id,
-                username: $scope.users[index].username,
+            vm.selectedUserIndex = index;
+            vm.user = {
+                _id: vm.users[index]._id,
+                username: vm.users[index].username,
                 };
 
             //$scope.apartment = $scope.apartments[index];
@@ -49,8 +56,10 @@
 
         function removeUser(index)
         {
-            var userId = $scope.users[index]._id;
-            UserService.deleteUserById(userId,removeUserCallback);
+            var userId = vm.users[index]._id;
+            UserService
+                .deleteUserById(userId)
+                .then(removeUserCallback);
             //$scope.apartments.splice(index, 1);
         }
 
@@ -62,14 +71,16 @@
                 password : "password"
 
             };
-            UserService.createUser(newUser,addUserCallback);
+            UserService
+                .createUser(newUser)
+                .then(addUserCallback);
             //$scope.apartments.push(newApartment);
         }
 
         //callback functions
 
         function findAllUsersCallback(allUsers) {
-            $scope.users = allUsers;
+            vm.users = allUsers.data;
             console.log(allUsers);
 
         }

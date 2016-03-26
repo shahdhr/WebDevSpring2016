@@ -11,21 +11,21 @@
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <th><input ng-model="user.username" class="form-control"/></th>
+                        <th><input ng-model="model.user.username" class="form-control"/></th>
                         <th>
-                            <button ng-click="addUser(user)" class="btn btn-primary">Add</button>
-                            <button ng-click="updateUser(user)" class="btn btn-primary btn-success">Update</button>
+                            <button ng-click="model.addUser(model.user)" class="btn btn-primary">Add</button>
+                            <button ng-click="model.updateUser(model.user)" class="btn btn-primary btn-success">Update</button>
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="user in users">
+                    <tr ng-repeat="user in model.users">
                         <td>{{user.username}}</td>
                         <!--<td>{{review.description}}</td>-->
                         <!--<td>{{review.rating}}</td>-->
                         <td>
-                            <button ng-click="removeUser($index)" class="btn btn-danger">Remove</button>
-                            <button ng-click="selectUser($index)" class="btn btn-info">Select</button>
+                            <button ng-click="model.removeUser($index)" class="btn btn-danger">Remove</button>
+                            <button ng-click="model.selectUser($index)" class="btn btn-info">Select</button>
                         </td>
                     </tr>
                     </tbody>
