@@ -10,6 +10,6 @@ module.exports = function(mongoose) {
         fields: String,
         created: { type: Date, default: Date.now },
         email: { type: Date, default: Date.now }
-    }, {collection: 'form'});
+    }, {collection: 'assignment.formmaker.form'});
     return UserSchema;
 };
