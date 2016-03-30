@@ -1,7 +1,7 @@
 /**
  * Created by Dhruv on 3/17/2016.
  */
-module.exports = function() {
+module.exports = function(db,mongoose) {
     var users = require("./user.mock.json");
     var api = {
         findUserByCredentials: findUserByCredentials,
