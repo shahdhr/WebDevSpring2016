@@ -12,9 +12,20 @@ module.exports = function (app, model,uuid) {
 
     function createUser (req, res) {
         var user = req.body;
-        user._id=uuid.v4();
-        model.createUser(user);
-        res.send (user);
+        //user._id=uuid.v4();
+        //model.createUser(user);
+        //res.send (user);
+
+        model.createUser(user)
+            .then(
+                function (doc) {
+                    req.session.newUser = doc;
+                    res.json(user);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function getAllUsers (req, res) {
@@ -36,13 +47,23 @@ module.exports = function (app, model,uuid) {
 
     function getUserById (req, res) {
         var id = req.params.id;
-        console.log(req.params);
-        var user = model.findUserById(id);
-        if(user) {
-            res.json(user);
-            return;
-        }
-        res.json({message: "User not found"});
+        //console.log(req.params);
+        //var user = model.findUserById(id);
+        //if(user) {
+        //    res.json(user);
+        //    return;
+        //}
+        //res.json({message: "User not found"});
+
+        var user = model.findUserById(id)
+            .then(
+                function(doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
     }
 
     function getUserByCredentials (req, res) {
@@ -52,23 +73,41 @@ module.exports = function (app, model,uuid) {
             username: username,
             password: password
         };
-        var user = model.findUserByCredentials(credentials);
-        if(user) {
-            res.json(user);
-            return;
-        }
-        res.json({message: "User not found"});
+        model.findUserByCredentials(credentials)
+            .then(
+                function(doc) {
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+
+            );
+        //if(user) {
+        //    res.json(user);
+        //    return;
+        //}
+        //res.json({message: "User not found"});
     }
 
     function getUserByUsername (req, res) {
         var username = req.query.username;
         console.log(username);
-        var user = model.findUserByUsername(username);
-        if(user) {
-            res.json(user);
-            return;
-        }
-        res.json({message: "User not found"});
+       model.findUserByUsername(username)
+            .then(
+                function(user) {
+                    res.json(user);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+        //if(user) {
+        //    res.json(user);
+        //    return;
+        //}
+        //res.json({message: "User not found"});
     }
 
 
@@ -76,7 +115,16 @@ module.exports = function (app, model,uuid) {
     function updateUserById (req, res) {
         var id = req.params.id;
         var user = req.body;
-        user = model.updateUser(id, user);
+        model
+            .updateUser(id, user)
+            .then(
+                function(stats) {
+                    res.status.send(200);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
         if(user) {
             res.json(user);
             return;
@@ -86,10 +134,19 @@ module.exports = function (app, model,uuid) {
 
     function deleteUserById (req, res) {
         var id = req.params.id;
-        if(model.deleteUser(id)) {
-            res.send(200);
-            return;
-        }
-        res.json ({message: "User not found"});
+        model.deleteUser(id)
+            .then (
+                function (stats) {
+                    res.send(200);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+        //if(model.deleteUser(id)) {
+        //    res.send(200);
+        //    return;
+        //}
+        //res.json ({message: "User not found"});
     }
 };

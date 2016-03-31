@@ -27,7 +27,7 @@
         function registerCallback(user) {
            UserService.setCurrentUser(user.data);
             $location.path('/profile');
-           console.log(user);
+           console.log(user.data);
         }
     }
 })();
