@@ -29,7 +29,7 @@
                 phones: user.phones
             };
             UserService
-                .updateUser(user._id, user)
+                .updateUser(user._id, updatedUser)
                 .then(updateCallback);
 
         }
