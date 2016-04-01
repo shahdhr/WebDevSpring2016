@@ -21,15 +21,6 @@ module.exports = function(db,mongoose) {
     return api;
 
     function findUserByCredentials(credentials) {
-        //for(var index=0;index<users.length;index++) {
-        //    if(users[index].username == credentials.username) {
-        //        if(users[index].password==credentials.password) {
-        //            return users[index];
-        //        }
-        //    }
-        //}
-        //return null;
-
         var deferred = q.defer();
 
         UserModel.findOne(
@@ -48,12 +39,6 @@ module.exports = function(db,mongoose) {
     }
 
     function findUserByUsername(username) {
-        //for(var index=0;index<users.length;index++) {
-        //    if(users[index].username == username) {
-        //        return users[index];
-        //    }
-        //}
-        //return null;
         var deferred = q.defer();
 
         UserModel.findOne(
@@ -71,12 +56,6 @@ module.exports = function(db,mongoose) {
     }
 
     function findUserById(userId) {
-        //for(var index=0;index<users.length;index++) {
-        //    if (users[index]._id == userId) {
-        //        return users[index];
-        //    }
-        //}
-        //return null;
         var deferred = q.defer();
 
         UserModel.findById(userId,function(err,doc) {
@@ -108,8 +87,6 @@ module.exports = function(db,mongoose) {
     }
 
     function createUser(user) {
-        //users[users.length] = user;
-        //return user;
         var deferred = q.defer();
         UserModel.create(user, function(err,doc){
             if(err) {
@@ -125,12 +102,6 @@ module.exports = function(db,mongoose) {
     }
 
     function deleteUser(userId) {
-        //for(var index=0;index<users.length;index++) {
-        //    if(users[index]._id == userId) {
-        //        users.remove(index);
-        //    }
-        //}
-        //return users;
         var deferred = q.defer();
 
         UserModel.remove({_id: userId},
@@ -148,18 +119,6 @@ module.exports = function(db,mongoose) {
     }
 
     function updateUser(userId, user) {
-        //for(var index=0;index<users.length;index++) {
-        //    if(users[index]._id == userId) {
-        //        users[index].firstName = user.firstName;
-        //        users[index].lastName = user.lastName;
-        //        users[index].password = user.password;
-        //        users[index].roles = user.roles;
-        //        users[index].username = user.username;
-        //        users[index].email = user.email;
-        //    }
-        //}
-        //return user;
-
         var deferred = q.defer();
         UserModel.update({_id :userId},{$set:user},function(err,doc) {
             if(!err) {

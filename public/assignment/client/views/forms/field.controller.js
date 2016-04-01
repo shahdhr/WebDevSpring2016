@@ -29,7 +29,11 @@
                 $scope.editField.placeholder = fromattedOptions;
             }
             $scope.submit = function(updatedOptions) {
-                var temp = updatedOptions.placeholder.split('\n');
+                var temp = [];
+                if(updatedOptions.placeholder) {
+                    temp = updatedOptions.placeholder.split('\n');
+                }
+
                 var newOptions = [];
                 for(var index =0;index<temp.length;index++) {
                     var tempString = temp[index];
@@ -205,26 +209,29 @@
             if(fieldType) {
                 switch(fieldType) {
                     case "Single Line Text Field":
-                        FieldService.createFieldForForm(formId,{"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"})
+                        console.log("create text field controller"+formId);
+                        FieldService.createFieldForForm(formId,{"label": "New Text Field", "type": "TEXT", "placeholder": "New Field"})
                             .then(function(res) {
+                                console.log("create text field controller response"+res);
+                                console.log(res);
                                 $scope.fields = res.data.fields;
                             });
 
                         break;
                     case "Multi Line Text Field":
-                        FieldService.createFieldForForm(formId,{"_id": null, "label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"})
+                        FieldService.createFieldForForm(formId,{"label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"})
                             .then(function(res) {
                                 $scope.fields = res.data.fields;
                             });
                         break;
                     case "Date Field":
-                        FieldService.createFieldForForm(formId,{"_id": null, "label": "New Date Field", "type": "DATE"})
+                        FieldService.createFieldForForm(formId,{ "label": "New Date Field", "type": "DATE"})
                             .then(function(res) {
                                 $scope.fields = res.data.fields;
                             });
                         break;
                     case "Checkboxes Field":
-                        FieldService.createFieldForForm(formId,{"_id": null, "label": "New Checkboxes", "type": "CHECKBOXES", "options": [
+                        FieldService.createFieldForForm(formId,{ "label": "New Checkboxes", "type": "CHECKBOXES", "options": [
                                 {"label": "Option A", "value": "OPTION_A"},
                                 {"label": "Option B", "value": "OPTION_B"},
                                 {"label": "Option C", "value": "OPTION_C"}
@@ -235,7 +242,7 @@
                         break;
 
                     case "Dropdown Field":
-                        FieldService.createFieldForForm(formId,{"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [
+                        FieldService.createFieldForForm(formId,{ "label": "New Dropdown", "type": "OPTIONS", "options": [
                                 {"label": "Option 1", "value": "OPTION_1"},
                                 {"label": "Option 2", "value": "OPTION_2"},
                                 {"label": "Option 3", "value": "OPTION_3"}
@@ -245,7 +252,7 @@
                             });
                         break;
                     case "Radio Buttons Field":
-                        FieldService.createFieldForForm(formId,{"_id": null, "label": "New Radio Buttons", "type": "RADIOS", "options": [
+                        FieldService.createFieldForForm(formId,{ "label": "New Radio Buttons", "type": "RADIOS", "options": [
                                 {"label": "Option X", "value": "OPTION_X"},
                                 {"label": "Option Y", "value": "OPTION_Y"},
                                 {"label": "Option Z", "value": "OPTION_Z"}
