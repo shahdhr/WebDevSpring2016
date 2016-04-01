@@ -102,7 +102,7 @@ module.exports = function (app, model,uuid) {
                 function (err) {
                     res.status(400).send(err);
                 }
-            )
+            );
         //if(user) {
         //    res.json(user);
         //    return;
@@ -125,11 +125,11 @@ module.exports = function (app, model,uuid) {
                     res.status(400).send(err);
                 }
             );
-        if(user) {
-            res.json(user);
-            return;
-        }
-        res.json({message: "User not found"});
+        //if(user) {
+        //    res.json(user);
+        //    return;
+        //}
+        //res.json({message: "User not found"});
     }
 
     function deleteUserById (req, res) {

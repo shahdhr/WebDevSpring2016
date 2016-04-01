@@ -133,7 +133,7 @@ module.exports = function(db,mongoose) {
         //return users;
         var deferred = q.defer();
 
-        UserModel.remove(userId,
+        UserModel.remove({_id: userId},
             function(err,doc) {
                 if(err) {
                     deferred.reject(err);

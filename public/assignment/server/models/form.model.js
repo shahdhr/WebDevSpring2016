@@ -1,8 +1,12 @@
 /**
  * Created by Dhruv on 3/17/2016.
  */
+
+var q = require("q");
 module.exports = function(db,mongoose) {
-    var forms = require("./form.mock.json");
+    //var forms = require("./form.mock.json");
+    var FormSchema = require("./form.schema.server.js")(mongoose);
+    var FormModel = mongoose.model('Form',FormSchema);
     var api = {
         createFormForUser:createFormForUser,
         findAllFormsForUser:findAllFormsForUser,
@@ -24,60 +28,120 @@ module.exports = function(db,mongoose) {
 
     function createFormForUser(userId, form) {
         form.userId = userId;
-        forms.push(form);
-        return form
+        //forms.push(form);
+        //return form
+        var deferred = q.defer();
+        FormModel.create(form,function(err,doc){
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+
     }
 
     function findAllFormsForUser(userId) {
-        var userForms = [];
-        for(var index=0;index<forms.length;index++) {
-            if(forms[index].userId == userId) {
-                userForms.push(forms[index]);
-            }
-        }
-        return userForms;
+        //var userForms = [];
+        //for(var index=0;index<forms.length;index++) {
+        //    if(forms[index].userId == userId) {
+        //        userForms.push(forms[index]);
+        //    }
+        //}
+        //return userForms;
+        console.log("form moderl all forms for user");
+        var deferred = q.defer();
+        FormModel.find({userId:userId},function(err,doc) {
+           if(err) {
+               console.log(err);
+               deferred.reject(err);
+           } else {
+               console.log(doc);
+               deferred.resolve(doc);
+           }
+        });
+        return deferred.promise;
     }
 
     function findFormByTitle(title) {
-        for(var index=0;index<forms.length;index++) {
-            if(forms[index].title === title) {
-                return forms[index];
+        //for(var index=0;index<forms.length;index++) {
+        //    if(forms[index].title === title) {
+        //        return forms[index];
+        //    }
+        //}
+        //return null;
+        var deferred = q.defer();
+        FormModel.findOne({title: title},function(err,doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
-        return null;
+        });
+        return deferred.promise;
     }
 
     function updateFormById(formId, newForm) {
-        for(var index=0;index<forms.length;index++) {
-            if(forms[index]._id == formId) {
-                forms[index]._id = formId;
-                newForm._id = formId;
-                forms[index].title = newForm.title;
-                forms[index].userId = newForm.userId;
-                break;
+        //for(var index=0;index<forms.length;index++) {
+        //    if(forms[index]._id == formId) {
+        //        forms[index]._id = formId;
+        //        newForm._id = formId;
+        //        forms[index].title = newForm.title;
+        //        forms[index].userId = newForm.userId;
+        //        break;
+        //    }
+        //}
+        //return newForm;
+        var deferred = q.defer();
+        FormModel.update({_id:formId},{$set: newForm}, function (err,doc) {
+            if(err) {
+                deferred.reject(err);
+            } else{
+                console.log("updated form>>>>>");
+                console.log(doc);
+                deferred.resolve(doc);
             }
-        }
-        return newForm;
+        });
+        return deferred.promise;
     }
 
     function deleteFormById(formId) {
-        for(var index=0;index<forms.length;index++) {
-            if(forms[index]._id == formId) {
-                forms.splice(index,1);
-                break;
+        //for(var index=0;index<forms.length;index++) {
+        //    if(forms[index]._id == formId) {
+        //        forms.splice(index,1);
+        //        break;
+        //    }
+        //}
+        //return forms
+        var deferred = q.defer();
+        FormModel.remove({_id:formId},function(err,doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
-        return forms
+        });
+        return deferred.promise;
     }
 
     function findFromById (formId) {
-        for(var index=0;index<forms.length;index++) {
-            if (forms[index]._id == formId) {
-                return forms[index];
+        //for(var index=0;index<forms.length;index++) {
+        //    if (forms[index]._id == formId) {
+        //        return forms[index];
+        //    }
+        //}
+        //
+        //return null;
+        var deferred = q.defer();
+        FormModel.findOne({_id: formId},function(err,doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
-
-        return null;
+        });
+        return deferred.promise;
     }
 
 

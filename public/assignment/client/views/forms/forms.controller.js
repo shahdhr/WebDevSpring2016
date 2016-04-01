@@ -22,6 +22,7 @@
 
         //Fetching all forms for current user to display
         function init() {
+            console.log("form controller init()");
             FormService
                 .findAllFormsForUser(currentUser._id)
                 .then(findAllFormsForUserCallback);
@@ -31,7 +32,7 @@
         //Event handler implementations
         function addForm(form) {
             form.userId = currentUser._id;
-            form._id = (new Date()).getTime();
+            //form._id = (new Date()).getTime();
             FormService
                 .createFormForUser(currentUser._id,form)
                 .then(addFormCallback);
@@ -54,6 +55,7 @@
                 title: $scope.forms[index].title,
                 userId: $scope.forms[index].userId
             };
+            console.log($scope.form);
 
         }
 
@@ -73,12 +75,13 @@
 
         //callback functions
         function findAllFormsForUserCallback(formsCurrentUser) {
-            console.log(formsCurrentUser.data);
+            console.log(formsCurrentUser);
             $scope.forms = formsCurrentUser.data;
 
         }
 
         function addFormCallback(form) {
+            console.log("Add form callback init called");
             init();
         }
 
@@ -87,6 +90,7 @@
         }
 
         function updateFormCallback(form) {
+            console.log("Add form callback init called");
             init();
         }
 

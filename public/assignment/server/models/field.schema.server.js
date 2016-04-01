@@ -8,7 +8,7 @@ module.exports = function(mongoose) {
         label: String,
         type: String,
         placeholder: String,
-        options: [{label:STRING, value:STRING}]
+        options: [{label:String, value:String}]
     },{collection:'assignment.formmaker.field'});
     return FieldSchema;
 };
