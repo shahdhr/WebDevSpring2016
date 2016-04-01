@@ -202,10 +202,12 @@
         //Event handler declarations
         $scope.addField=addField;
         $scope.removeField = removeField;
+        $scope.cloneField = cloneField;
         $scope.updateModelOnSort=updateModelOnSort;
 
         //Event handler implementation
         function addField(fieldType) {
+            console.log("addField"+fieldType);
             if(fieldType) {
                 switch(fieldType) {
                     case "Single Line Text Field":
@@ -275,6 +277,36 @@
                 .then(function(res) {
                     $scope.fields = res.data.fields;
                 })
+        }
+
+        function cloneField(field) {
+            console.log("cloneField"+field.type);
+
+            switch (field.type) {
+                case 'TEXT':
+                    addField("Single Line Text Field");
+                    break;
+                case 'EMAIL':
+                    addField("Single Line Text Field");
+                    break;
+                case 'TEXTAREA':
+                    addField("Multi Line Text Field");
+                    break;
+                case 'DATE':
+                    addField("Date Field");
+                    break;
+                case 'OPTIONS':
+                    addField("Dropdown Field");
+                    break;
+                case 'CHECKBOXES':
+                    addField("Checkboxes Field");
+                    break;
+                case 'RADIOS':
+                    addField("Radio Buttons Field");
+                    break;
+                default:
+                    break;
+            }
         }
 
         function updateModelOnSort() {
