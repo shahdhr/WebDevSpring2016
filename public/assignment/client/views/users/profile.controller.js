@@ -7,17 +7,17 @@
         .module("FormBuilderApp")
         .controller("ProfileController",ProfileController)
 
-    function ProfileController($scope, $location, UserService, $rootScope) {
-
+    function ProfileController(UserService) {
+        var vm = this;
         // currently logged in user
         var currentUser = UserService.getCurrentUser();
-        $scope.user = currentUser;
+        vm.user = currentUser;
 
 
 
 
         //Even handler declarations
-        $scope.update = update;
+        vm.update = update;
 
 
         //Event handler implementations
@@ -42,7 +42,7 @@
         //callback functions
         function updateCallback(user) {
             console.log(user);
-            $scope.updateMessage = "Profile updated successfully.";
+            vm.updateMessage = "Profile updated successfully.";
             UserService
                 .findUserByCredentials(currentUser.username,currentUser.password)
                 .then(function(user){
