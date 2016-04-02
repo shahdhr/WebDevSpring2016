@@ -46,8 +46,10 @@
             UserService
                 .findUserByCredentials(currentUser.username,currentUser.password)
                 .then(function(user){
-                    UserService.setCurrentUser = user;
-                })
+                    console.log("update response");
+                    console.log(user);
+                    UserService.setCurrentUser(user.data);
+                });
         }
     }
 })();

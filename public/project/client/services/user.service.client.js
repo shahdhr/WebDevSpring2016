@@ -55,6 +55,7 @@
             //        "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email, "favourites":aUser.favourites}
             //}
             $rootScope.newUser = aUser;
+            console.log($rootScope.newUser);
 
         }
 

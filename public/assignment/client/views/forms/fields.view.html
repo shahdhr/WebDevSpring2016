@@ -8,7 +8,7 @@
                 <li class="active"><a href="#/fields">Fields</a></li>
             </ul>
             <div my-sortable>
-                <div ng-repeat="field in fields" ng-switch on="field.type">
+                <div ng-repeat="field in model.fields" ng-switch on="field.type">
                     <div ng-switch-when="TEXT">
                         <fieldset class="form-group">
                             <label for="{{field._id}}">{{field.label}}</label>
@@ -18,9 +18,9 @@
                                 </div>
                                 <div class="form-group col-xs-6">
                                     <div class=" no-breaking " >
-                                        <a ng-click="open('TEXT', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a ng-click="cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                        <a ng-click="model.open('TEXT', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                        <a ng-click="model.cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                        <a ng-click="model.removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
                                         <a  class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder" ></a>
                                     </div>
                                 </div>
@@ -30,16 +30,16 @@
                     <div ng-switch-when="EMAIL">
                         <fieldset class="form-group">
 
-                            <label for="{{field._id}}">{{field.label}}</label>
+                            <label for="{{field._id}}">{{model.field.label}}</label>
                             <div class="row">
                                 <div class="form-group col-xs-6">
                                     <input type="email" class="form-control" id="{{field._id}}" placeholder="{{field.placeholder}}">
                                 </div>
                                 <div class="form-group col-xs-6">
                                     <div class=" no-breaking ">
-                                        <a ng-click="open('EMAIL', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a ng-click="cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                        <a ng-click="model.open('EMAIL', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                        <a ng-click="model.cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                        <a ng-click="model.removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
                                         <a  class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
                                     </div>
                                 </div>
@@ -55,9 +55,9 @@
                                 </div>
                                 <div class="form-group col-xs-6">
                                     <div class=" no-breaking">
-                                        <a ng-click="open('TEXTAREA', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a ng-click="cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                        <a ng-click="model.open('TEXTAREA', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                        <a ng-click="model.cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                        <a ng-click="model.removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
                                         <a  class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
                                     </div>
                                 </div>
@@ -75,9 +75,9 @@
                                 </div>
                                 <div class="form-group col-xs-6">
                                     <div class=" no-breaking">
-                                        <a ng-click="open('OPTIONS', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a ng-click="cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                        <a ng-click="model.open('OPTIONS', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                        <a ng-click="model.cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                        <a ng-click="model.removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
                                         <a class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
                                     </div>
                                 </div>
@@ -93,9 +93,9 @@
                                 </div>
                                 <div class="form-group col-xs-6">
                                     <div class=" no-breaking ">
-                                        <a ng-click="open('DATE', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a ng-click="cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                        <a ng-click="model.open('DATE', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                        <a ng-click="model.cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                        <a ng-click="model.removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
                                         <a  class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
                                     </div>
                                 </div>
@@ -116,9 +116,9 @@
                                 </div>
                                 <div class="form-group col-xs-6">
                                     <div class=" no-breaking ">
-                                        <a ng-click="open('RADIOS', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a ng-click="cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                        <a ng-click="model.open('RADIOS', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                        <a ng-click="model.cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                        <a ng-click="model.removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
                                         <a  class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
                                     </div>
                                 </div>
@@ -139,9 +139,9 @@
                                 </div>
                                 <div class="col-xs-6">
                                     <div class=" no-breaking ">
-                                        <a ng-click="open('CHECKBOXES', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a ng-click="cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
+                                        <a ng-click="model.open('CHECKBOXES', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
+                                        <a ng-click="model.cloneField(field)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                                        <a ng-click="model.removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
                                         <a  class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
                                     </div>
                                 </div>
@@ -155,14 +155,14 @@
                 <label for="inputAddField">Add New Field:</label>
                 <div class="row">
                     <div class="form-group col-xs-6">
-                        <select ng-model="model.fieldType" id="inputAddField"  class="form-control">
-                            <option ng-repeat="option in model.availableOptions" value="{{option.name}}">{{option.name}}</option>
+                        <select ng-model="model.modelOptions.fieldType" id="inputAddField"  class="form-control">
+                            <option ng-repeat="option in model.modelOptions.availableOptions" value="{{option.name}}">{{option.name}}</option>
                         </select>
                     </div>
                     <div class="form-group col-xs-6">
                         <div class=" no-breaking">
                             <a href="#" class="glyphicon glyphicon-plus my-styling invisible-link" ></a>
-                            <a ng-click="addField(model.fieldType)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
+                            <a ng-click="model.addField(model.modelOptions.fieldType)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
                             <a href="#" class="glyphicon glyphicon-plus my-styling invisible-link" ></a>
                             <a href="#" class="glyphicon glyphicon-plus my-styling invisible-link" ></a>
 
@@ -178,13 +178,13 @@
     </div>
     <script type="text/ng-template" id="labelPlaceholder.html">
         <div class="modal-header">
-            <h3 class="modal-title">{{popupHeader}}</h3>
+            <h3 class="modal-title">{{modelPopUp.popupHeader}}</h3>
         </div>
         <div class="modal-body">
             <label for="TEXTLABEL" class="control-label">Label:</label>
             <div class="row nowrap">
                 <div class="col-xs-12" >
-                    <input type="text" id="TEXTLABEL" ng-model="editField.label" class="form-control">
+                    <input type="text" id="TEXTLABEL" ng-model="modelPopUp.editField.label" class="form-control">
                 </div>
             </div>
 
@@ -193,25 +193,25 @@
             <label for="TEXTPLACEHOLDER" class="control-label">Placeholder:</label>
             <div class="row nowrap">
                 <div class="col-xs-12" >
-                    <input type="text" id="TEXTPLACEHOLDER" ng-model="editField.placeholder" class="form-control">
+                    <input type="text" id="TEXTPLACEHOLDER" ng-model="modelPopUp.editField.placeholder" class="form-control">
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="submit(editField)">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" type="button" ng-click="modelPopUp.submit(modelPopUp.editField)">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="modelPopUp.cancel()">Cancel</button>
         </div>
     </script>
 
     <script type="text/ng-template" id="labelPlaceholderDate.html">
         <div class="modal-header">
-            <h3 class="modal-title">{{popupHeader}}</h3>
+            <h3 class="modal-title">{{modelPopUp.popupHeader}}</h3>
         </div>
         <div class="modal-body">
             <label for="DATELABEL" class="control-label">Label:</label>
             <div class="row nowrap">
                 <div class="col-xs-12" >
-                    <input type="text" id="DATELABEL" ng-model="editField.label" class="form-control">
+                    <input type="text" id="DATELABEL" ng-model="modelPopUp.editField.label" class="form-control">
                 </div>
             </div>
 
@@ -219,20 +219,20 @@
         </div>
 
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="submit(editField)">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" type="button" ng-click="modelPopUp.submit(modelPopUp.editField)">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="modelPopUp.cancel()">Cancel</button>
         </div>
     </script>
 
     <script type="text/ng-template" id="labelOptions.html">
         <div class="modal-header">
-            <h3 class="modal-title">{{popupHeader}}</h3>
+            <h3 class="modal-title">{{modelPopUp.popupHeader}}</h3>
         </div>
         <div class="modal-body">
             <label for="LABEL" class="control-label">Label:</label>
             <div class="row nowrap">
                 <div class="col-xs-12" >
-                    <input type="text" id="LABEL" ng-model="editField.label" class="form-control">
+                    <input type="text" id="LABEL" ng-model="modelPopUp.editField.label" class="form-control">
                 </div>
             </div>
 
@@ -241,13 +241,13 @@
             <label for="PLACEHOLDER" class="control-label">Options:</label>
             <div class="row nowrap">
                 <div class="col-xs-12" >
-                    <textarea id="PLACEHOLDER" ng-model="editField.placeholder" class="form-control"></textarea>
+                    <textarea id="PLACEHOLDER" ng-model="modelPopUp.editField.placeholder" class="form-control"></textarea>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="submit(editField)">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" type="button" ng-click="modelPopUp.submit(modelPopUp.editField)">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="modelPopUp.cancel()">Cancel</button>
         </div>
     </script>
 </div>

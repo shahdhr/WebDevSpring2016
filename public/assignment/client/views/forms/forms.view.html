@@ -28,7 +28,7 @@
                     </td>
                 </tr>
                 <tr ng-repeat="form in model.forms" ng-class="{'success' : $index == selectedRow }">
-                    <td><a ng-click="model.formClick(model.form)">{{form.title}}</a></td>
+                    <td><a ng-click="model.formClick(form)">{{form.title}}</a></td>
                     <td>
                         <a ng-click="model.deleteForm($index)" class="glyphicon glyphicon-remove my-styling" title="delete form" ></a>
                         <a ng-click="model.selectForm($index)" class="glyphicon glyphicon-pencil my-styling" title="select form"></a>

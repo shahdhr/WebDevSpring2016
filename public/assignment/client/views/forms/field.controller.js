@@ -6,10 +6,11 @@
 
     angular
         .module('FormBuilderApp')
-        .controller('ModalInstance', function ($scope, $uibModalInstance, editField, popupHeader) {
+        .controller('ModalInstance', function ( $uibModalInstance, editField, popupHeader) {
 
-            $scope.editField = editField;
-            $scope.popupHeader = popupHeader;
+            var vm = this;
+            vm.editField = editField;
+            vm.popupHeader = popupHeader;
             if(editField.options) {
 
                 console.log(editField.options);
@@ -26,9 +27,9 @@
                     }
                 }
 
-                $scope.editField.placeholder = fromattedOptions;
+                vm.editField.placeholder = fromattedOptions;
             }
-            $scope.submit = function(updatedOptions) {
+            vm.submit = function(updatedOptions) {
                 var temp = [];
                 if(updatedOptions.placeholder) {
                     temp = updatedOptions.placeholder.split('\n');
@@ -46,7 +47,7 @@
                 $uibModalInstance.close(updatedOptions);
             };
 
-            $scope.cancel = function() {
+            vm.cancel = function() {
                 $uibModalInstance.dismiss();
             };
         });
@@ -55,8 +56,8 @@
         .module("FormBuilderApp")
         .controller("FieldController",FieldController);
 
-    function FieldController($scope, $location, UserService, FormService,$routeParams, FieldService,$uibModal) {
-
+    function FieldController($location, UserService, FormService,$routeParams, FieldService,$uibModal) {
+        var vm = this;
         //currently logged in user
         var currentUser = UserService.getCurrentUser();
         var formId = $routeParams.formId;
@@ -66,8 +67,8 @@
         }
         init();
 
-        $scope.$location = $location;
-        $scope.model = {
+        vm.$location = $location;
+        vm.modelOptions = {
             fieldType: null,
             availableOptions: [{id: '1', name: 'Single Line Text Field'},
                 {id: '2', name: 'Multi Line Text Field'},
@@ -77,7 +78,7 @@
                 {id: '6', name: 'Radio Buttons Field'}]
         };
 
-        $scope.open = function (fieldType, field) {
+        vm.open = function (fieldType, field) {
 
             var modalInstance = null;
             var currentLabel = field.label,
@@ -89,6 +90,7 @@
                         animation: true,
                         templateUrl: 'labelPlaceholder.html',
                         controller: 'ModalInstance',
+                        controllerAs:"modelPopUp",
                         size: 'sm',
                         resolve: {
                             popupHeader: function() {
@@ -103,6 +105,7 @@
                         animation: true,
                         templateUrl: 'labelPlaceholder.html',
                         controller: 'ModalInstance',
+                        controllerAs:"modelPopUp",
                         size: 'sm',
                         resolve: {
                             popupHeader: function() {
@@ -117,6 +120,7 @@
                         animation: true,
                         templateUrl: 'labelPlaceholder.html',
                         controller: 'ModalInstance',
+                        controllerAs:"modelPopUp",
                         size: 'sm',
                         resolve: {
                             popupHeader: function() {
@@ -131,6 +135,7 @@
                         animation: true,
                         templateUrl: 'labelPlaceholderDate.html',
                         controller: 'ModalInstance',
+                        controllerAs:"modelPopUp",
                         size: 'sm',
                         resolve: {
                             popupHeader: function() {
@@ -145,6 +150,7 @@
                         animation: true,
                         templateUrl: 'labelOptions.html',
                         controller: 'ModalInstance',
+                        controllerAs:"modelPopUp",
                         size: 'sm',
                         resolve: {
                             popupHeader: function() {
@@ -159,6 +165,7 @@
                         animation: true,
                         templateUrl: 'labelOptions.html',
                         controller: 'ModalInstance',
+                        controllerAs:"modelPopUp",
                         size: 'sm',
                         resolve: {
                             popupHeader: function() {
@@ -173,6 +180,7 @@
                         animation: true,
                         templateUrl: 'labelOptions.html',
                         controller: 'ModalInstance',
+                        controllerAs:"modelPopUp",
                         size: 'sm',
                         resolve: {
                             popupHeader: function() {
@@ -189,7 +197,7 @@
             modalInstance.result.then(function (model) {
                 field.label = model.label;
                 field.placeholder = model.placeholder;
-                FieldService.updateFields(formId, $scope.fields);
+                FieldService.updateFields(formId, vm.fields);
                 console.log(field);
             }, function () {
                 field.label = currentLabel;
@@ -200,10 +208,10 @@
         };
 
         //Event handler declarations
-        $scope.addField=addField;
-        $scope.removeField = removeField;
-        $scope.cloneField = cloneField;
-        $scope.updateModelOnSort=updateModelOnSort;
+        vm.addField=addField;
+        vm.removeField = removeField;
+        vm.cloneField = cloneField;
+        vm.updateModelOnSort=updateModelOnSort;
 
         //Event handler implementation
         function addField(fieldType) {
@@ -216,20 +224,20 @@
                             .then(function(res) {
                                 console.log("create text field controller response"+res);
                                 console.log(res);
-                                $scope.fields = res.data.fields;
+                                vm.fields = res.data.fields;
                             });
 
                         break;
                     case "Multi Line Text Field":
                         FieldService.createFieldForForm(formId,{"label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"})
                             .then(function(res) {
-                                $scope.fields = res.data.fields;
+                                vm.fields = res.data.fields;
                             });
                         break;
                     case "Date Field":
                         FieldService.createFieldForForm(formId,{ "label": "New Date Field", "type": "DATE"})
                             .then(function(res) {
-                                $scope.fields = res.data.fields;
+                                vm.fields = res.data.fields;
                             });
                         break;
                     case "Checkboxes Field":
@@ -239,7 +247,7 @@
                                 {"label": "Option C", "value": "OPTION_C"}
                             ]})
                             .then(function(res) {
-                                $scope.fields = res.data.fields;
+                                vm.fields = res.data.fields;
                             });
                         break;
 
@@ -250,7 +258,7 @@
                                 {"label": "Option 3", "value": "OPTION_3"}
                             ]})
                             .then(function(res) {
-                                $scope.fields = res.data.fields;
+                                vm.fields = res.data.fields;
                             });
                         break;
                     case "Radio Buttons Field":
@@ -261,7 +269,7 @@
                             ]})
                             .then(function(res) {
                                 console.log(res.data.fields);
-                                $scope.fields = res.data.fields;
+                                vm.fields = res.data.fields;
                             });
                         break;
                     default:
@@ -275,7 +283,7 @@
             console.log("remove"+field._id);
             FieldService.deleteFieldFromForm(formId,field._id)
                 .then(function(res) {
-                    $scope.fields = res.data.fields;
+                    vm.fields = res.data.fields;
                 })
         }
 
@@ -310,12 +318,12 @@
         }
 
         function updateModelOnSort() {
-            FieldService.updateFields(formId, $scope.fields);
+            FieldService.updateFields(formId, vm.fields);
         }
 
         //callbacks
         function fieldsForFormCallback(fields) {
-            $scope.fields = fields.data;
+            vm.fields = fields.data;
             console.log(fields);
         }
     }

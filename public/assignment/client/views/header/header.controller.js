@@ -18,7 +18,8 @@
                 UserService
                     .logout()
                     .then(function(){
-                        UserService.setCurrentUser(null);
+                        UserService
+                            .setCurrentUser(null);
                         $location.url("/home");
                     });
             }
