@@ -7,43 +7,90 @@
         .module("FormBuilderApp")
         .config(function($routeProvider) {
 
-        $routeProvider
-            .when("/", {
+            $routeProvider
+                .when("/", {
                     redirectTo: "/home"
 
                 })
-            .when("/profile", {
+                .when("/profile", {
                     templateUrl: "views/users/profile.view.html",
-                    controller: "ProfileController"
+                    controller: "ProfileController",
+                    resolve: {
+                        checkLoggedIn : checkLoggedIn
+                    }
                 })
-            .when("/admin", {
-                    templateUrl: "views/admin/admin.view.html"
+                .when("/admin", {
+                    templateUrl: "views/admin/admin.view.html",
+                    resolve: {
+                        checkLoggedIn : checkLoggedIn
+                    }
                 })
-            .when("/forms", {
-                    templateUrl: "views/forms/forms.view.html"
+                .when("/forms", {
+                    templateUrl: "views/forms/forms.view.html",
+                    resolve: {
+                        checkLoggedIn : checkLoggedIn
+                    }
                 })
-            .when("/form/:formId/fields", {
+                .when("/form/:formId/fields", {
                     templateUrl: "views/forms/fields.view.html",
-                    controller: "FieldController"
+                    controller: "FieldController",
+                    resolve: {
+                        getLoggedIn : getLoggedIn
+                    }
                 })
-            .when("/register", {
+                .when("/register", {
                     templateUrl: "views/users/register.view.html",
                     controller: "RegisterController"
                 })
-            .when("/login", {
+                .when("/login", {
                     templateUrl: "views/users/login.view.html",
                     controller: "LoginController"
+
                 })
-            .when("/home", {
-                    templateUrl: "views/home/home.view.html"
+                .when("/home", {
+                    templateUrl: "views/home/home.view.html",
+                    resolve: {
+                        getLoggedIn : getLoggedIn
+                    }
+
+
                 })
-            .otherwise({
+                .otherwise({
                     redirectTo: "/"
                 })
 
 
-    });
+        });
+
+    function getLoggedIn(UserService, $q) {
+        var deferred = $q.defer();
+        UserService
+            .getCurrentSessionUser()
+            .then(function (response) {
+                var currentUser = response.data;
+                UserService.setCurrentUser(currentUser);
+                deferred.resolve();
+            });
+        return deferred.promise;
+    }
+
+    function checkLoggedIn(UserService, $q, $location) {
+        var deferred = $q.defer();
+        UserService
+            .getCurrentSessionUser()
+            .then(function (response){
+                var currentUser = response.data;
+                if(currentUser) {
+                    UserService.setCurrentUser(currentUser);
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                    $location.url("/home");
+                }
+            });
+        return deferred.promise;
+    }
 })();
 
 
-    ;
+;

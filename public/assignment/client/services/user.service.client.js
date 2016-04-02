@@ -16,7 +16,9 @@
             deleteUserById:deleteUserById,
             updateUser:updateUser,
             setCurrentUser:setCurrentUser,
-            getCurrentUser:getCurrentUser
+            getCurrentUser:getCurrentUser,
+            getCurrentSessionUser:getCurrentSessionUser,
+            logout:logout
         };
         return api;
 
@@ -36,6 +38,14 @@
             return $http.post("/api/assignment/user",user);
         }
 
+        function getCurrentSessionUser() {
+            return $http.get("/api/assignment/loggedin");
+        }
+
+        function logout() {
+            return $http.post("/api/assignment/logout");
+        }
+
         function deleteUserById(userId) {
            return $http.delete ("/api/assignment/user/"+userId);
         }
@@ -45,14 +55,14 @@
         }
 
         function setCurrentUser(aUser) {
-            if(aUser == null) {
-                $rootScope.newUser = null;
-            }
-            else {
-                $rootScope.newUser = {"_id":aUser._id, "firstName":aUser.firstName, "lastName":aUser.lastName,
-                    "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email}
-            }
-
+            //if(aUser == null) {
+            //    $rootScope.newUser = null;
+            //}
+            //else {
+            //    $rootScope.newUser = {"_id":aUser._id, "firstName":aUser.firstName, "lastName":aUser.lastName,
+            //        "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email}
+            //}
+            $rootScope.newUser = aUser;
         }
 
         function getCurrentUser() {

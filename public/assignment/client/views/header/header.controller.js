@@ -14,9 +14,12 @@
 
             //Event handler implementations
             function logout() {
-                $location.path("/home");
-                UserService.setCurrentUser(null);
-
+                UserService
+                    .logout()
+                    .then(function(){
+                        UserService.setCurrentUser(null);
+                        $location.url("/home");
+                    });
             }
         }
 

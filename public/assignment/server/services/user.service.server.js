@@ -4,6 +4,8 @@
 module.exports = function (app, model,uuid) {
     app.get("/api/assignment/user", getAllUsers);
     app.get("/api/assignment/user/:id", getUserById);
+    app.get("/api/assignment/loggedin",loggedin);
+    app.post("/api/assignment/logout", logout);
     app.get("/api/assignment/user?username=username", getUserByUsername);
     app.get("/api/assignment/user?username=alice&password=wonderland",getUserByCredentials);
     app.put("/api/assignment/user/:id",updateUserById);
@@ -26,6 +28,15 @@ module.exports = function (app, model,uuid) {
                     res.status(400).send(err);
                 }
             );
+    }
+
+    function loggedin(req, res) {
+        res.json(req.session.newUser);
+    }
+
+    function logout(req, res) {
+        req.session.destroy();
+        res.send(200);
     }
 
     function getAllUsers (req, res) {
@@ -76,7 +87,7 @@ module.exports = function (app, model,uuid) {
         model.findUserByCredentials(credentials)
             .then(
                 function(doc) {
-                    req.session.currentUser = doc;
+                    req.session.newUser = doc;
                     res.json(doc);
                 },
                 function (err) {
