@@ -14,6 +14,8 @@
         $scope.user = currentUser;
 
 
+
+
         //Even handler declarations
         $scope.update = update;
 
@@ -40,7 +42,12 @@
         //callback functions
         function updateCallback(user) {
             console.log(user);
-            $scope.updateMessage = "Profile updated successfully."
+            $scope.updateMessage = "Profile updated successfully.";
+            UserService
+                .findUserByCredentials(currentUser.username,currentUser.password)
+                .then(function(user){
+                    UserService.setCurrentUser = user;
+                })
         }
     }
 })();
