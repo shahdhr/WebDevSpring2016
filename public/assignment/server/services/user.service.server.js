@@ -130,7 +130,7 @@ module.exports = function (app, model,uuid) {
             .updateUser(id, user)
             .then(
                 function(stats) {
-                    res.status.send(200);
+                    res.send(200);
                 },
                 function(err) {
                     res.status(400).send(err);

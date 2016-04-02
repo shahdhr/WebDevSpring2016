@@ -121,10 +121,12 @@ module.exports = function(db,mongoose) {
     function updateUser(userId, user) {
         var deferred = q.defer();
         UserModel.update({_id :userId},{$set:user},function(err,doc) {
-            if(!err) {
-                deferred.resolve(doc);
-            } else {
+            if(err) {
                 deferred.reject(err);
+            } else {
+                console.log("Update user model server");
+                console.log(doc);
+                deferred.resolve(doc);
             }
         });
         return deferred.promise;

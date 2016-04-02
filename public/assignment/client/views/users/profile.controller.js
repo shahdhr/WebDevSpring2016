@@ -20,6 +20,7 @@
 
         //Event handler implementations
         function update(user) {
+            console.log(user);
             var updatedUser = {
                 username: user.username,
                 password: user.password,
@@ -28,6 +29,7 @@
                 email: user.email,
                 phones: user.phones
             };
+            console.log(updatedUser);
             UserService
                 .updateUser(user._id, updatedUser)
                 .then(updateCallback);

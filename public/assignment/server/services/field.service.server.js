@@ -1,13 +1,15 @@
 /**
  * Created by Dhruv on 3/17/2016.
  */
-module.exports = function (app, model,uuid) {
+module.exports = function (app, formModel,uuid) {
     app.get("/api/assignment/form/:formId/field", getAllFieldsByFormId);
     app.get("/api/assignment/form/:formId/field/:fieldId", getFieldById);
     app.put("/api/assignment/form/:formId/field/:fieldId",updateFieldById);
     app.put("/api/assignment/form/:formId/field",updateAllFields);
     app.post("/api/assignment/form/:formId/field",createFieldForForm);
     app.delete("/api/assignment/form/:formId/field/:fieldId",deleteFieldById);
+
+    var model   = require("../models/field.model.js")(formModel);
 
     function createFieldForForm(req, res) {
 
