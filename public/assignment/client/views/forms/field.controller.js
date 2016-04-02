@@ -318,6 +318,7 @@
         }
 
         function updateModelOnSort() {
+            console.log("here")
             FieldService.updateFields(formId, vm.fields);
         }
 
