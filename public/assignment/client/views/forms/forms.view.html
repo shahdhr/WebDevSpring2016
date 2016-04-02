@@ -7,7 +7,7 @@
                 <li class="active"><a href="#/forms">Forms</a></li>
                 <li><a >Fields</a></li>
             </ul>
-            <div class="table-responsive" ng-controller="FormController">
+            <div class="table-responsive" ng-controller="FormController as model">
             <table class="table table-striped table-bordered">
                 <tr>
                     <th>
@@ -20,18 +20,18 @@
 
                 <tr>
                     <td>
-                        <input ng-model="form.title" type="text" class="form-control" id="inputName" placeholder="name">
+                        <input ng-model="model.form.title" type="text" class="form-control" id="inputName" placeholder="name">
                     </td>
                     <td>
-                        <a  ng-click="addForm(form)" class="glyphicon glyphicon-plus my-styling" title="Add form" ></a>
-                        <a ng-click="updateForm(form)" class="glyphicon glyphicon-ok my-styling" title="Update form" ></a>
+                        <a  ng-click="model.addForm(model.form)" class="glyphicon glyphicon-plus my-styling" title="Add form" ></a>
+                        <a ng-click="model.updateForm(model.form)" class="glyphicon glyphicon-ok my-styling" title="Update form" ></a>
                     </td>
                 </tr>
-                <tr ng-repeat="form in forms" ng-class="{'success' : $index == selectedRow }">
-                    <td><a ng-click="formClick(form)">{{form.title}}</a></td>
+                <tr ng-repeat="form in model.forms" ng-class="{'success' : $index == selectedRow }">
+                    <td><a ng-click="model.formClick(model.form)">{{form.title}}</a></td>
                     <td>
-                        <a ng-click="deleteForm($index)" class="glyphicon glyphicon-remove my-styling" title="delete form" ></a>
-                        <a ng-click="selectForm($index)" class="glyphicon glyphicon-pencil my-styling" title="select form"></a>
+                        <a ng-click="model.deleteForm($index)" class="glyphicon glyphicon-remove my-styling" title="delete form" ></a>
+                        <a ng-click="model.selectForm($index)" class="glyphicon glyphicon-pencil my-styling" title="select form"></a>
                     </td>
 
                 </tr>
