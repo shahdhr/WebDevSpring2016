@@ -7,11 +7,12 @@
         .module("FormBuilderApp")
         .controller("LoginController",LoginController)
 
-    function LoginController($scope, $location, UserService, $rootScope) {
+    function LoginController( $location, UserService, $rootScope) {
 
+        var vm = this;
         //Even handler declarations
-        $scope.login = login;
-        $scope.$location = $location;
+        vm.login = login;
+        vm.$location = $location;
 
 
         //Event handler implemntations
@@ -30,7 +31,7 @@
                 $location.path('/profile');
             }
             else {
-                $scope.loginFailed = "Login failed. Invalid username or password."
+                vm.loginFailed = "Login failed. Invalid username or password."
             }
 
         }
