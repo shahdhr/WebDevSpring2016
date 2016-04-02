@@ -7,9 +7,10 @@
         .module("FormBuilderApp")
         .controller("HeaderController",HeaderController);
 
-        function HeaderController($scope,$location,UserService) {
+        function HeaderController($location,UserService) {
             //Event handler declarations
-            $scope.logout = logout;
+            var vm = this;
+            vm.logout = logout;
 
 
             //Event handler implementations
