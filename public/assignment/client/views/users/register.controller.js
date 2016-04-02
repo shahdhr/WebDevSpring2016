@@ -5,12 +5,13 @@
 (function() {
     angular
         .module("FormBuilderApp")
-        .controller("RegisterController",RegisterController)
+        .controller("RegisterController",RegisterController);
 
-    function RegisterController($location, UserService, $scope, $rootScope) {
+    function RegisterController($location, UserService, $rootScope) {
 
+        var vm=this;
         //Event handler declarations;
-        $scope.register =register;
+        vm.register =register;
 
 
 
