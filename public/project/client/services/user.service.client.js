@@ -23,7 +23,11 @@
         return api;
 
         function findUserByCredentials(username, password) {
-            return $http.get("/api/project/user?username="+username+"&password="+password);
+            var user = {
+                username: username,
+                password:password
+            };
+            return $http.post("/api/project/login",user)    ;
         }
 
         function findUserByUsername(username) {

@@ -41,9 +41,13 @@
             //UserService.setCurrentUser(null);
             UserService
                 .logout()
-                .then(function(){
+                .then(
+                    function(response){
                     UserService.setCurrentUser(null);
                     $location.url("/home");
+                },
+                function(err) {
+                    //TODO : Show error on UI.
                 });
 
         }
