@@ -3,10 +3,10 @@
  */
 "use strict";
 module.exports = function (app, model,uuid) {
-    app.get("/api/project/user/:userId/booking", findAllBookingsForUser);
-    app.put("/api/project/booking/:bookingId",updateBookingById);
-    app.post("/api/project/user/:userId/booking",addBooking);
-    app.delete("/api/project/booking/:bookingId",deleteBookingById);
+    app.get("/api/projectAssignments/user/:userId/booking", findAllBookingsForUser);
+    app.put("/api/projectAssignments/booking/:bookingId",updateBookingById);
+    app.post("/api/projectAssignments/user/:userId/booking",addBooking);
+    app.delete("/api/projectAssignments/booking/:bookingId",deleteBookingById);
 
 
     function addBooking (req, res) {

@@ -5,5 +5,5 @@
 (function()
 {
     angular
-        .module("RentOutApp", ["ngRoute","ui.bootstrap"]);
+        .module("RentOutApp", ["ngRoute"]);
 })();

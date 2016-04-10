@@ -22,23 +22,23 @@
 
 
         function findAllBookingsForUser (bookedby) {
-            return $http.get("/api/project/user/"+bookedby+"/booking");
+            return $http.get("/api/projectAssignments/user/"+bookedby+"/booking");
 
         }
 
 
 
         function addBooking(booking)  {
-            return $http.post("/api/project/user/"+booking.booked_by+"/booking",booking);
+            return $http.post("/api/projectAssignments/user/"+booking.booked_by+"/booking",booking);
         }
 
         function deleteBookingById(bookingId) {
-            return $http.delete("/api/project/booking/"+bookingId);
+            return $http.delete("/api/projectAssignments/booking/"+bookingId);
 
         }
 
         function updateBookingById(bookingId, newBooking) {
-            return $http.put("/api/project/booking/"+bookingId,newBooking);
+            return $http.put("/api/projectAssignments/booking/"+bookingId,newBooking);
         }
 
 

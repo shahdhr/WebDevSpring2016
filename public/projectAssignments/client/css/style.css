@@ -1,0 +1,19 @@
+.top-buffer {
+    padding-top: 30px;
+}
+
+.img-full {
+    width: 100%;
+}
+
+body {
+    padding-top: 51px;
+}
+
+.no-breaking {
+    white-space: nowrap;
+}
+
+.padding-search-bar {
+    padding-right: 30px;
+}

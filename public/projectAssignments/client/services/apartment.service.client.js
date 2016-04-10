@@ -32,22 +32,22 @@
 
         function findAllApartmentsForUser (ownerId) {
             console.log("")
-           return $http.get("/api/project/user/"+ownerId+"/apartment");
+           return $http.get("/api/projectAssignments/user/"+ownerId+"/apartment");
         }
 
 
 
         function addApartment(apartment)  {
-           return $http.post("/api/project/user/"+apartment.ownerId+"/apartment",apartment);
+           return $http.post("/api/projectAssignments/user/"+apartment.ownerId+"/apartment",apartment);
 
         }
 
         function deleteApartmentById(apartmentId) {
-            return $http.delete("/api/project/apartment/"+apartmentId);
+            return $http.delete("/api/projectAssignments/apartment/"+apartmentId);
         }
 
         function updateApartmentById(apartmentId, newApartment) {
-            return $http.put("/api/project/apartment/"+apartmentId,newApartment);
+            return $http.put("/api/projectAssignments/apartment/"+apartmentId,newApartment);
         }
 
 

@@ -25,23 +25,23 @@
 
 
         function findAllReviewsForUser (reviewedBy) {
-            return $http.get("/api/project/user/"+reviewedBy+"/review");
+            return $http.get("/api/projectAssignments/user/"+reviewedBy+"/review");
         }
 
         function findAllReviewsForApartemnt(apartmentId) {
-            return $http.get("/api/project/apartment/"+apartmentId+"/review");
+            return $http.get("/api/projectAssignments/apartment/"+apartmentId+"/review");
         }
 
         function addReview(review)  {
-            return $http.post("/api/project/user/"+review.reviewed_by+"/review",review);
+            return $http.post("/api/projectAssignments/user/"+review.reviewed_by+"/review",review);
         }
 
         function deleteReviewById(reviewId) {
-            return $http.delete("/api/project/review/"+reviewId);
+            return $http.delete("/api/projectAssignments/review/"+reviewId);
         }
 
         function updateReviewById(reviewId, newReview) {
-            return $http.put("/api/project/review/"+reviewId,newReview);
+            return $http.put("/api/projectAssignments/review/"+reviewId,newReview);
         }
     }
 })();

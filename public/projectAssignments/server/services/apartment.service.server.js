@@ -2,10 +2,10 @@
  * Created by Dhruv on 3/25/2016.
  */
 module.exports = function (app, model,uuid) {
-    app.get("/api/project/user/:userId/apartment", findAllApartmentsForUser);
-    app.put("/api/project/apartment/:apartmentId",updateApartmentById);
-    app.post("/api/project/user/:userId/apartment",addApartment);
-    app.delete("/api/project/apartment/:apartmentId",deleteApartmentById);
+    app.get("/api/projectAssignments/user/:userId/apartment", findAllApartmentsForUser);
+    app.put("/api/projectAssignments/apartment/:apartmentId",updateApartmentById);
+    app.post("/api/projectAssignments/user/:userId/apartment",addApartment);
+    app.delete("/api/projectAssignments/apartment/:apartmentId",deleteApartmentById);
 
 
     function addApartment (req, res) {

@@ -5,7 +5,7 @@
 (function(){
     angular
         .module("RentOutApp")
-        .factory("UserService",UserService);
+        .factory("UserService",UserService)
 
     function UserService($rootScope,$http) {
 
@@ -23,46 +23,55 @@
         return api;
 
         function findUserByCredentials(username, password) {
-            return $http.get("/api/project/user?username="+username+"&password="+password);
+            return $http.get("/api/projectAssignments/user?username="+username+"&password="+password);
         }
 
         function findUserByUsername(username) {
-            return $http.get("/api/project/user?username="+username);
+            return $http.get("/api/projectAssignments/user?username="+username);
         }
 
         function findAllUsers(){
-            return $http.get("/api/project/user");
+            return $http.get("/api/projectAssignments/user");
         }
 
         function createUser(user) {
-            return $http.post("/api/project/user",user);
+            return $http.post("/api/projectAssignments/user",user);
         }
 
         function deleteUserById(userId) {
-            return $http.delete ("/api/project/user/"+userId);
+            return $http.delete ("/api/projectAssignments/user/"+userId);
         }
 
         function updateUser(userId, user) {
-            return $http.put("/api/project/user/"+userId,user);
+            return $http.put("/api/projectAssignments/user/"+userId,user);
         }
 
         function setCurrentUser(aUser) {
+            //if(aUser == null) {
+            //    $rootScope.newUser = null;
+            //}
+            //else {
+            //    $rootScope.newUser = {"_id":aUser._id, "firstName":aUser.firstName, "lastName":aUser.lastName,
+            //        "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email, "favourites":aUser.favourites}
+            //}
             $rootScope.newUser = aUser;
             console.log($rootScope.newUser);
+
         }
 
         function getCurrentUser() {
             return $rootScope.newUser;
+            //    return $http.get("/api/projectAssignments/loggedin");
         }
 
         function getCurrentSessionUser() {
-            return $http.get("/api/project/loggedin");
+            return $http.get("/api/projectAssignments/loggedin");
         }
 
 
 
         function logout() {
-            return $http.post("/api/project/logout");
+            return $http.post("/api/projectAssignments/logout");
         }
     }
 })();

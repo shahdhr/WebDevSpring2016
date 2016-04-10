@@ -1,8 +1,11 @@
 /**
  * Created by Dhruv on 3/25/2016.
  */
-module.exports = function() {
-    var users = require("./user.mock.json");
+var q = require("q");
+module.exports = function(db,mongoose) {
+    //var users = require("./user.mock.json");
+    var UserSchema = require("./user.schema.server.js")(mongoose);
+    var UserModel = mongoose.model('ProjectUser', UserSchema);
     var api = {
         findUserByCredentials: findUserByCredentials,
         findUserByUsername: findUserByUsername,
@@ -11,72 +14,119 @@ module.exports = function() {
         createUser:createUser,
         deleteUser:deleteUser,
         updateUser:updateUser
-        //setCurrentUser:setCurrentUser,
-        //getCurrentUser:getCurrentUser
     };
     return api;
 
     function findUserByCredentials(credentials) {
-        for(var index=0;index<users.length;index++) {
-            if(users[index].username == credentials.username) {
-                if(users[index].password==credentials.password) {
-                    return users[index];
+        var deferred = q.defer();
+
+        UserModel.findOne(
+            {username: credentials.username,
+                password: credentials.password},
+            function(err,doc) {
+                if(err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
                 }
             }
-        }
-        return null;
+        );
+
+        return deferred.promise;
     }
 
     function findUserByUsername(username) {
-        for(var index=0;index<users.length;index++) {
-            if(users[index].username == username) {
-                return users[index];
+        var deferred = q.defer();
+
+        UserModel.findOne(
+            {username: username},
+            function(err,doc) {
+                if(err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
+                }
             }
-        }
-        return null;
+        );
+
+        return deferred.promise;
     }
 
     function findUserById(userId) {
-        for(var index=0;index<users.length;index++) {
-            if (users[index]._id == userId) {
-                return users[index];
+        var deferred = q.defer();
+
+        UserModel.findById(userId,function(err,doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
-        return null;
+        });
+
+        return deferred.promise;
     }
 
     function findAllUsers(){
-        return users;
+        //return users;
+        var deferred = q.defer();
+
+        UserModel.find(
+            function(err,doc) {
+                if(err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
+                }
+            }
+        )
+
+        return deferred.promise;
     }
 
     function createUser(user) {
-        users[users.length] = user;
-        return user;
+        var deferred = q.defer();
+        UserModel.create(user, function(err,doc){
+            if(err) {
+                deferred.reject(err);
+            } else {
+                console.log(doc);
+                deferred.resolve(doc);
+            }
+
+        });
+        //returning the promise
+        return deferred.promise;
     }
 
     function deleteUser(userId) {
-        for(var index=0;index<users.length;index++) {
-            if(users[index]._id == userId) {
-                users.splice(index,1);
-                break;
+        var deferred = q.defer();
+
+        UserModel.remove({_id: userId},
+            function(err,doc) {
+                if(err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
+                }
             }
-        }
-        return users;
+        );
+
+        return deferred.promise;
 
     }
 
     function updateUser(userId, user) {
-        for(var index=0;index<users.length;index++) {
-            if(users[index]._id == userId) {
-                users[index].firstName = user.firstName;
-                users[index].lastName = user.lastName;
-                users[index].password = user.password;
-                users[index].roles = user.roles;
-                users[index].username = user.username;
-                users[index].email = user.email;
+        var deferred = q.defer();
+        UserModel.update({_id :userId},{$set:user},function(err,doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                console.log("Update user model server");
+                console.log(doc);
+                deferred.resolve(doc);
             }
-        }
-        return user;
+        });
+        return deferred.promise;
     }
 
     //function setCurrentUser(aUser) {
