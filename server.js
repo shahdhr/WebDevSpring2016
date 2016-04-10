@@ -8,15 +8,17 @@ var session       = require('express-session');
 var cookieParser  = require('cookie-parser');
 var mongoose      = require('mongoose');
 //While running on local host
-var connectionString = 'mongodb://127.0.0.1:27017/cs5610FormMaker';
-//While running on open shift
-if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
-    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-        process.env.OPENSHIFT_APP_NAME;
-}
+
+var connectionString = process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://127.0.0.1:27017/cs5610FormMaker';
+
+////While running on open shift
+//if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+//    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+//        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+//        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+//        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+//        process.env.OPENSHIFT_APP_NAME;
+//}
 
 // connect to the database
 var db = mongoose.connect(connectionString);
