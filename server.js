@@ -31,8 +31,6 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
-console.log("secret");
-console.log(process.env.SESSION_SECRET);
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
