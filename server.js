@@ -31,10 +31,13 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
-app.use(cookieParser());
-app.use(session({ secret: "MySecret",
+console.log("secret");
+console.log(process.env.SESSION_SECRET);
+app.use(session({
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true}));
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 var SEARCH_QUERY_URL = "https://api.9flats.com/api/v4/places?client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l&search[query]=SEARCHQUERY";
