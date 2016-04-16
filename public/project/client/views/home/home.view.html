@@ -1,14 +1,13 @@
 <section class="hero">
     <section class="caption">
-        <h2 class="caption visible-xs-block">Find Your Holiday Home</h2>
-        <!--<h3 class="properties">Appartements - Houses - Mansions</h3>-->
+        <h2 class="caption">Welcome Home</h2>
+        <h3 class="properties">Find your holiday home</h3>
         <div class="wrapper ">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Where do you want to go?">
+                <input type="text" ng-model="model.search.place" class="form-control" placeholder="Where do you want to go?">
                 <span class="input-group-btn">
-                    <button class="btn btn-default " type="button">Go!</button>
+                    <button ng-click="model.searchPlaces(model.search)" class="btn btn-default " type="button">Go!</button>
                 </span>
-
             </div>
         </div>
     </section>

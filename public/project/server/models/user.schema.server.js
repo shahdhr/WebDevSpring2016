@@ -10,7 +10,10 @@ module.exports = function(mongoose) {
         firstName: String,
         lastName: String,
         email: [String],
-        phones: [String]
+        phones: [String],
+        roles: [String],
+        favourites:[String]
+
     }, {collection: 'project.rentout.user'});
     return UserSchema;
 };

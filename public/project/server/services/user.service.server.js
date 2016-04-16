@@ -10,15 +10,15 @@ module.exports = function (app, model) {
     app.get("/api/project/user", auth,getAllUsers);
     app.get("/api/project/user/:id", getUserById);
     app.get("/api/project/user?username=username", getUserByUsername);
-    app.post("/api/project/login",passport.authenticate('local'), login);
+    app.post("/api/project/login",passport.authenticate('project'), loginProject);
     app.get("/api/project/loggedin",loggedin);
     app.post("/api/project/logout", logout);
-    app.put("/api/project/user/:id",auth,updateUserById);
-    app.post("/api/project/user",auth,createUser);
-    app.delete("/api/project/user/:id",auth,deleteUserById);
+    app.put("/api/project/user/:id",updateUserById);
+    app.post("/api/project/user",createUser);
+    app.delete("/api/project/user/:id",deleteUserById);
 
 
-    passport.use(new LocalStrategy(localStrategy));
+    passport.use('project',new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -91,8 +91,8 @@ module.exports = function (app, model) {
 
     }
 
-    function login(req, res) {
-        console.log("using new login");
+    function loginProject(req, res) {
+        console.log("using new login la casa");
         var user = req.user;
         res.json(user);
     }
@@ -126,9 +126,9 @@ module.exports = function (app, model) {
     function updateUserById (req, res) {
         var id = req.params.id;
         var newUser = req.body;
-        if(!isAdmin(req.user)) {
-            delete newUser.roles;
-        }
+        //if(!isAdmin(req.user)) {
+        //    delete newUser.roles;
+        //}
         if(typeof newUser.roles == "string") {
             newUser.roles = newUser.roles.split(",");
         }
@@ -177,8 +177,10 @@ module.exports = function (app, model) {
 
     function authorized (req, res, next) {
         if (!req.isAuthenticated()) {
+            console.log("project auth");
             res.send(401);
         } else {
+            console.log("project auth");
             next();
         }
     }
