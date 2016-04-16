@@ -31,6 +31,12 @@
                     controllerAs: "model"
                 })
 
+                .when("/profile", {
+                    templateUrl: "views/users/profile.view.html",
+                    controller: "ProfileController",
+                    controllerAs: "model"
+                })
+
                 .otherwise({
                     redirectTo: "/"
                 })

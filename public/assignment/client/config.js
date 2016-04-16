@@ -52,10 +52,8 @@
 
                 })
                 .when("/home", {
-                    templateUrl: "views/home/home.view.html",
-                    resolve: {
-                        getLoggedIn : getLoggedIn
-                    }
+                    templateUrl: "views/home/home.view.html"
+
 
 
                 })
@@ -72,8 +70,15 @@
             .getCurrentSessionUser()
             .then(function (response) {
                 var currentUser = response.data;
-                UserService.setCurrentUser(currentUser);
-                deferred.resolve();
+                if (currentUser !== '0')
+                {
+                    UserService.setCurrentUser(currentUser);
+                    deferred.resolve();
+                } else {
+                    UserService.setCurrentUser(null);
+                    deferred.reject();
+                }
+
             });
         return deferred.promise;
     }
