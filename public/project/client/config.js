@@ -37,6 +37,18 @@
                     controllerAs: "model"
                 })
 
+                .when("/search", {
+                    templateUrl: "views/apartment/search.view.html",
+                    controller: "SearchController",
+                    controllerAs: "model"
+                })
+
+                .when("/details/:apartmentId", {
+                    templateUrl: "views/apartment/details.view.html",
+                    controller: "ApartmentDetailsController",
+                    controllerAs: "model"
+                })
+
                 .otherwise({
                     redirectTo: "/"
                 })

@@ -1,6 +1,7 @@
 /**
  * Created by Dhruv on 3/25/2016.
  */
+"use strict";
 var q = require("q");
 module.exports = function(db,mongoose) {
     //var users = require("./user.mock.json");
@@ -78,7 +79,7 @@ module.exports = function(db,mongoose) {
                     deferred.resolve(doc);
                 }
             }
-        )
+        );
 
         return deferred.promise;
     }

@@ -4,6 +4,7 @@
 /**
  * Created by Dhruv on 3/2/2016.
  */
+"use strict";
 (function() {
     angular
         .module("RentOutApp")
@@ -15,13 +16,15 @@
         vm.searchPlaces = searchPlaces;
         vm.findDetailsById = findDetailsById;
         function searchPlaces(search) {
-            var query = search.place;
-            ApartmentService.findApartmentsByQuery(query,renderDetails);
+            ApartmentService.setSearchQuery(search);
+            $location.path("/search");
+            //ApartmentService.findApartmentsByQuery(query,renderDetails);
 
         }
 
         function  renderDetails(response) {
             console.log(response);
+
             //vm.places = response.places;
         }
 

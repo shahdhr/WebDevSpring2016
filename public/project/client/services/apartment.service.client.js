@@ -7,7 +7,7 @@
         .module("RentOutApp")
         .factory("ApartmentService",ApartmentService);
 
-    function ApartmentService($http) {
+    function ApartmentService($http, $rootScope) {
 
 
         var api = {
@@ -16,7 +16,9 @@
             addApartment : addApartment,
             findAllApartmentsForUser  : findAllApartmentsForUser ,
             deleteApartmentById : deleteApartmentById,
-            updateApartmentById : updateApartmentById
+            updateApartmentById : updateApartmentById,
+            setSearchQuery : setSearchQuery,
+            getSearchQuery : getSearchQuery
         };
         return api;
 
@@ -51,7 +53,13 @@
         }
 
 
+        function setSearchQuery(search) {
+            $rootScope.searchQuery = search;
+        }
 
+        function getSearchQuery() {
+            return $rootScope.searchQuery;
+        }
 
 
 

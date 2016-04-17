@@ -50,3 +50,36 @@
     margin-bottom: 5px;
     line-height: 28px;
 }
+
+.truncate_property_title {
+    width: 20vw;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@media (max-width:790px) {
+    .truncate_property_title {
+        width: 30vw;
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}
+
+@media (max-width:490px) {
+    .truncate_property_title {
+        width: 60vw;
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}
+
+.search_panel_style {
+    margin-top: 20px;
+    white-space: nowrap;
+}
