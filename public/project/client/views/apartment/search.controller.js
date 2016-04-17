@@ -14,7 +14,10 @@
         function init() {
             ApartmentService.findApartmentsByQuery(searchQuery.place,renderDetails);
         }
-        init();
+        if(searchQuery){
+            init();
+        }
+
         vm.searchPlaces = searchPlaces;
         vm.findDetailsById = findDetailsById;
         function searchPlaces(search) {

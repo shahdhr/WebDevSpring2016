@@ -18,7 +18,7 @@
 
         vm.favouriteButton = "Mark as favourite";
         console.log(apartmentId);
-        ApartmentService.findApartmentDetailsById(apartmentId,renderDetails);
+        ApartmentService.findApartmentDetailsById(apartmentId, renderDetails);
 
 
         //function showReviews() {
@@ -58,6 +58,7 @@
                 .then(addApartmentToFavouritesCallback);
 
         }
+
         function addApartmentToFavouritesCallback(user) {
             console.log(user.data.favourites);
             vm.favouriteButton = "Marked";
@@ -67,7 +68,30 @@
             console.log(review);
             showReviews();
         }
+
+
+        vm.myInterval = 5000;
+        vm.noWrapSlides = false;
+        vm.active = 0;
+        var slides = vm.slides = [];
+        var currIndex = 0;
+
+        vm.addSlide = function () {
+            var newWidth = 600 + slides.length + 1;
+            slides.push({
+                image: 'http://lorempixel.com/' + newWidth + '/300',
+                text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
+                id: currIndex++
+            });
+        };
+
+        vm.randomize = function () {
+            var indexes = generateIndexesArray();
+            assignNewIndexesToSlides(indexes);
+        };
+
+        for (var i = 0; i < 4; i++) {
+            vm.addSlide();
+        }
     }
-
-
-})();
+    })();
