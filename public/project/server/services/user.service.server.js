@@ -28,7 +28,9 @@ module.exports = function (app, model) {
             .then(
                 function (doc) {
                     req.session.newUser = doc;
-                    res.json(user);
+                    console.log("service server create user");
+                    console.log(doc);
+                    res.json(doc);
                 },
                 function (err) {
                     res.status(400).send(err);
