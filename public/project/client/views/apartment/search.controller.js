@@ -12,6 +12,10 @@
         var bounds = [];
         var searchQuery = ApartmentService.getSearchQuery();
         console.log(searchQuery);
+        vm.search = {
+            place:searchQuery.place
+        }
+
 
 
 
