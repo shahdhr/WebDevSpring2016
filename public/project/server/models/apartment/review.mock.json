@@ -1,7 +1,0 @@
-[
-  {	"_id":123,  "description": "Very clean",   "rating":"3", "apartmentId":"123",  "reviewed_by":123   },
-  {	"_id":234,  "description": "Very clean",   "rating":"3", "apartmentId":"123",  "reviewed_by":234   },
-  {	"_id":345,  "description": "Very clean",   "rating":"3", "apartmentId":"123",  "reviewed_by":345   },
-  {	"_id":456,  "description": "Very clean",   "rating":"3", "apartmentId":"123",  "reviewed_by":456   },
-  {	"_id":567,  "description": "Very clean",   "rating":"3", "apartmentId":"123",  "reviewed_by":567   }
-]

@@ -49,6 +49,12 @@
                     controllerAs: "model"
                 })
 
+                .when("/apartment",{
+                    templateUrl:"views/apartment/apartment.view.html",
+                    controller:"ApartmentController",
+                    controllerAs:"model"
+                })
+
                 .otherwise({
                     redirectTo: "/"
                 })

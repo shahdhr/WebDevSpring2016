@@ -126,3 +126,8 @@
 .no-breaking {
     white-space: nowrap;
 }
+
+.style_hero {
+    background-color: #f2f1f1;
+    padding: 0 90px;
+}

@@ -14,7 +14,8 @@ module.exports = function(db,mongoose) {
         addApartment : addApartment,
         findAllApartmentsForUser  : findAllApartmentsForUser ,
         deleteApartmentById : deleteApartmentById,
-        updateApartmentById : updateApartmentById
+        updateApartmentById : updateApartmentById,
+        findApartmentByDbId : findApartmentByDbId
     };
     return api;
 
@@ -43,6 +44,8 @@ module.exports = function(db,mongoose) {
             if(err) {
                 deferred.reject(err);
             } else {
+                console.log("find all aprtments");
+                console.log(doc);
                 deferred.resolve(doc);
             }
         });
@@ -101,6 +104,18 @@ module.exports = function(db,mongoose) {
         //return newApartment;
         var deferred = q.defer();
         ApartmentModel.update({_id : apartmentId},{$set:newApartment}, function (err, doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findApartmentByDbId(apartmentId){
+        var deferred = q.defer();
+        ApartmentModel.findOne({_id:apartmentId}, function (err, doc) {
             if(err) {
                 deferred.reject(err);
             } else {

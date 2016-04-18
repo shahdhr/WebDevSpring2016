@@ -10,15 +10,15 @@ module.exports = function(mongoose) {
         description: String,
         amenities: [String],
         city: String,
-        cleaning_fee: String,
-        price: Number,
+        cleaning_fee: {type:Number,default:5.0},
+        price: {type:Number,default:50},
         country:String,
         featured_photo: [String],
         owner_id:String,
         number_of_bathrooms:String,
         rating:String,
         zipcode:String,
-        favourite_count:Number
+        favourite_count:{type:Number,default:0}
     }, {collection: 'project.rentout.apartment'});
     return ApartmentSchema;
 };

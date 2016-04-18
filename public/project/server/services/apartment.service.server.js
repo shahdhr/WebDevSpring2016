@@ -2,25 +2,34 @@
  * Created by Dhruv on 3/25/2016.
  */
 module.exports = function (app, model,uuid) {
-    app.get("/api/projectAssignments/user/:userId/apartment", findAllApartmentsForUser);
-    app.put("/api/projectAssignments/apartment/:apartmentId",updateApartmentById);
-    app.post("/api/projectAssignments/user/:userId/apartment",addApartment);
-    app.delete("/api/projectAssignments/apartment/:apartmentId",deleteApartmentById);
+    app.get("/api/project/user/:userId/apartment", findAllApartmentsForUser);
+    app.put("/api/project/apartment/:apartmentId",updateApartmentById);
+    app.post("/api/project/user/:userId/apartment",addApartment);
+    app.delete("/api/project/apartment/:apartmentId",deleteApartmentById);
 
 
     function addApartment (req, res) {
         var apartment = req.body;
-        apartment._id=uuid.v4();
-        model.addApartment(apartment);
-        res.send (apartment);
+        model.addApartment(apartment)
+            .then(function (doc) {
+                res.json(doc);
+            }, function (err) {
+                res.status(400).send(err);
+            });
+        //res.send (apartment);
     }
 
 
     function findAllApartmentsForUser (req, res) {
 
         var userId = req.params.userId;
-        var apartments = model.findAllApartmentsForUser(userId);
-        res.json(apartments);
+        model.findAllApartmentsForUser(userId)
+            .then(function (doc) {
+                res.json(doc);
+            }, function (err) {
+                res.status(400).send(err);
+            });
+        //res.json(apartments);
 
 
     }
@@ -28,22 +37,37 @@ module.exports = function (app, model,uuid) {
     function updateApartmentById (req, res) {
         var id = req.params.apartmentId;
         var apartment = req.body;
-        apartment = model.updateApartmentById(id, apartment);
-        if(apartment) {
-            res.json(apartment);
-            return;
-        }
-        res.json({message: "User not found"});
+        apartment = model.updateApartmentById(id, apartment)
+            .then(function (doc) {
+                model.findApartmentByDbId(id)
+                    .then(function (doc) {
+                        res.json(doc);
+                    }, function (err) {
+                        res.status(400).send(err);
+                    });
+            }, function (err) {
+                res.status(400).send(err);
+            });
+        //if(apartment) {
+        //    res.json(apartment);
+        //    return;
+        //}
+        //res.json({message: "User not found"});
     }
 
     function deleteApartmentById (req, res) {
         var id = req.params.apartmentId;
-        var apartments =model.deleteApartmentById(id);
-        console.log(apartments);
-        if(apartments) {
-            res.send(apartments);
-            return;
-        }
-        res.json ({message: "User not found"});
+        model.deleteApartmentById(id)
+            .then(function (doc) {
+                res.json(doc);
+            }, function (err) {
+                res.status(400).send(err);
+            });
+        //console.log(apartments);
+        //if(apartments) {
+        //    res.send(apartments);
+        //    return;
+        //}
+        //res.json ({message: "User not found"});
     }
 };

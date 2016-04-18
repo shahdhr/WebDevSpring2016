@@ -9,29 +9,12 @@
 
     function SearchController( $location, ApartmentService) {
         var vm = this;
+        var bounds = [];
         var searchQuery = ApartmentService.getSearchQuery();
         console.log(searchQuery);
 
 
-        var mymap = L.map('map');
 
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-            maxZoom: 18
-        }).addTo(mymap);
-
-        var marker = L.marker([51.5, -0.09]).addTo(mymap);
-        marker.bindPopup("<b>Hello world!</b><br>I am a popup.");
-
-        var marker1 = L.marker([51.6, -0.09]).addTo(mymap);
-        marker1.bindPopup("<b>Hello world!</b><br>I am a popup.");
-
-        var bounds = [
-            [51.5, -0.09],
-            [51.6, -0.09],
-        ];
-
-        mymap.fitBounds(bounds);
 
         function init() {
             ApartmentService.findApartmentsByQuery(searchQuery.place,renderDetails);
@@ -49,14 +32,42 @@
 
         }
 
+
+
         function  renderDetails(response) {
-            console.log(response);
+            setMapMarkers(response.places);
             vm.places = response.places;
         }
 
         function findDetailsById(id) {
             $location.path("/details/"+id);
         }
+
+        //map
+        var mymap = L.map('map');
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 18
+        }).addTo(mymap);
+
+        function setMapMarkers(places) {
+
+            for (var i = 0; i<places.length;i++) {
+
+                var marker = L.marker([Number(places[i].place.place_details.lat),Number(places[i].place.place_details.lng)]).addTo(mymap);
+
+                marker.bindPopup("<h1><a href='#/details/"+ places[i].place.place_details.id +"'>"+places[i].place.place_details.name+"</a></h1><h2>Bedroom :"+places[i].place.place_details.number_of_bedrooms+", Bath :"+ places[i].place.place_details.number_of_bathrooms+"</h2>");
+                var bound = [Number(places[i].place.place_details.lat),Number(places[i].place.place_details.lng)];
+
+                bounds.push(bound);
+            }
+            mymap.fitBounds(bounds);
+        }
+
+
+
+
+
 
     }
 })();
