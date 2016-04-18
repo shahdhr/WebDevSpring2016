@@ -1,13 +1,9 @@
 <div class="row">
-        <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-            <uib-slide ng-repeat="slide in model.slides track by slide.id" index="slide.id">
-                <img class="img-full" ng-src="{{slide.image}}">
-                <div class="carousel-caption">
-                    <h4>Slide {{slide.id}}</h4>
-                    <p>{{slide.text}}</p>
-                </div>
-            </uib-slide>
-        </uib-carousel>
+    <uib-carousel active="active" interval="myInterval" ng-show="model.newSlides" no-wrap="noWrapSlides">
+        <uib-slide ng-repeat="slide in model.newSlides track by $index" index = "$index" >
+            <img align="middle"  ng-src="{{slide.place_photo.url}}">
+        </uib-slide>
+    </uib-carousel>
     <div class="col-xs-12 col-md-6">
         <div class="top-buffer ">
             <div class="container-fluid">

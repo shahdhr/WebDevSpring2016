@@ -94,3 +94,18 @@
     -o-background-size: cover;
 }
 
+.img-full-detail {
+    width: 80%;
+    height: 200px;
+    position: relative;
+    background-size: auto;
+    -webkit-background-size: 80% 75%;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    /*height: 200px;*/
+    margin: 0 auto;
+
+}

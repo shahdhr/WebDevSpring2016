@@ -7,47 +7,48 @@
         .module("RentOutApp")
         .controller("ApartmentDetailsController",ApartmentDetailsController);
 
-    function ApartmentDetailsController($location, $routeParams, ApartmentService,UserService) {
+    function ApartmentDetailsController($location, $routeParams, ApartmentService,UserService,ReviewService) {
         var vm = this;
 
         var apartmentId = $routeParams.apartmentId;
         var currentUser = UserService.getCurrentUser();
         vm.addApartmentToFavourites = addApartmentToFavourites;
-        //$scope.showReviews = showReviews;
-        //vm.addReview = addReview;
+        vm.showReviews = showReviews;
+        vm.addReview = addReview;
 
         vm.favouriteButton = "Mark as favourite";
         console.log(apartmentId);
         ApartmentService.findApartmentDetailsById(apartmentId, renderDetails);
 
 
-        //function showReviews() {
-        //    ReviewService
-        //        .findAllReviewsForApartemnt(apartmentId)
-        //        .then(function(res){
-        //            console.log(res.data);
-        //            vm.reviews = res.data;
-        //        });
-        //}
-        //showReviews();
-        //
-        //function addReview(review)
-        //{
-        //    var newReview = {
-        //        apartmentId : apartmentId,
-        //        description : review.description,
-        //        rating : review.rating,
-        //        reviewed_by : currentUser._id
-        //    };
-        //    ReviewService
-        //        .addReview(newReview)
-        //        .then(addReviewCallback);
-        //    //$scope.apartments.push(newApartment);
-        //}
+        function showReviews() {
+            ReviewService
+                .findAllReviewsForApartemnt(apartmentId)
+                .then(function(res){
+                    console.log(res.data);
+                    vm.reviews = res.data;
+                });
+        }
+        showReviews();
+
+        function addReview(review)
+        {
+            var newReview = {
+                apartmentId : apartmentId,
+                description : review.description,
+                rating : review.rating,
+                reviewed_by : currentUser._id
+            };
+            ReviewService
+                .addReview(newReview)
+                .then(addReviewCallback);
+            //$scope.apartments.push(newApartment);
+        }
 
         function renderDetails(apartmentDetails) {
             console.log(apartmentDetails.place.place_details);
             vm.apartment = apartmentDetails.place.place_details;
+            makeSlides();
         }
 
         function addApartmentToFavourites() {
@@ -73,25 +74,28 @@
         vm.myInterval = 5000;
         vm.noWrapSlides = false;
         vm.active = 0;
-        var slides = vm.slides = [];
+        var slides = [];
         var currIndex = 0;
 
-        vm.addSlide = function () {
-            var newWidth = 600 + slides.length + 1;
-            slides.push({
-                image: 'http://lorempixel.com/' + newWidth + '/300',
-                text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
-                id: currIndex++
-            });
-        };
 
-        vm.randomize = function () {
-            var indexes = generateIndexesArray();
-            assignNewIndexesToSlides(indexes);
-        };
+        function makeSlides() {
+          var slidesNew = vm.apartment.additional_photos;
+            var loop = slidesNew.length;
+            if(loop > 10) {
+                loop = 10;
+            }
+          for(var  i = 0;i<loop;i++) {
+              //console.log(slidesNew[i].place_photo.url);
 
-        for (var i = 0; i < 4; i++) {
-            vm.addSlide();
+              slidesNew[i].place_photo.url = slidesNew[i].place_photo.url.replace("/medium.","/large.");
+              slides.push(slidesNew[i]);
+          }
+
+            vm.newSlides = slides;
+
         }
+
+
+
     }
     })();
