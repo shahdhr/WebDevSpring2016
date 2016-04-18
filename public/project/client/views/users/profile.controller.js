@@ -5,7 +5,7 @@
 (function () {
     angular
         .module("RentOutApp")
-        .controller("ProfileController",ProfileController)
+        .controller("ProfileController",ProfileController);
 
     function ProfileController($location, UserService, $rootScope, ApartmentService) {
         var vm = this;
@@ -21,7 +21,7 @@
         vm.showFavourites = showFavourites;
         vm.removeFavourite = removeFavourite;
         vm.listApartment = listApartment;
-
+        vm.alertClosed = alertClosed;
 
         //Event handler implementations
         function update(user) {
@@ -36,7 +36,7 @@
             vm.favoritedApartments = [];
             if(user.favourites.length > 0) {
                 for(var index = 0; index<user.favourites.length;index++) {
-                    ApartmentService.findApartmentDetailsById(user.favourites[index],showFavouritesCallback)
+                    ApartmentService.findApartmentDetailsById(user.favourites[index],showFavouritesCallback);
                 }
             } else {
                 vm.favoritedApartments = [];
@@ -48,7 +48,10 @@
             var user = UserService.getCurrentUser();
             var index = user.favourites.indexOf(id);
             user.favourites.splice(index,1);
-            UserService.updateUser(user._id,user,removeFavouriteCallback);
+            UserService.updateUser(user._id,user)
+                .then(function (res) {
+                    showFavourites();
+                });
 
 
         }
@@ -58,7 +61,9 @@
         }
 
 
-
+        function alertClosed() {
+            vm.updateMessage = null;
+        }
 
         //callback functions
         function updateCallback(user) {
@@ -71,7 +76,7 @@
         }
 
         function removeFavouriteCallback(user) {
-            console.log("remove callback")
+            console.log("remove callback");
             console.log(user.favourites);
             showFavourites();
         }

@@ -109,3 +109,20 @@
     margin: 0 auto;
 
 }
+
+#map {
+    height:300px;
+}
+
+.margin_top_header {
+    margin-top: 20px;
+}
+
+.panel-default > .panel-heading-custom {
+    background: rgba(28, 54, 85, .6);
+    color: #fff;
+}
+
+.no-breaking {
+    white-space: nowrap;
+}

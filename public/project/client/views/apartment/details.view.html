@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 <div class="top-buffer">
                     <h1 class="text-center">{{model.apartment.name}}
-                        <button ng-click="model.addApartmentToFavourites()" ng-show="newUser" type="submit" class="btn ">{{model.favouriteButton}}</button>
+                        <button ng-click="model.addApartmentToFavourites()" ng-show="newUser" type="submit" class="glyphicon glyphicon-heart" ng-show="model.favouriteButton === 'marked'"></button>
                     </h1>
                 </div>
                 <br>

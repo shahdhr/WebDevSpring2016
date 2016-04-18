@@ -7,7 +7,7 @@
         .module("RentOutApp")
         .controller("ApartmentDetailsController",ApartmentDetailsController);
 
-    function ApartmentDetailsController($location, $routeParams, ApartmentService,UserService,ReviewService) {
+    function ApartmentDetailsController( $routeParams, ApartmentService,UserService,ReviewService) {
         var vm = this;
 
         var apartmentId = $routeParams.apartmentId;
@@ -33,15 +33,18 @@
 
         function addReview(review)
         {
+            var user = UserService.getCurrentUser();
             var newReview = {
                 apartmentId : apartmentId,
                 description : review.description,
                 rating : review.rating,
-                reviewed_by : currentUser._id
+                reviewed_by : user._id
             };
             ReviewService
                 .addReview(newReview)
                 .then(addReviewCallback);
+
+            vm.review = null;
             //$scope.apartments.push(newApartment);
         }
 
