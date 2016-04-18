@@ -14,12 +14,20 @@
         var vm = this;
         var SEARCH_URL = "https://api.9flats.com/api/v4/places?client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l&search[query]=SEARCHQUERY";
         vm.searchPlaces = searchPlaces;
+        vm.cityClick = cityClick;
         vm.findDetailsById = findDetailsById;
         function searchPlaces(search) {
             ApartmentService.setSearchQuery(search);
             $location.path("/search");
             //ApartmentService.findApartmentsByQuery(query,renderDetails);
 
+        }
+
+        function cityClick(city) {
+            var search = {
+                place:city
+            };
+            searchPlaces(search);
         }
 
         function  renderDetails(response) {

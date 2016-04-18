@@ -54,18 +54,18 @@
                                         <br>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-8">
-                                        <button type="submit" ng-click="model.showFavourites()" class="btn btn-block form_button_background form_button_text">View Favourite Apartments</button>
-                                        <br>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-8">
-                                        <button type="submit" ng-click="model.listApartment()" class="btn btn-block form_button_background form_button_text">List Apartment</button>
-                                        <br>
-                                    </div>
-                                </div>
+                                <!--<div class="form-group">-->
+                                    <!--<div class="col-sm-offset-2 col-sm-8">-->
+                                        <!--<button type="submit" ng-click="model.showFavourites()" class="btn btn-block form_button_background form_button_text">View Favourite Apartments</button>-->
+                                        <!--<br>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<div class="col-sm-offset-2 col-sm-8">-->
+                                        <!--<button type="submit" ng-click="model.listApartment()" class="btn btn-block form_button_background form_button_text">List Apartment</button>-->
+                                        <!--<br>-->
+                                    <!--</div>-->
+                                <!--</div>-->
                             </form>
 
 
@@ -75,29 +75,25 @@
             <div class="col-md-6 col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-heading panel-heading-custom">
-                        <h3 class="panel-title">Messages</h3>
+                        <h3 class="panel-title">Favourited Apartments</h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped" ng-show="model.favoritedApartments.length">
-                                <thead>
-                                <tr>
-                                    <th>Thumbnail</th>
-                                    <th>Name</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="apartment in model.favoritedApartments"
-                                    ng-click="model.findDetailsById(model.place.place.place_details.id)">
-                                    <td><img ng-src="{{apartment.featured_photo.medium}}"> </td>
-                                    <td>{{apartment.name}}</td>
-                                    <td><a href="" ng-click="model.removeFavourite(apartment.id)"
-                                           class="glyphicon glyphicon-remove my-styling" title="remove favourite" ></a></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="panel-body fixed_height_scroll">
+                        <ul class="properties_list" ng-show="model.favoritedApartments">
+                            <li ng-repeat="apartment in model.favoritedApartments" ng-click="model.findDetailsById(apartment.id)">
+                                <div class="property_details">
+                                    <h5>
+                                        <button type="button" ng-click="model.removeFavourite(apartment.id)" class="close" >
+                                            <span aria-hidden="true">&times;</span></button>
+                                        <a class="truncate_property_title">{{apartment.name}}</a>
+
+                                    </h5>
+                                    <h6>Bedroom : {{apartment.number_of_bedrooms}}, Bath : {{apartment.number_of_bathrooms}}</h6>
+                                    <hr>
+                                </div>
+
+                            </li>
+                        </ul>
+                        <span ng-hide="model.favoritedApartments" class="help-block">Enter a short name for your space</span>
                     </div>
                 </div>
             </div>

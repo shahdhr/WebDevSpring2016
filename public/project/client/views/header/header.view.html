@@ -1,8 +1,8 @@
 <header ng-controller="HeaderController as model">
     <div class="wrapper">
         <a href="#/home"><img src="img/logo.png" class="logo" alt="" titl=""/></a>
-        <a href="#" class="hamburger"></a>
-        <nav>
+        <a href class="hamburger navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"></a>
+        <nav id="navbar" class=" collapse">
             <ul>
                 <li ng-hide="newUser" ng-class="{'active': $location.url()=='/register'}">
                     <a href="#/register">Register</a></li>
@@ -10,10 +10,6 @@
                     <a href="#/admin">Admin</a></li>
                 <li ng-show="newUser" ng-class="{'active': $location.url()=='/profile'}">
                     <a href="#/profile">{{newUser.firstName}}</a></li>
-                <!--<li><a href="#/home">Rent</a></li>-->
-                <!--<li><a href="#/home">Sell</a></li>-->
-                <!--<li><a href="#/home">About</a></li>-->
-                <!--<li><a href="#/home">Contact</a></li>-->
             </ul>
             <a href="" ng-hide="newUser" ng-click="model.open()" class="login_btn">Login</a>
             <a href="" ng-show="newUser" ng-click="model.logout()" class="login_btn">Logout</a>
@@ -21,22 +17,5 @@
     </div>
 </header><!--  end header section  -->
 
-<!--<script type="text/ng-template" id="myModalContent.html">-->
-    <!--<div class="modal-header">-->
-        <!--<h3 class="modal-title">I'm a modal!</h3>-->
-    <!--</div>-->
-    <!--<div class="modal-body">-->
-        <!--<ul>-->
-            <!--<li ng-repeat="item in items">-->
-                <!--<a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>-->
-            <!--</li>-->
-        <!--</ul>-->
-        <!--Selected: <b>{{ selected.item }}</b>-->
-    <!--</div>-->
-    <!--<div class="modal-footer">-->
-        <!--<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>-->
-        <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
-    <!--</div>-->
-<!--</script>-->
 
 

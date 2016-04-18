@@ -32,16 +32,19 @@
 
         function showFavourites() {
             var user = UserService.getCurrentUser();
-            console.log(user);
-            vm.favoritedApartments = [];
-            if(user.favourites.length > 0) {
-                for(var index = 0; index<user.favourites.length;index++) {
-                    ApartmentService.findApartmentDetailsById(user.favourites[index],showFavouritesCallback);
-                }
-            } else {
+            if(user){
                 vm.favoritedApartments = [];
+                if(user.favourites.length > 0) {
+                    for(var index = 0; index<user.favourites.length;index++) {
+                        ApartmentService.findApartmentDetailsById(user.favourites[index],showFavouritesCallback);
+                    }
+                } else {
+                    vm.favoritedApartments = [];
+                }
             }
         }
+        showFavourites();
+
 
         function removeFavourite(id) {
             console.log(id);
