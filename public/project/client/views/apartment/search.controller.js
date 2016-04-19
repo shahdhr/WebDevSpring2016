@@ -38,7 +38,7 @@
         }
 
         function previousPage() {
-            if(!vm.current_page < 1) {
+            if(vm.current_page > 1) {
                 var pre = vm.current_page-1;
                 var query = vm.search.place +"&search[page]="+ pre;
                 ApartmentService.findApartmentsByQuery(query,renderDetails);

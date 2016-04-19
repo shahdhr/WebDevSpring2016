@@ -19,7 +19,8 @@
             getCurrentUser:getCurrentUser,
             logout: logout,
             getCurrentSessionUser: getCurrentSessionUser,
-            loginFirst: loginFirst
+            loginFirst: loginFirst,
+            updateProfilePicture: updateProfilePicture
         };
         return api;
 
@@ -66,6 +67,15 @@
 
         function loginFirst() {
             $rootScope.open();
+        }
+
+        function updateProfilePicture(userId, file) {
+            var fd = new FormData();
+            fd.append('file', file);
+            return $http.post('/api/project/user/profilePic/'+userId, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            });
         }
 
 

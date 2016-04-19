@@ -14,7 +14,8 @@ module.exports = function(db,mongoose) {
         findAllUsers: findAllUsers,
         createUser:createUser,
         deleteUser:deleteUser,
-        updateUser:updateUser
+        updateUser:updateUser,
+        updateProfilePic:updateProfilePic
     };
     return api;
 
@@ -134,18 +135,21 @@ module.exports = function(db,mongoose) {
         return deferred.promise;
     }
 
-    //function setCurrentUser(aUser) {
-    //    if(aUser == null) {
-    //        $rootScope.newUser = null;
-    //    }
-    //    else {
-    //        $rootScope.newUser = {"_id":aUser._id, "firstName":aUser.firstName, "lastName":aUser.lastName,
-    //            "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email}
-    //    }
-    //
-    //}
-    //
-    //function getCurrentUser() {
-    //    return $rootScope.newUser;
-    //}
+    function updateProfilePic(id, profilePic) {
+        var deferred = q.defer();
+        UserModel.update(
+            {_id: id},
+            {$set: {
+                profilePicUrl: profilePic
+            }},
+            function (err, stats) {
+                if (!err) {
+                    deferred.resolve(stats);
+                } else {
+                    deferred.reject(err);
+                }
+            }
+        );
+        return deferred.promise;
+    }
 };

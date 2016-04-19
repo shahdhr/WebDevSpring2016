@@ -61,6 +61,15 @@
                     }
                 })
 
+                .when("/details/rentOut/:apartmentId", {
+                    templateUrl: "views/apartment/detailsDb.view.html",
+                    controller: "ApartmentDetailsDBController",
+                    controllerAs: "model",
+                    resolve: {
+                        loggedin: getLoggedIn
+                    }
+                })
+
                 .when("/apartment",{
                     templateUrl:"views/apartment/apartment.view.html",
                     controller:"ApartmentController",

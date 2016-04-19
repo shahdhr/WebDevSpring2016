@@ -6,6 +6,8 @@ module.exports = function (app, model,uuid) {
     app.put("/api/project/apartment/:apartmentId",updateApartmentById);
     app.post("/api/project/user/:userId/apartment",addApartment);
     app.delete("/api/project/apartment/:apartmentId",deleteApartmentById);
+    app.get("/api/project/apartment/:apartmentId",findApartmentByDbId);
+    app.get("/api/project/cities",getAllCities);
 
 
     function addApartment (req, res) {
@@ -17,6 +19,16 @@ module.exports = function (app, model,uuid) {
                 res.status(400).send(err);
             });
         //res.send (apartment);
+    }
+
+    function findApartmentByDbId(req,res) {
+        var apartmentId = req.params.apartmentId;
+        model.findApartmentByDbId(apartmentId)
+            .then(function (doc) {
+                res.json(doc);
+            }, function (err) {
+                res.status(400).send(err);
+            });
     }
 
 
@@ -69,5 +81,10 @@ module.exports = function (app, model,uuid) {
         //    return;
         //}
         //res.json ({message: "User not found"});
+    }
+
+    function getAllCities(req,res) {
+        var cities = model.getAllCities();
+        res.send(cities)
     }
 };

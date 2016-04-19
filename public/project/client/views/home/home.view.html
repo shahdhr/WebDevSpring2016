@@ -3,12 +3,13 @@
         <h2 class="caption">Welcome Home</h2>
         <h3 class="properties">Find your holiday home</h3>
         <div class="wrapper ">
-            <div class="input-group">
-                <input type="text" ng-model="model.search.place" class="form-control" placeholder="Where do you want to go?">
-                <span class="input-group-btn">
-                    <button ng-click="model.searchPlaces(model.search)" class="btn btn-default " type="button">Go!</button>
-                </span>
-            </div>
+            <form class="" ng-submit="model.searchPlaces(model.search)">
+                <!--<input type="text" ng-model="model.search.place" class="form-control" placeholder="Where do you want to go?">-->
+                <autocomplete data="model.allCities" on-type="model.updateCities" on-select="model.findCities" ng-model="model.search.place" attr-input-class="form-control" click-activation="true" attr-placeholder="Where do you want to go?">
+                    <!--<button ng-click="model.searchPlaces(model.search)" class="btn btn-default " type="button">Go!</button>-->
+                </autocomplete>
+            </form>
+        </div>
         </div>
     </section>
 </section><!--  end hero section  -->
@@ -72,7 +73,7 @@
             </li>
         </ul>
         <!--<div class="more_listing">-->
-            <!--<a href="#" class="more_listing_btn">View More Listings</a>-->
+        <!--<a href="#" class="more_listing_btn">View More Listings</a>-->
         <!--</div>-->
     </div>
 </section>

@@ -1,0 +1,86 @@
+<div class="row">
+    <img class="details_img_middle" ng-hide="model.newSlides"  ng-src="{{model.noImage}}">
+    <uib-carousel active="active" interval="myInterval" ng-show="model.newSlides" no-wrap="noWrapSlides">
+        <uib-slide ng-repeat="slide in model.newSlides track by $index" index = "$index" >
+            <img align="middle"  ng-src="{{slide.place_photo.url}}">
+        </uib-slide>
+    </uib-carousel>
+    <div class="container-fluid">
+        <div class="col-xs-12 col-md-6">
+            <div class="top-buffer ">
+
+                <div class="top-buffer">
+                    <h1 class="text-center">{{model.apartment.title}}
+                        <button ng-click="model.addApartmentToFavourites()" ng-show="newUser" type="submit" class="glyphicon glyphicon-heart" ng-show="model.favouriteButton === 'marked'"></button>
+                    </h1>
+                </div>
+                <br>
+                <h5><small>Description</small></h5>
+                <p>{{model.apartment.description}}</p>
+
+
+                <h2 class="page-header">Amenities</h2>
+                <ul>
+                    <li ng-repeat="amenities in model.apartment.amenities track by $index">
+                        {{amenities}}
+                    </li>
+                </ul>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Review</th>
+                            <th>No. of Stars(_/5)</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="review in model.reviews">
+                            <td>{{review.description}}</td>
+                            <td>{{review.rating}}</td>
+                        </tr>
+                        <tr ng-show="newUser">
+                            <th><input ng-model="model.review.description" class="form-control"/></th>
+                            <th><input ng-model="model.review.rating" class="form-control"/></th>
+                            <th>
+                                <button ng-click="model.addReview(model.review)" class="btn btn-primary">Add</button>
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6 margin_top_header" >
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-custom">
+                    <h3 class="panel-title">Book Now</h3>
+                </div>
+                <div class="panel-body ">
+                    <div class="alert alert-success" role="alert" ng-show="model.bookingDone">
+                        <button type="button" ng-click="model.alertClosed()" class="close" ><span aria-hidden="true">&times;</span></button>
+                        {{model.bookingDone}}
+                    </div>
+                    <div class="form-group col-xs-6 ">
+                        <div class="form_label">In</div>
+                        <input placeholder="Date" onfocus="(this.type='date')" onBlur="(this.type='')" ng-model="model.book.startDate" min="{{model.minDate}}" class="form-control" id="inputStartDate">
+                    </div>
+                    <div class="form-group col-xs-6">
+                        <div class="form_label">Out</div>
+                        <input placeholder="Date" onfocus="(this.type='date')" onBlur="(this.type='')" ng-model="model.book.endDate" min="{{model.book.startDate}}" class="form-control" id="inputEndDate">
+                    </div>
+                    <div class="form-group col-xs-12" ng-show="model.book.endDate && model.book.startDate">
+                        <div class="form_label">Price/Night: {{model.pricing.price}}</div>
+                    </div>
+                    <div class="form-group col-xs-12" ng-show="model.Total">
+                        <div class="form_label">Total: {{model.Total}}</div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <button  type="submit" ng class="btn btn-block form_button_background form_button_text" ng-click="model.bookApartment(model.book,model.bookButton)">{{model.bookButton}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

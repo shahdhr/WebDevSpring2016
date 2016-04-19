@@ -5,6 +5,7 @@
 var q = require("q");
 module.exports = function(db,mongoose) {
     //var apartments = require("./apartment.mock.json");
+    var cities = require("./cities/cities.mock.json");
     var ApartmentSchema = require("./apartment.schema.server.js")(mongoose);
     var ApartmentModel = mongoose.model('ProjectApartment', ApartmentSchema);
 
@@ -15,7 +16,8 @@ module.exports = function(db,mongoose) {
         findAllApartmentsForUser  : findAllApartmentsForUser ,
         deleteApartmentById : deleteApartmentById,
         updateApartmentById : updateApartmentById,
-        findApartmentByDbId : findApartmentByDbId
+        findApartmentByDbId : findApartmentByDbId,
+        getAllCities : getAllCities
     };
     return api;
 
@@ -126,5 +128,9 @@ module.exports = function(db,mongoose) {
             }
         });
         return deferred.promise;
+    }
+
+    function getAllCities() {
+        return cities;
     }
 };

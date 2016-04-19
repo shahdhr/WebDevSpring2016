@@ -11,23 +11,14 @@ var mongoose      = require('mongoose');
 
 var connectionString = process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://127.0.0.1:27017/cs5610FormMaker';
 
-////While running on open shift
-//if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
-//    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-//        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-//        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-//        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-//        process.env.OPENSHIFT_APP_NAME;
-//}
 
 // connect to the database
 var db = mongoose.connect(connectionString);
 var uuid = require('node-uuid');
+
 app.use(express.static(__dirname + '/public'));
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
@@ -38,12 +29,28 @@ app.use(session({
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
-var SEARCH_QUERY_URL = "https://api.9flats.com/api/v4/places?client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l&search[query]=SEARCHQUERY";
-var SEARCH_BY_ID_URL = "https://api.9flats.com/api/v4/places/PLACEID?&client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l";
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/uploads/')
+    },
+    filename: function (req, file, cb) {
+        var datetimestamp = Date.now();
+        cb(null, datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1])
+    }
+});
+var upload = multer({storage: storage});
+
 
 require("./public/assignment/server/app.js")(app,uuid, db, mongoose);
 require("./public/projectAssignments/server/app.js")(app,uuid);
-require("./public/project/server/app.js")(app,db, mongoose);
+require("./public/project/server/app.js")(app,db, mongoose,upload);
+
+//9Flats api
+var SEARCH_QUERY_URL = "https://api.9flats.com/api/v4/places?client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l&search[query]=SEARCHQUERY";
+var SEARCH_BY_ID_URL = "https://api.9flats.com/api/v4/places/PLACEID?&client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l";
+
+
 //List of Apartments for a given query
 app.get('/api/search/place/:query', function(req, res){
     var url = SEARCH_QUERY_URL.replace("SEARCHQUERY",req.params.query);

@@ -12,7 +12,8 @@ module.exports = function(mongoose) {
         email: [String],
         phones: [String],
         roles: [String],
-        favourites:[String]
+        favourites:[String],
+        profilePicUrl: String
 
     }, {collection: 'project.rentout.user'});
     return UserSchema;

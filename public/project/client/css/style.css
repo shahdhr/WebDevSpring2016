@@ -148,3 +148,17 @@
     max-height: 400px;
 
 }
+.details_img_middle {
+    margin: auto;
+    display: block;
+}
+
+.renout_brand{
+    margin-top: 30px;
+    float: left;
+    text-decoration: none;
+    color: #fff;
+    font-family: "lato-regular", Helvetica, Arial, sans-serif;
+    font-size: 26px;
+    letter-spacing: 1.5px;
+}

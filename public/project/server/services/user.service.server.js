@@ -3,8 +3,8 @@
  */
 var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
-
-module.exports = function (app, model) {
+var _                = require('lodash');
+module.exports = function (app, model,upload) {
 
     var auth = authorized;
     app.get("/api/project/user", auth,getAllUsers);
@@ -16,6 +16,7 @@ module.exports = function (app, model) {
     app.put("/api/project/user/:id",auth,updateUserById);
     app.post("/api/project/user",auth,createUser);
     app.delete("/api/project/user/:id",auth,deleteUserById);
+    app.post('/api/project/user/profilePic/:id', upload.single('file'), updateProfilePic);
 
 
     passport.use('project',new LocalStrategy(localStrategy));
@@ -124,7 +125,18 @@ module.exports = function (app, model) {
 
     }
 
-
+    function updateProfilePic(req, res) {
+        var profilePic = req.file.path;
+        model.updateProfilePic(req.params.id, profilePic.replace('public\\', '\\'))
+            .then(
+                function(stats) {
+                    res.json(profilePic.replace('public\\', '\\'));
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            )
+    }
 
     function updateUserById (req, res) {
         var id = req.params.id;

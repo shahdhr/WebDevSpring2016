@@ -25,6 +25,7 @@
         vm.findApartmentDetailsById = findApartmentDetailsById;
         vm.formatDate = formatDate;
         vm.removeBooking = removeBooking;
+        vm.updateProfilePic = updateProfilePic;
 
 
 
@@ -34,6 +35,19 @@
                 .then(function (res) {
                     findAllBookingsForUser();
                 })
+        }
+
+        function updateProfilePic() {
+            var user = UserService.getCurrentUser();
+            UserService.updateProfilePicture(
+                user._id,
+                vm.fileModel
+            ).then(function successCallback(response) {
+                $rootScope.newUser.profilePicUrl = response.data;
+                UserService.setCurrentUser($rootScope.newUser);
+                vm.user = UserService.getCurrentUser();
+                vm.showProfilePicSuccessAlert = true;
+            });
         }
 
 
@@ -51,8 +65,13 @@
 
 
 
-        function findApartmentDetailsById(id) {
-            $location.path("/details/"+id);
+        function findApartmentDetailsById(apartment) {
+            if(apartment.id) {
+                $location.path("/details/"+apartment.id);
+            } else if(apartment._id) {
+                $location.path("/details/rentOut/"+apartment._id)
+            }
+
         }
 
         function findAllUserApartments() {

@@ -68,69 +68,34 @@
             <div class="col-md-6 col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-heading panel-heading-custom">
-                        <h3 class="panel-title">Profile</h3>
+                        <h3 class="panel-title">Profile Picture</h3>
                     </div>
                     <div class="panel-body">
-
-
-                        <div class="alert alert-success" role="alert" ng-show="model.updateMessage">
-                            <button type="button" ng-click="model.alertClosed()" class="close" ><span aria-hidden="true">&times;</span></button>
-                            {{model.updateMessage}}
-                        </div>
-                        <form class="form-horizontal" >
+                        <img ng-show="model.user.profilePicUrl" src="{{model.user.profilePicUrl}}" alt="User Profile Picture" class="img-thumbnail profile-img">
+                        <br>
+                        <br>
+                        <form class="form-horizontal">
                             <div class="form-group">
-                                <label for="inputUsername" class="col-sm-2 control-label form_label">Username</label>
+                                <label for="profilePic" class="col-sm-2 control-label form_label"><span class="no-breaking">Profile Picture:</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" ng-model="model.user.username" class="form-control" id="inputUsername" placeholder="Username">
+                                    <input type="file" file-model="model.fileModel" id="profilePic">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="inputPassword" class="col-sm-2 control-label form_label">Password</label>
-                                <div class="col-sm-10">
-                                    <input type="password" ng-model="model.user.password" class="form-control" id="inputPassword" placeholder="Password">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputFirstName" class="col-sm-2 control-label form_label"><span class="no-breaking">First Name</span></label>
-                                <div class="col-sm-10">
-                                    <input type="text" ng-model="model.user.firstName" class="form-control" id="inputFirstName" placeholder="First Name">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputLastName" class="col-sm-2 control-label form_label"><span class="no-breaking">Last Name</span></label>
-                                <div class="col-sm-10">
-                                    <input type="text" ng-model="model.user.lastName" class="form-control" id="inputLastName" placeholder="Last Name">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputEmail" class="col-sm-2 control-label form_label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" ng-model="model.user.email" class="form-control" id="inputEmail" placeholder="Email">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" ng-click="model.update(model.user)" class="btn btn-block form_button_background form_button_text">Update</button>
-                                    <br>
-                                </div>
-                            </div>
-                            <!--<div class="form-group">-->
-                            <!--<div class="col-sm-offset-2 col-sm-8">-->
-                            <!--<button type="submit" ng-click="model.showFavourites()" class="btn btn-block form_button_background form_button_text">View Favourite Apartments</button>-->
-                            <!--<br>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                            <!--<div class="col-sm-offset-2 col-sm-8">-->
-                            <!--<button type="submit" ng-click="model.listApartment()" class="btn btn-block form_button_background form_button_text">List Apartment</button>-->
-                            <!--<br>-->
-                            <!--</div>-->
-                            <!--</div>-->
                         </form>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-10 col-sm-offset-2">
+                                <button ng-click="model.updateProfilePic()" class="btn btn-primary col-xs-12"> Update </button>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="alert alert-success col-xs-12 col-sm-10 col-sm-offset-2" ng-show="model.showProfilePicSuccessAlert">
+                                <strong>Updated!</strong>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -146,7 +111,7 @@
                                     <div class="form_label">
                                         <button type="button" ng-click="model.removeFavourite(apartment.id)" class="close" >
                                             <span aria-hidden="true">&times;</span></button>
-                                        <a href class="truncate_property_title" ng-click="model.findApartmentDetailsById(apartment.id)">{{apartment.name}}</a>
+                                        <a href class="truncate_property_title" ng-click="model.findApartmentDetailsById(apartment)">{{apartment.name}}</a>
 
                                     </div>
                                     <h6>Bedroom : {{apartment.number_of_bedrooms}}, Bath : {{apartment.number_of_bathrooms}}</h6>
@@ -171,7 +136,7 @@
                                     <div class="form_label">
                                         <!--<button type="button" ng-click="model.removeFavourite(apartment.id)" class="close" >-->
                                         <!--<span aria-hidden="true">&times;</span></button>-->
-                                        <a href class="truncate_property_title">{{apartment.title}}</a>
+                                        <a href ng-click="model.findApartmentDetailsById(apartment)" class="truncate_property_title">{{apartment.title}}</a>
 
                                     </div>
                                     <h6>Bedroom : {{apartment.number_of_bedrooms}}, Bath : {{apartment.number_of_bathrooms}}</h6>
@@ -204,17 +169,18 @@
                                     </div>
                                     <h6 class="form_label">Cost:&nbsp;${{booking.amount}}</h6>
                                     <div class="row">
-                                    <div class="help-block col-xs-7">From:{{model.formatDate(booking.startDate)}}&nbsp;To:{{model.formatDate(booking.endDate)}}</div>
+                                        <div class="help-block col-xs-7">From:{{model.formatDate(booking.startDate)}}</div>
+                                        <div class="help-block col-xs-7">To:{{model.formatDate(booking.endDate)}}</div>
 
-                                    <button type="button" ng-click="model.removeBooking(booking._id)" class="col-xs-offset-1 col-xs-3 btn btn-defalut form_button_background form_button_text" >
-                                        <span aria-hidden="true">Cancel</span></button>
+                                        <button type="button" ng-click="model.removeBooking(booking._id)" class="col-xs-offset-1 col-xs-3 btn btn-defalut form_button_background form_button_text" >
+                                            <span aria-hidden="true">Cancel</span></button>
                                     </div>
                                     <hr>
                                 </div>
 
                             </li>
                         </ul>
-                        <span ng-hide="model.userBooking" class="help-block form_label">No upcoming bookings</span>
+                        <span ng-hide="model.userBooking.length" class="help-block form_label">No upcoming bookings</span>
                     </div>
                 </div>
             </div>

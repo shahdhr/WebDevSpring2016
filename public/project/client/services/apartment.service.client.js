@@ -15,10 +15,12 @@
             findApartmentDetailsById: findApartmentDetailsById,
             addApartment : addApartment,
             findAllApartmentsForUser  : findAllApartmentsForUser ,
+            findApartmentDetailsByDbId:findApartmentDetailsByDbId,
             deleteApartmentById : deleteApartmentById,
             updateApartmentById : updateApartmentById,
             setSearchQuery : setSearchQuery,
-            getSearchQuery : getSearchQuery
+            getSearchQuery : getSearchQuery,
+            getAllCities : getAllCities
         };
         return api;
 
@@ -47,6 +49,10 @@
             return $http.delete("/api/project/apartment/"+apartmentId);
         }
 
+        function findApartmentDetailsByDbId(apartmentId) {
+            return $http.get("/api/project/apartment/"+apartmentId);
+        }
+
         function updateApartmentById(apartmentId, newApartment) {
             return $http.put("/api/project/apartment/"+apartmentId,newApartment);
         }
@@ -58,6 +64,10 @@
 
         function getSearchQuery() {
             return $rootScope.searchQuery;
+        }
+
+        function getAllCities() {
+            return $http.get("/api/project/cities");
         }
 
 
