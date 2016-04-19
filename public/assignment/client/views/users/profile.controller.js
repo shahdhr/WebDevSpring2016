@@ -5,13 +5,14 @@
 (function () {
     angular
         .module("FormBuilderApp")
-        .controller("ProfileController",ProfileController)
+        .controller("ProfileController",ProfileController);
 
     function ProfileController(UserService) {
         var vm = this;
         // currently logged in user
         var currentUser = UserService.getCurrentUser();
         vm.user = currentUser;
+        console.log(currentUser);
 
 
 
