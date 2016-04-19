@@ -13,9 +13,9 @@ module.exports = function (app, model) {
     app.post("/api/project/login",passport.authenticate('project'), loginProject);
     app.get("/api/project/loggedin",loggedin);
     app.post("/api/project/logout", logout);
-    app.put("/api/project/user/:id",updateUserById);
-    app.post("/api/project/user",createUser);
-    app.delete("/api/project/user/:id",deleteUserById);
+    app.put("/api/project/user/:id",auth,updateUserById);
+    app.post("/api/project/user",auth,createUser);
+    app.delete("/api/project/user/:id",auth,deleteUserById);
 
 
     passport.use('project',new LocalStrategy(localStrategy));
@@ -96,6 +96,7 @@ module.exports = function (app, model) {
     function loginProject(req, res) {
         console.log("using new login la casa");
         var user = req.user;
+        console.log(user);
         res.json(user);
     }
 

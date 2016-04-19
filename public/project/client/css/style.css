@@ -142,3 +142,9 @@
     max-height: 200px;
     overflow-y: scroll;
 }
+
+.fixed_height_400 {
+    min-height: 400px;
+    max-height: 400px;
+
+}

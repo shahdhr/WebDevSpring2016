@@ -7,10 +7,10 @@
         .module("RentOutApp")
         .controller("HeaderController",HeaderController);
 
-    function HeaderController($uibModal,UserService,$location) {
+    function HeaderController($uibModal,UserService,$location,$rootScope) {
         var vm = this;
         //Event handler declarations
-        vm.open = openModal;
+        $rootScope.open = openModal;
         vm.logout = logout;
 
         //Event handler implementations

@@ -27,7 +27,8 @@
                 username : username,
                 password : password
             };
-            return $http.post("/api/assignment/login",user);
+            //return $http.post("/api/assignment/login",user);
+            return $http.get("/api/assignment/user?username="+ username +"&password="+ password);
         }
 
         function findUserByUsername(username) {

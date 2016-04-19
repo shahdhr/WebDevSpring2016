@@ -18,7 +18,8 @@
             setCurrentUser:setCurrentUser,
             getCurrentUser:getCurrentUser,
             logout: logout,
-            getCurrentSessionUser: getCurrentSessionUser
+            getCurrentSessionUser: getCurrentSessionUser,
+            loginFirst: loginFirst
         };
         return api;
 
@@ -61,6 +62,10 @@
 
         function getCurrentSessionUser() {
             return $http.get("/api/project/loggedin");
+        }
+
+        function loginFirst() {
+            $rootScope.open();
         }
 
 

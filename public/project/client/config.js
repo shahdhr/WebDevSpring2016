@@ -21,7 +21,10 @@
                 .when("/home", {
                     templateUrl: "views/home/home.view.html",
                     controller: "HomeController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        loggedin: getLoggedIn
+                    }
 
                 })
 
@@ -34,25 +37,37 @@
                 .when("/profile", {
                     templateUrl: "views/users/profile.view.html",
                     controller: "ProfileController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        checkLoggedIn : checkLoggedIn
+                    }
                 })
 
-                .when("/search", {
+                .when("/search/:searchPlace", {
                     templateUrl: "views/apartment/search.view.html",
                     controller: "SearchController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        loggedin: getLoggedIn
+                    }
                 })
 
                 .when("/details/:apartmentId", {
                     templateUrl: "views/apartment/details.view.html",
                     controller: "ApartmentDetailsController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        loggedin: getLoggedIn
+                    }
                 })
 
                 .when("/apartment",{
                     templateUrl:"views/apartment/apartment.view.html",
                     controller:"ApartmentController",
-                    controllerAs:"model"
+                    controllerAs:"model",
+                    resolve: {
+                        loggedin: getLoggedIn
+                    }
                 })
 
                 .otherwise({
@@ -63,7 +78,7 @@
         });
 
 
-    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope)
+    var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope)
     {
         var deferred = $q.defer();
 
@@ -71,9 +86,10 @@
         {
             $rootScope.errorMessage = null;
             // User is Authenticated
+            console.log(user);
             if (user !== '0')
             {
-                $rootScope.currentUser = user;
+                $rootScope.newUser = user;
                 deferred.resolve();
             }
             // User is Not Authenticated
@@ -88,5 +104,20 @@
         return deferred.promise;
     };
 
+    var getLoggedIn = function($q, $timeout, $http, $location, $rootScope) {
+        var deferred = $q.defer();
+
+        $http.get('/api/project/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0'){
+                $rootScope.newUser = user;
+            }
+            deferred.resolve();
+        });
+
+        return deferred.promise;
+    };
 
 })();

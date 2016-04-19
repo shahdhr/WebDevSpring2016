@@ -2,7 +2,7 @@
     <div class="wrapper">
         <a href="#/home"><img src="img/logo.png" class="logo" alt="" titl=""/></a>
         <a href class="hamburger navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"></a>
-        <nav id="navbar" class=" collapse">
+        <nav id="navbar" class="navbar-collapse collapse">
             <ul>
                 <li ng-hide="newUser" ng-class="{'active': $location.url()=='/register'}">
                     <a href="#/register">Register</a></li>
@@ -11,7 +11,7 @@
                 <li ng-show="newUser" ng-class="{'active': $location.url()=='/profile'}">
                     <a href="#/profile">{{newUser.firstName}}</a></li>
             </ul>
-            <a href="" ng-hide="newUser" ng-click="model.open()" class="login_btn">Login</a>
+            <a href="" ng-hide="newUser" ng-click="open()" class="login_btn">Login</a>
             <a href="" ng-show="newUser" ng-click="model.logout()" class="login_btn">Logout</a>
         </nav>
     </div>

@@ -7,25 +7,24 @@
         .module("RentOutApp")
         .controller("SearchController",SearchController);
 
-    function SearchController( $location, ApartmentService) {
+    function SearchController( $location, ApartmentService,$routeParams) {
         var vm = this;
         var bounds = [];
-        var searchQuery = ApartmentService.getSearchQuery();
+        var searchQuery = $routeParams.searchPlace;
         console.log(searchQuery);
         vm.search = {
-            place:searchQuery.place
-        }
+            place:searchQuery
+        };
 
 
 
 
 
         function init() {
-            ApartmentService.findApartmentsByQuery(searchQuery.place,renderDetails);
+            ApartmentService.findApartmentsByQuery(searchQuery,renderDetails);
         }
-        if(searchQuery){
-            init();
-        }
+        init();
+
 
         vm.searchPlaces = searchPlaces;
         vm.findDetailsById = findDetailsById;

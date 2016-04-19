@@ -11,7 +11,7 @@ module.exports = function (app, model,uuid) {
 
     function addBooking (req, res) {
         var booking = req.body;
-
+        console.log("iyan aayvu");
         model.addBooking(booking)
             .then(function (doc) {
                 res.json(doc);

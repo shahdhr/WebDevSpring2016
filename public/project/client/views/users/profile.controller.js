@@ -9,10 +9,9 @@
 
     function ProfileController($location, UserService, $rootScope, ApartmentService) {
         var vm = this;
+
         // currently logged in user
         var currentUser = UserService.getCurrentUser();
-        console.log(currentUser);
-        vm.favoritedApartments = [];
         vm.user = currentUser;
 
 
@@ -22,8 +21,29 @@
         vm.removeFavourite = removeFavourite;
         vm.listApartment = listApartment;
         vm.alertClosed = alertClosed;
+        vm.findAllUserApartments = findAllUserApartments;
+        vm.findApartmentDetailsById = findApartmentDetailsById;
+
+
 
         //Event handler implementations
+        function findApartmentDetailsById(id) {
+            $location.path("/details/"+id);
+        }
+
+        function findAllUserApartments() {
+            var user = UserService.getCurrentUser();
+            if(user) {
+                ApartmentService.findAllApartmentsForUser(user._id)
+                    .then(function (res) {
+                        vm.userApartments = res.data;
+                    });
+            }
+        }
+        findAllUserApartments();
+
+
+
         function update(user) {
             UserService.updateUser(user._id, user)
                 .then(updateCallback);

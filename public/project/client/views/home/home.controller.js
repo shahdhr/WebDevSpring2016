@@ -18,7 +18,7 @@
         vm.findDetailsById = findDetailsById;
         function searchPlaces(search) {
             ApartmentService.setSearchQuery(search);
-            $location.path("/search");
+            $location.path("/search/"+search.place);
             //ApartmentService.findApartmentsByQuery(query,renderDetails);
 
         }

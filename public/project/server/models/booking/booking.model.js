@@ -3,7 +3,7 @@
  */
 "use strict";
 var q = require("q");
-module.exports = function() {
+module.exports = function(db,mongoose) {
     var BookingSchema = require("./booking.schema.server.js")(mongoose);
     var BookingModel = mongoose.model('ProjectBooking', BookingSchema);
     //var bookings = require("./booking.mock.json");

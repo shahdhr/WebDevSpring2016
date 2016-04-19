@@ -7,7 +7,7 @@
         .module("RentOutApp")
         .controller("ApartmentDetailsController",ApartmentDetailsController);
 
-    function ApartmentDetailsController( $routeParams, ApartmentService,UserService,ReviewService) {
+    function ApartmentDetailsController( $routeParams, ApartmentService,UserService,ReviewService,BookingService) {
         var vm = this;
 
         var apartmentId = $routeParams.apartmentId;
@@ -15,11 +15,50 @@
         vm.addApartmentToFavourites = addApartmentToFavourites;
         vm.showReviews = showReviews;
         vm.addReview = addReview;
+        vm.bookApartment = bookApartment;
+        vm.bookButton = "Submit";
 
         vm.favouriteButton = "Mark as favourite";
         console.log(apartmentId);
         ApartmentService.findApartmentDetailsById(apartmentId, renderDetails);
 
+
+        function bookApartment(book,bookButton) {
+            if(bookButton=="Submit") {
+                var date1 = new Date(book.startDate);
+                var date2 = new Date(book.endDate);
+                var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                vm.Total = diffDays * Number(vm.pricing.price);
+                vm.bookButton = "Book?"
+            } else {
+                console.log("iyan aayvu");
+                var user = UserService.getCurrentUser();
+                console.log(user);
+                if(user) {
+                    var booking = {
+                        startDate:book.startDate,
+                        endDate:book.endDate,
+                        apartmentId:vm.apartment.id,
+                        booked_by:user._id,
+                        amount:vm.Total
+                    };
+                    BookingService.addBooking(booking)
+                        .then(function (res) {
+                                vm.bookingDone = "Booking Done!";
+                                console.log(vm.bookingDone)
+                            },
+                            function (err) {
+                                vm.bookingDone = "Booking Failed!"
+                            });
+                } else {
+                    UserService.loginFirst();
+                }
+
+
+            }
+
+        }
 
         function showReviews() {
             ReviewService
@@ -51,6 +90,7 @@
         function renderDetails(apartmentDetails) {
             console.log(apartmentDetails.place.place_details);
             vm.apartment = apartmentDetails.place.place_details;
+            vm.pricing = apartmentDetails.place.pricing;
             makeSlides();
         }
 
