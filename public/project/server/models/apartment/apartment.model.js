@@ -91,6 +91,9 @@ module.exports = function(db,mongoose) {
     }
 
     function updateApartmentById(apartmentId, newApartment) {
+        if(newApartment._id){
+            delete newApartment._id;
+        }
         //for(var index=0;index<apartments.length;index++) {
         //    if(apartments[index]._id == apartmentId) {
         //        apartments[index]._id = apartmentId;

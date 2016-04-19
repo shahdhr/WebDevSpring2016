@@ -98,6 +98,10 @@ module.exports = function(db,mongoose) {
         //    }
         //}
         //return newBooking;
+        if(newBooking._id){
+            delete newBooking._id;
+        }
+
         var deferred = q.defer();
         BookingModel.update({_id: bookingId}, {$set:newBooking}, function (err, doc) {
             if(err){

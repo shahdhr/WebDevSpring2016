@@ -119,6 +119,9 @@ module.exports = function(db, mongoose) {
         //    }
         //}
         //return newReview;
+        if(newReview._id) {
+            delete newReview._id;
+        }
         var deferred = q.defer();
         ReviewModel.update({_id:reviewId},{$set: newReview}, function (err, doc) {
             if(err) {
