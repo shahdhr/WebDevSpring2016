@@ -61,10 +61,12 @@
                 ApartmentService.findAllApartmentsForUser(user._id)
                     .then(function (res) {
                         vm.userApartments = res.data;
+
                     });
             }
         }
         findAllUserApartments();
+
 
 
 
@@ -77,13 +79,13 @@
         function showFavourites() {
             var user = UserService.getCurrentUser();
             if(user){
-                //vm.favoritedApartments = [];
+                vm.favoritedApartments = [];
                 if(user.favourites.length > 0) {
                     for(var index = 0; index<user.favourites.length;index++) {
                         ApartmentService.findApartmentDetailsById(user.favourites[index],showFavouritesCallback);
                     }
                 } else {
-                    //vm.favoritedApartments = [];
+                    vm.favoritedApartments = [];
                 }
             }
         }
@@ -96,10 +98,23 @@
                     .then(function (resp) {
                         console.log("booking");
                         console.log(resp.data);
-                        vm.userBooking = resp.data
+                        //vm.userBooking = resp.data
+                        getUpcomingBookings(resp.data);
                     });
             }
         } findAllBookingsForUser();
+
+        function getUpcomingBookings(allBookings) {
+            var upcoming = [];
+            for(var i = 0;i<allBookings.length;i++) {
+                console.log(Date.parse(allBookings[i].startDate));
+                console.log(Date.now());
+                if(Date.parse(allBookings[i].startDate) > Date.now()) {
+                    upcoming.push(allBookings[i]);
+                }
+            }
+            vm.userBooking = upcoming;
+        }
 
 
         function removeFavourite(id) {

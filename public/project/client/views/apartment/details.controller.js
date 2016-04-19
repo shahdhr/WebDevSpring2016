@@ -10,6 +10,8 @@
     function ApartmentDetailsController( $routeParams, ApartmentService,UserService,ReviewService,BookingService) {
         var vm = this;
 
+        var today = new Date().toISOString().split('T')[0];
+        vm.minDate = today;
         var apartmentId = $routeParams.apartmentId;
         var currentUser = UserService.getCurrentUser();
         vm.addApartmentToFavourites = addApartmentToFavourites;
@@ -17,6 +19,7 @@
         vm.addReview = addReview;
         vm.bookApartment = bookApartment;
         vm.bookButton = "Submit";
+        vm.alertClosed = alertClosed;
 
         vm.favouriteButton = "Mark as favourite";
         console.log(apartmentId);
@@ -47,7 +50,9 @@
                     BookingService.addBooking(booking)
                         .then(function (res) {
                                 vm.bookingDone = "Booking Done!";
-                                console.log(vm.bookingDone)
+                                vm.bookButton = "Submit"
+                                vm.Total = null;
+                                vm.book=null;
                             },
                             function (err) {
                                 vm.bookingDone = "Booking Failed!"
@@ -139,7 +144,9 @@
 
         }
 
-
+        function alertClosed() {
+            vm.bookingDone = null;
+        }
 
     }
     })();
