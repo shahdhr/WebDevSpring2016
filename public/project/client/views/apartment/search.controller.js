@@ -9,13 +9,15 @@
 
     function SearchController( $location, ApartmentService,$routeParams) {
         var vm = this;
+
         var bounds = [];
         var searchQuery = $routeParams.searchPlace;
         console.log(searchQuery);
         vm.search = {
             place:searchQuery
         };
-
+        vm.previousPage = previousPage;
+        vm.nextPage = nextPage;
 
 
 
@@ -35,11 +37,31 @@
 
         }
 
+        function previousPage() {
+            if(!vm.current_page < 1) {
+                var pre = vm.current_page-1;
+                var query = vm.search.place +"&search[page]="+ pre;
+                ApartmentService.findApartmentsByQuery(query,renderDetails);
+            }
+        }
 
+        function nextPage() {
+            console.log("here next");
+            console.log(vm.current_page);
+            if(!vm.current_page < 20) {
+                var next = vm.current_page+1;
+                var query = vm.search.place +"&search[page]="+ next;
+                ApartmentService.findApartmentsByQuery(query,renderDetails);
+            }
+        }
 
         function  renderDetails(response) {
             setMapMarkers(response.places);
             vm.places = response.places;
+            //vm.pages = response.total_pages;
+            vm.current_page = response.current_page;
+
+
         }
 
         function findDetailsById(id) {
