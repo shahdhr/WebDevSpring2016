@@ -8,6 +8,7 @@ module.exports = function(mongoose) {
         startDate : { type: Date, default: Date.now },
         endDate : { type: Date, default: Date.now},
         apartmentId  : String,
+        apartmentName : String,
         booked_by : String,
         amount : Number
     }, {collection: 'project.rentout.booking'});

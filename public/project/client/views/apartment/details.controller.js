@@ -40,6 +40,7 @@
                         startDate:book.startDate,
                         endDate:book.endDate,
                         apartmentId:vm.apartment.id,
+                        apartmentName:vm.apartment.name,
                         booked_by:user._id,
                         amount:vm.Total
                     };

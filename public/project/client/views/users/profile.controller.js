@@ -7,7 +7,7 @@
         .module("RentOutApp")
         .controller("ProfileController",ProfileController);
 
-    function ProfileController($location, UserService, $rootScope, ApartmentService) {
+    function ProfileController($location, UserService, $rootScope, ApartmentService,BookingService) {
         var vm = this;
 
         // currently logged in user
@@ -23,10 +23,34 @@
         vm.alertClosed = alertClosed;
         vm.findAllUserApartments = findAllUserApartments;
         vm.findApartmentDetailsById = findApartmentDetailsById;
+        vm.formatDate = formatDate;
+        vm.removeBooking = removeBooking;
 
 
 
         //Event handler implementations
+        function removeBooking(id) {
+            BookingService.deleteBookingById(id)
+                .then(function (res) {
+                    findAllBookingsForUser();
+                })
+        }
+
+
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+
+
         function findApartmentDetailsById(id) {
             $location.path("/details/"+id);
         }
@@ -53,17 +77,29 @@
         function showFavourites() {
             var user = UserService.getCurrentUser();
             if(user){
-                vm.favoritedApartments = [];
+                //vm.favoritedApartments = [];
                 if(user.favourites.length > 0) {
                     for(var index = 0; index<user.favourites.length;index++) {
                         ApartmentService.findApartmentDetailsById(user.favourites[index],showFavouritesCallback);
                     }
                 } else {
-                    vm.favoritedApartments = [];
+                    //vm.favoritedApartments = [];
                 }
             }
         }
         showFavourites();
+
+        function findAllBookingsForUser() {
+            var user = UserService.getCurrentUser();
+            if(user) {
+                BookingService.findAllBookingsForUser(user._id)
+                    .then(function (resp) {
+                        console.log("booking");
+                        console.log(resp.data);
+                        vm.userBooking = resp.data
+                    });
+            }
+        } findAllBookingsForUser();
 
 
         function removeFavourite(id) {
