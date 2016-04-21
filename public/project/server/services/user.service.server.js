@@ -127,10 +127,11 @@ module.exports = function (app, model,upload) {
 
     function updateProfilePic(req, res) {
         var profilePic = req.file.path;
-        model.updateProfilePic(req.params.id, profilePic.replace('public\\', '\\'))
+        //model.updateProfilePic(req.params.id, profilePic.replace('public\\', '\\'))
+        model.updateProfilePic(req.params.id, profilePic.replace('public\/', '\/'))
             .then(
                 function(stats) {
-                    res.json(profilePic.replace('public\\', '\\'));
+                    res.json(profilePic.replace('public\/', '\/'));
                 },
                 function(err) {
                     res.status(400).send(err);

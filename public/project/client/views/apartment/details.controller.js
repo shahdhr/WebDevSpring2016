@@ -7,7 +7,7 @@
         .module("RentOutApp")
         .controller("ApartmentDetailsController",ApartmentDetailsController);
 
-    function ApartmentDetailsController( $routeParams, ApartmentService,UserService,ReviewService,BookingService) {
+    function ApartmentDetailsController( $routeParams, ApartmentService,UserService,ReviewService,BookingService,MessageService) {
         var vm = this;
 
         var today = new Date().toISOString().split('T')[0];
@@ -20,6 +20,7 @@
         vm.bookApartment = bookApartment;
         vm.bookButton = "Submit";
         vm.alertClosed = alertClosed;
+        vm.sendMessage = sendMessage;
 
         vm.favouriteButton = "Mark as favourite";
         console.log(apartmentId);
@@ -145,7 +146,26 @@
         }
 
         function alertClosed() {
-            vm.bookingDone = null;
+            vm.bookingDone = null;  vm.messageDone = null;
+        }
+
+
+        function sendMessage(message) {
+            var user = UserService.getCurrentUser();
+            var newMessage = {
+                message: message,
+                message_to: "9FlatsOwner",
+                message_by: user._id,
+                message_time : Date.now,
+                message_by_name : user.firstName +" "+user.lastName,
+                apartment : vm.apartment.name,
+                apartment_id : apartmentId
+            };
+            MessageService.addMessage(newMessage)
+                .then(function(res) {
+                    vm.messageDone = "Message sent to owner"
+                })
+
         }
 
     }

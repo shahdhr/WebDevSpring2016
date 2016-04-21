@@ -70,14 +70,25 @@
                     }
                 })
 
+                .when("/message",{
+                    templateUrl:"views/users/message.view.html",
+                    controller:"ChatController",
+                    controllerAs:"model",
+                    resolve: {
+                        loggedin: checkLoggedIn
+                    }
+                })
+
                 .when("/apartment",{
                     templateUrl:"views/apartment/apartment.view.html",
                     controller:"ApartmentController",
                     controllerAs:"model",
                     resolve: {
-                        loggedin: getLoggedIn
+                        loggedin: checkLoggedIn
                     }
                 })
+
+
 
                 .otherwise({
                     redirectTo: "/"

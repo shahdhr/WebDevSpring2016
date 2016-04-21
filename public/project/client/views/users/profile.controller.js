@@ -26,7 +26,9 @@
         vm.formatDate = formatDate;
         vm.removeBooking = removeBooking;
         vm.updateProfilePic = updateProfilePic;
-
+        vm.showFileChoosing = false;
+        vm.updateProfilePicBtn = "Change";
+        vm.messages = messages;
 
 
         //Event handler implementations
@@ -38,16 +40,24 @@
         }
 
         function updateProfilePic() {
-            var user = UserService.getCurrentUser();
-            UserService.updateProfilePicture(
-                user._id,
-                vm.fileModel
-            ).then(function successCallback(response) {
-                $rootScope.newUser.profilePicUrl = response.data;
-                UserService.setCurrentUser($rootScope.newUser);
-                vm.user = UserService.getCurrentUser();
-                vm.showProfilePicSuccessAlert = true;
-            });
+            if(vm.showFileChoosing) {
+                var user = UserService.getCurrentUser();
+                UserService.updateProfilePicture(
+                    user._id,
+                    vm.fileModel
+                ).then(function successCallback(response) {
+                    $rootScope.newUser.profilePicUrl = response.data;
+                    UserService.setCurrentUser($rootScope.newUser);
+                    vm.user = UserService.getCurrentUser();
+                    vm.showFileChoosing = false
+                    vm.updateProfilePicBtn = "Change";
+
+                });
+            } else {
+                vm.showFileChoosing = true;
+                vm.updateProfilePicBtn = "Update";
+            }
+
         }
 
 
@@ -158,6 +168,10 @@
             vm.updateMessage = null;
         }
 
+        function messages() {
+            $location.path("/message");
+        }
+
         //callback functions
         function updateCallback(user) {
             console.log(user);
@@ -173,5 +187,7 @@
             console.log(user.favourites);
             showFavourites();
         }
+
+
     }
 })();

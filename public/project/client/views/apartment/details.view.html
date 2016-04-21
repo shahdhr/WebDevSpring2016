@@ -81,6 +81,24 @@
                     </div>
                 </div>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-custom">
+                    <h3 class="panel-title">Contact Owner</h3>
+                </div>
+                <div class="panel-body ">
+                    <div class="alert alert-success" role="alert" ng-show="model.messageDone">
+                        <button type="button" ng-click="model.alertClosed()" class="close" ><span aria-hidden="true">&times;</span></button>
+                        {{model.messageDone}}
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label form_label" for="inputMessage">Message</label>
+                        <textarea rows="3" class="form-control" ng-model = "model.message" id="inputMessage"></textarea>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <button  type="submit"  class="btn btn-block form_button_background form_button_text" ng-click="model.sendMessage(model.message)">Send</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

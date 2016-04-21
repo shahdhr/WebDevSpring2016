@@ -1,101 +1,91 @@
 <div class="container-fluid">
     <div class="row">
         <div class = "margin_top_header">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-heading panel-heading-custom">
-                        <h3 class="panel-title">Profile</h3>
-                    </div>
-                    <div class="panel-body">
-
-
-                        <div class="alert alert-success" role="alert" ng-show="model.updateMessage">
-                            <button type="button" ng-click="model.alertClosed()" class="close" ><span aria-hidden="true">&times;</span></button>
-                            {{model.updateMessage}}
+                        <div class="row">
+                            <div class="panel-title col-xs-9">Profile</div>
+                            <div><a ng-click="model.messages()" class="col-xs-offset-1  col-xs-2 text-right  panel-title glyphicon glyphicon-envelope"></a></div>
                         </div>
-                        <form class="form-horizontal" >
-                            <div class="form-group">
-                                <label for="inputUsername" class="col-sm-2 control-label form_label">Username</label>
-                                <div class="col-sm-10">
-                                    <input type="text" ng-model="model.user.username" class="form-control" id="inputUsername" placeholder="Username">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword" class="col-sm-2 control-label form_label">Password</label>
-                                <div class="col-sm-10">
-                                    <input type="password" ng-model="model.user.password" class="form-control" id="inputPassword" placeholder="Password">
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="inputFirstName" class="col-sm-2 control-label form_label"><span class="no-breaking">First Name</span></label>
-                                <div class="col-sm-10">
-                                    <input type="text" ng-model="model.user.firstName" class="form-control" id="inputFirstName" placeholder="First Name">
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="inputLastName" class="col-sm-2 control-label form_label"><span class="no-breaking">Last Name</span></label>
-                                <div class="col-sm-10">
-                                    <input type="text" ng-model="model.user.lastName" class="form-control" id="inputLastName" placeholder="Last Name">
-                                </div>
-                            </div>
+                    </div>
+                    <div class = "panel-body">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="panel panel-default">
 
-                            <div class="form-group">
-                                <label for="inputEmail" class="col-sm-2 control-label form_label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" ng-model="model.user.email" class="form-control" id="inputEmail" placeholder="Email">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" ng-click="model.update(model.user)" class="btn btn-block form_button_background form_button_text">Update</button>
+                                <div class="panel-body">
+                                    <img ng-show="model.user.profilePicUrl" src="{{model.user.profilePicUrl}}" alt="User Profile Picture" class="img-circle profile_picture">
                                     <br>
+                                    <br>
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <div class=" col-sm-12" ng-show="model.showFileChoosing">
+                                                <input type="file" file-model="model.fileModel" id="profilePic" placeholder="Update">
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <button ng-click="model.updateProfilePic()" class="btn form_button_background form_button_text col-xs-12"> {{model.updateProfilePicBtn}} </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <br>
+
                                 </div>
                             </div>
-                            <!--<div class="form-group">-->
-                            <!--<div class="col-sm-offset-2 col-sm-8">-->
-                            <!--<button type="submit" ng-click="model.showFavourites()" class="btn btn-block form_button_background form_button_text">View Favourite Apartments</button>-->
-                            <!--<br>-->
-                            <!--</div>-->
-                            <!--</div>-->
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading panel-heading-custom">
-                        <h3 class="panel-title">Profile Picture</h3>
-                    </div>
-                    <div class="panel-body">
-                        <img ng-show="model.user.profilePicUrl" src="{{model.user.profilePicUrl}}" alt="User Profile Picture" class="img-thumbnail profile-img">
-                        <br>
-                        <br>
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <label for="profilePic" class="col-sm-2 control-label form_label"><span class="no-breaking">Profile Picture:</span></label>
-                                <div class="col-sm-10">
-                                    <input type="file" file-model="model.fileModel" id="profilePic">
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <form class="form-horizontal" >
+                                <div class="form-group">
+                                    <label for="inputUsername" class="col-sm-2 control-label form_label">Username</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" ng-model="model.user.username" class="form-control" id="inputUsername" placeholder="Username">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                                <div class="form-group">
+                                    <label for="inputPassword" class="col-sm-2 control-label form_label">Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" ng-model="model.user.password" class="form-control" id="inputPassword" placeholder="Password">
+                                    </div>
+                                </div>
 
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-10 col-sm-offset-2">
-                                <button ng-click="model.updateProfilePic()" class="btn btn-primary col-xs-12"> Update </button>
-                            </div>
+                                <div class="form-group">
+                                    <label for="inputFirstName" class="col-sm-2 control-label form_label"><span class="no-breaking">First Name</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" ng-model="model.user.firstName" class="form-control" id="inputFirstName" placeholder="First Name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputLastName" class="col-sm-2 control-label form_label"><span class="no-breaking">Last Name</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" ng-model="model.user.lastName" class="form-control" id="inputLastName" placeholder="Last Name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-sm-2 control-label form_label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" ng-model="model.user.email" class="form-control" id="inputEmail" placeholder="Email">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" ng-click="model.update(model.user)" class="btn btn-block form_button_background form_button_text">Update</button>
+                                        <br>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                            </form>
                         </div>
 
-                        <br>
-
-                        <div class="row">
-                            <div class="alert alert-success col-xs-12 col-sm-10 col-sm-offset-2" ng-show="model.showProfilePicSuccessAlert">
-                                <strong>Updated!</strong>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
