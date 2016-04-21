@@ -14,14 +14,14 @@
                 <div class="form-group col-xs-12 col-md-3">
                     <div class="input-group">
                         <div class="input-group-addon">In</div>
-                        <input type="date" ng-model="model.search.startDate" class="form-control" id="inputStartDate">
+                        <input placeholder="Date" onfocus="(this.type='date')" onBlur="(this.type='')" ng-model="model.search.startDate" class="form-control" id="inputStartDate">
                     </div>
                 </div>
 
                 <div class="form-group col-xs-12 col-md-3">
                     <div class="input-group">
                         <div class="input-group-addon">Out</div>
-                        <input type="date" ng-model="model.search.endDate" class="form-control" id="inputEndDate">
+                        <input placeholder="Date" onfocus="(this.type='date')" onBlur="(this.type='')" ng-model="model.search.endDate" class="form-control" id="inputEndDate">
                     </div>
                 </div>
 
@@ -43,7 +43,11 @@
 
     </form>
 </div>
-<div class="wrapper margin_top_header" id="map"></div>
+<div class="container margin_top_header" id="map"></div>
+<div class="container margin_top_header" >
+    <h1 class="form_page_header text-center ">Search Results</h1>
+    <h6 class="form_page_header text-center ">{{model.total_entries}} Results</h6>
+</div>
 <section class="listings">
     <div class="wrapper">
         <ul class="properties_list" >
@@ -82,6 +86,7 @@
                 <li class="previous"><a href ng-click="model.previousPage()"><span aria-hidden="true">&larr;</span> Previous</a></li>
                 <li class="next"><a href ng-click="model.nextPage()">Next <span aria-hidden="true">&rarr;</span></a></li>
             </ul>
+            <h6 class="form_page_header text-center ">Page : {{model.current_page}} of {{model.total_pages}}</h6>
         </nav>
     </div>
 </section>

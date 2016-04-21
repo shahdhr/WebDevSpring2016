@@ -59,7 +59,9 @@
             setMapMarkers(response.places);
             vm.places = response.places;
             //vm.pages = response.total_pages;
+            vm.total_entries = response.total_entries;
             vm.current_page = response.current_page;
+            vm.total_pages = response.total_pages;
 
 
         }
@@ -81,7 +83,7 @@
 
                 var marker = L.marker([Number(places[i].place.place_details.lat),Number(places[i].place.place_details.lng)]).addTo(mymap);
 
-                marker.bindPopup("<h1><a href='#/details/"+ places[i].place.place_details.id +"'>"+places[i].place.place_details.name+"</a></h1><h2>Bedroom :"+places[i].place.place_details.number_of_bedrooms+", Bath :"+ places[i].place.place_details.number_of_bathrooms+"</h2>");
+                marker.bindPopup("<h4><a class='truncate_property_title' href='#/details/"+ places[i].place.place_details.id +"'>"+places[i].place.place_details.name+"</a></h4><h5>Bedroom :"+places[i].place.place_details.number_of_bedrooms+", Bath :"+ places[i].place.place_details.number_of_bathrooms+"</h5>");
                 var bound = [Number(places[i].place.place_details.lat),Number(places[i].place.place_details.lng)];
 
                 bounds.push(bound);
