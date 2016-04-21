@@ -46,7 +46,9 @@
         function removeMessage(message) {
             MessageService.deleteMessageById(message._id)
                 .then(function(res) {
-                    findMessageDetailsById(message);
+                    init();
+                    vm.chat = null;
+
                 })
         }
 

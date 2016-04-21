@@ -21,7 +21,6 @@
         vm.bookApartment = bookApartment;
         vm.bookButton = "Submit";
         vm.alertClosed = alertClosed;
-        vm.contactOwner = contactOwner;
         vm.sendMessage = sendMessage;
 
         vm.favouriteButton = "Mark as favourite";
