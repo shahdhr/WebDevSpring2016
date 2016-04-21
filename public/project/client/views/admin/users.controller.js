@@ -31,7 +31,11 @@
         function updateUser(user)
         {
             console.log(user._id);
-            var emails = user.email.split(",");
+            var emails = user.email;
+            if(user.email.indexOf(",") > 0){
+                var emails = user.email.split(",");
+            }
+
             user.email = emails;
             UserService
                 .updateUser(user._id,user)

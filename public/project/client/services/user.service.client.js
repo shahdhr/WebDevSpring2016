@@ -20,9 +20,14 @@
             logout: logout,
             getCurrentSessionUser: getCurrentSessionUser,
             loginFirst: loginFirst,
-            updateProfilePicture: updateProfilePicture
+            updateProfilePicture: updateProfilePicture,
+            register:register
         };
         return api;
+
+        function register(user) {
+            return $http.post("/api/project/register",user);
+        }
 
         function findUserByCredentials(username, password) {
             var user = {

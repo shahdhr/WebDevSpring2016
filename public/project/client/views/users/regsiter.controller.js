@@ -11,22 +11,31 @@
         var vm = this;
         //Event handler declarations;
         vm.register =register;
+        vm.alertClosed = alertClosed;
 
 
 
         //Event handler implementations
         function register (user) {
-            UserService.createUser(user)
+            UserService.register(user)
                 .then(registerCallback);
         }
 
+        function alertClosed() {
+            vm.showAlert = null;
+        }
 
 
         //Callback functions
         function registerCallback(user) {
-            UserService.setCurrentUser(user.data);
-            $location.path('/profile');
-            console.log(user.data);
+            if(!user.data.username){
+                vm.showAlert = "Username already exists"
+            } else {
+                UserService.setCurrentUser(user.data);
+                $location.path('/profile');
+                console.log(user.data);
+            }
+
         }
     }
 })();

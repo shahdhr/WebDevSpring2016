@@ -1,15 +1,13 @@
 <header ng-controller="HeaderController as model">
     <div class="wrapper">
         <!--<a href="#/home"><img src="img/logo.png" class="logo" alt="" titl=""/></a>-->
-        <a href="#/home"><span class="logo renout_brand">RentOut</span></a>
+        <a href="#/home"><span class=" renout_brand">RentOut</span></a>
         <a href class="hamburger navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"></a>
         <nav id="navbar" class="navbar-collapse collapse">
             <ul>
                 <li ng-hide="newUser" ng-class="{'active': $location.url()=='/register'}">
                     <a href="#/register">Register</a></li>
-                <!--<li ng-show="newUser.roles.indexOf('admin') >= 0" ng-class="{'active': $location.url()=='/admin'}">-->
-                    <!--<a href="#/admin">Admin</a></li>-->
-                <li  ng-class="{'active': $location.url()=='/admin'}">
+                <li ng-show="newUser.roles.indexOf('admin') >= 0">
                     <a href="#/admin">Admin</a></li>
                 <li ng-show="newUser" ng-class="{'active': $location.url()=='/profile'}">
                     <a href="#/profile">{{newUser.firstName}}</a></li>

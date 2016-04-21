@@ -15,6 +15,7 @@ module.exports = function (app, model,upload) {
     app.post("/api/project/logout", logout);
     app.put("/api/project/user/:id",auth,updateUserById);
     app.post("/api/project/user",auth,createUser);
+    app.post("/api/project/register",register);
     app.delete("/api/project/user/:id",auth,deleteUserById);
     app.post('/api/project/user/profilePic/:id', upload.single('file'), updateProfilePic);
 
@@ -29,7 +30,6 @@ module.exports = function (app, model,upload) {
             .then(
                 function (doc) {
                     req.session.newUser = doc;
-                    console.log("service server create user");
                     console.log(doc);
                     res.json(doc);
                 },
@@ -180,6 +180,48 @@ module.exports = function (app, model,upload) {
             );
     }
 
+    function register(req, res) {
+        var newUser = req.body;
+        newUser.roles = ['general'];
+
+        model
+            .findUserByUsername(newUser.username)
+            .then(
+                function(user){
+                    if(user) {
+                        var invalidUser = {
+                            username : false
+                        };
+                        console.log(invalidUser);
+                        res.json(invalidUser);
+                    } else {
+                        console.log("creat user");
+                        return model.createUser(newUser)
+                            .then(
+                                function(user){
+                                    if(user){
+                                        req.login(user, function(err) {
+                                            if(err) {
+                                                res.status(400).send(err);
+                                            } else {
+                                                res.json(user);
+                                            }
+                                        });
+                                    }
+                                },
+                                function(err){
+                                    res.status(400).send(err);
+                                }
+                            );
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+
+    }
+
     //passport related functions
 
     function localStrategy(username, password, done) {
@@ -229,4 +271,6 @@ module.exports = function (app, model,upload) {
         }
         return false;
     }
+
+
 };
