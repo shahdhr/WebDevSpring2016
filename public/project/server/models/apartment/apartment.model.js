@@ -17,7 +17,9 @@ module.exports = function(db,mongoose) {
         deleteApartmentById : deleteApartmentById,
         updateApartmentById : updateApartmentById,
         findApartmentByDbId : findApartmentByDbId,
-        getAllCities : getAllCities
+        getAllCities : getAllCities,
+        findAllApartments:findAllApartments
+
     };
     return api;
 
@@ -132,5 +134,17 @@ module.exports = function(db,mongoose) {
 
     function getAllCities() {
         return cities;
+    }
+
+    function findAllApartments() {
+        var deferred = q.defer();
+        ApartmentModel.find(function(err,doc){
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
     }
 };

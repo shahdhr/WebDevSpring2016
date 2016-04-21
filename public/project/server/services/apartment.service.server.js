@@ -8,6 +8,7 @@ module.exports = function (app, model,uuid) {
     app.delete("/api/project/apartment/:apartmentId",deleteApartmentById);
     app.get("/api/project/apartment/:apartmentId",findApartmentByDbId);
     app.get("/api/project/cities",getAllCities);
+    app.get("/api/admin/apartment",findAllApartments)
 
 
     function addApartment (req, res) {
@@ -86,5 +87,14 @@ module.exports = function (app, model,uuid) {
     function getAllCities(req,res) {
         var cities = model.getAllCities();
         res.send(cities)
+    }
+
+    function findAllApartments(req,res) {
+        model.findAllApartments()
+            .then(function (doc) {
+                res.json(doc);
+            }, function (err) {
+                res.status(400).send(err);
+            });
     }
 };

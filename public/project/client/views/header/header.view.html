@@ -7,7 +7,9 @@
             <ul>
                 <li ng-hide="newUser" ng-class="{'active': $location.url()=='/register'}">
                     <a href="#/register">Register</a></li>
-                <li ng-show="newUser.roles.indexOf('admin') >= 0" ng-class="{'active': $location.url()=='/admin'}">
+                <!--<li ng-show="newUser.roles.indexOf('admin') >= 0" ng-class="{'active': $location.url()=='/admin'}">-->
+                    <!--<a href="#/admin">Admin</a></li>-->
+                <li  ng-class="{'active': $location.url()=='/admin'}">
                     <a href="#/admin">Admin</a></li>
                 <li ng-show="newUser" ng-class="{'active': $location.url()=='/profile'}">
                     <a href="#/profile">{{newUser.firstName}}</a></li>

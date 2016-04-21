@@ -42,7 +42,7 @@ module.exports = function (app, model,upload) {
 
 
     function getAllUsers (req, res) {
-
+        console.log("getAllUsers");
         if(req.query.username) {
             if(req.query.password) {
                 getUserByCredentials(req,res);
@@ -52,8 +52,13 @@ module.exports = function (app, model,upload) {
             }
         }
         else {
-            var users = model.findAllUsers();
-            res.json(users);
+            var users = model.findAllUsers()
+                .then(function(doc){
+                    res.json(doc);
+                }, function (err){
+                    res.status(400).send(err);
+                });
+
         }
 
     }

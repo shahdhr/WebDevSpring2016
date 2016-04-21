@@ -36,6 +36,13 @@
     line-height: 28px;
 }
 
+.tab_label {
+    color: #666464;
+    font-family: "lato-bold", Helvetica, Arial, sans-serif;
+    font-size: 16px!important;
+    font-weight: bold;
+}
+
 .form_button_background {
     background: rgba(28, 54, 85, .6);
 }

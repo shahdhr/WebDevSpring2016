@@ -88,6 +88,24 @@
                     }
                 })
 
+                .when("/admin",{
+                    templateUrl : "views/admin/users.view.html",
+                    controller: "AdminController",
+                    controllerAs : "model",
+                    resolve: {
+                        loggedin:checkLoggedIn
+                    }
+                })
+
+                .when("/admin/apartment",{
+                    templateUrl : "views/admin/apartments.view.html",
+                    controller:"ApartmentAdminController",
+                    controllerAs : "model",
+                    resolve: {
+                        loggedin : checkLoggedIn
+                    }
+                })
+
 
 
                 .otherwise({

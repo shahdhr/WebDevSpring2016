@@ -20,7 +20,8 @@
             updateApartmentById : updateApartmentById,
             setSearchQuery : setSearchQuery,
             getSearchQuery : getSearchQuery,
-            getAllCities : getAllCities
+            getAllCities : getAllCities,
+            findAllApartments: findAllApartments
         };
         return api;
 
@@ -38,6 +39,9 @@
            return $http.get("/api/project/user/"+ownerId+"/apartment");
         }
 
+        function findAllApartments() {
+            return $http.get("/api/admin/apartment");
+        }
 
 
         function addApartment(apartment)  {

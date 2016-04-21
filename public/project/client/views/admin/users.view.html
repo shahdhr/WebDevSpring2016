@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-12 col-md-12 ">
+            <ul class="nav nav-tabs margin_top_header">
+                <li class="active"><a href class="tab_label">Users</a></li>
+                <li><a href="#/admin/apartment" class="tab_label">Apartments</a></li>
+            </ul>
+            <h1 class=" form_page_header">Manage Users</h1>
+            <div class="table-responsive margin_top_header panel panel-default">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Email</th>
+                        <th><span class="no-breaking">First Name</span></th>
+                        <th><span class="no-breaking">Last Name</span></th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <th><input type="text" ng-model="model.user.username" class="form-control"/></th>
+                        <th><input type="password" ng-model="model.user.password" class="form-control"/></th>
+                        <th><input  ng-model="model.user.email" class="form-control"/></th>
+                        <th><input type="text" ng-model="model.user.firstName" class="form-control"/></th>
+                        <th><input type="text" ng-model="model.user.lastName" class="form-control"/></th>
+                        <th class="no-breaking">
+                            <button ng-click="model.addUser(model.user)" class="btn form_button_background  glyphicon glyphicon-plus"></button>
+                            <button ng-click="model.updateUser(model.user)" class="btn form_button_background  glyphicon glyphicon-ok"></button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="user in model.users">
+                        <td>{{user.username}}</td>
+                        <td>{{user.password}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
+                        <td>
+                            <button ng-click="model.removeUser($index)" class="btn form_button_background  glyphicon glyphicon-remove"></button>
+                            <button ng-click="model.selectUser($index)" class="btn form_button_background  glyphicon glyphicon-pencil"></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

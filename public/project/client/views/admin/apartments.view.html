@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-12 col-md-12 ">
+            <ul class="nav nav-tabs margin_top_header">
+                <li><a href="#/admin" class="tab_label">Users</a></li>
+                <li class="active"><a href class="tab_label">Apartments</a></li>
+            </ul>
+            <h1 class="form_page_header">Manage Newly Hosted Apartments</h1>
+            <div class="table-responsive panel panel-default margin_top_header">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Zipcode</th>
+                        <th>Price</th>
+                        <th>Bedrooms</th>
+                        <th>Bathrooms</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <th><input ng-model="model.apartment.title" class="form-control"/></th>
+                        <th><textarea row =1 ng-model="model.apartment.description"  class="form-control"/></th>
+                        <th><input ng-model="model.apartment.city" class="form-control"/></th>
+                        <th><input ng-model="model.apartment.country"  class="form-control"/></th>
+                        <th><input ng-model="model.apartment.zipcode"  class="form-control"/></th>
+                        <th><input type = "number" ng-model="model.apartment.price"  class="form-control"/></th>
+                        <th><input  ng-model="model.apartment.number_of_bedrooms"  class="form-control"/></th>
+                        <th><input  ng-model="model.apartment.number_of_bathrooms"  class="form-control"/></th>
+                        <th class="no-breaking">
+                            <button ng-click="model.addApartment(model.apartment)" class="btn form_button_background  glyphicon glyphicon-plus"></button>
+                            <button ng-click="model.updateApartment(model.apartment)" class="btn form_button_background  glyphicon glyphicon-ok"></button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="apartment in model.apartments">
+                        <td>{{apartment.title}}</td>
+                        <td class="truncate_property_title">{{apartment.description}}</td>
+                        <td>{{apartment.city}}</td>
+                        <td>{{apartment.country}}</td>
+                        <td>{{apartment.zipcode}}</td>
+                        <td>{{apartment.price}}</td>
+                        <td>{{apartment.number_of_bedrooms}}</td>
+                        <td>{{apartment.number_of_bathrooms}}</td>
+                        <td class="no-breaking">
+                            <button ng-click="model.removeApartment($index)" class="btn form_button_background  glyphicon glyphicon-remove"></button>
+                            <button ng-click="model.selectApartment($index)" class="btn form_button_background  glyphicon glyphicon-pencil"></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
