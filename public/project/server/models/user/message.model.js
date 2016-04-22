@@ -32,9 +32,9 @@ module.exports = function(db, mongoose) {
     }
 
 
-    function findAllMessagesForUser (messagedBy) {
+    function findAllMessagesForUser (messagedTo) {
         var deferred = q.defer();
-        MessageModel.find({message_by: messagedBy }, function (err, doc) {
+        MessageModel.find({message_to: messagedTo }, function (err, doc) {
             if(err) {
                 deferred.reject(err);
             } else {

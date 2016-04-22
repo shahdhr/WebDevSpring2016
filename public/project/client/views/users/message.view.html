@@ -11,8 +11,6 @@
                         <li ng-repeat="message in model.userMessages">
                             <div class="property_details">
                                 <div class="form_label">
-                                    <button type="button" ng-click="model.removeMessage(message)" class="close" >
-                                        <span aria-hidden="true" class="glyphicon glyphicon-trash"></span></button>
                                     <a href ng-click="model.findMessageDetailsById(message)" class="truncate_property_title">{{message.message_by_name}}</a>
                                 </div>
                                 <h6>{{message.message_time}}</h6>

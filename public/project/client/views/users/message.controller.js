@@ -21,7 +21,10 @@
             var currentUser = UserService.getCurrentUser();
             MessageService.findAllMessagesForUser(currentUser._id)
                 .then(function(res) {
-                    vm.userMessages = res.data;
+                    console.log(res.data);
+                    vm.userMessages = _.uniqBy(res.data,function(o){return o.message_by_name});
+                    console.log("duplicate")
+                    console.log(vm.userMessages);
                 });
         } init();
 
@@ -31,6 +34,12 @@
                 .then(function(res) {
                     vm.chat = res.data;
                     console.log(vm.chat);
+
+                    //sorting based on message_time
+                    vm.chat=_.sortBy(res.data,function(o){return o.message_time});
+                    console.log("sorting");
+                    console.log(vm.chat)
+
                 });
         }
 
@@ -67,7 +76,7 @@
                     message_to: message.message_by,
                     message_by: currentUser._id,
                     message_time : Date.now,
-                    message_by_name : currentUser.firstName + currentUser.lastName,
+                    message_by_name : currentUser.firstName +" "+ currentUser.lastName,
                     apartment : message.apartment,
                     apartment_id : message.apartment_id
                 };
