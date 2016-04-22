@@ -125,7 +125,8 @@
                 vm.fileModel
             ).then(function successCallback(response) {
                 //$rootScope.user.profilePicUrl = response.data;
-                vm.apartment.picUrl = response.data
+                vm.apartment.picUrl = response.data;
+                $location.path("/details/rentOut/"+vm.apartmentId)
             });
         }
 
