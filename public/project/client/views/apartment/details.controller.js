@@ -22,10 +22,27 @@
         vm.alertClosed = alertClosed;
         vm.sendMessage = sendMessage;
 
+
         vm.favouriteButton = "Mark as favourite";
         console.log(apartmentId);
-        ApartmentService.findApartmentDetailsById(apartmentId, renderDetails);
+        function init() {
 
+            ApartmentService.findApartmentDetailsById(apartmentId, renderDetails);
+
+        } init();
+
+
+        function checkIfFavourite() {
+            var currentUser = UserService.getCurrentUser();
+            if(currentUser) {
+                for(var i = 0;i<currentUser.favourites.length;i++) {
+                    if(currentUser.favourites[i]==vm.apartment.id) {
+                        vm.favourited = true;
+                    }
+                }
+                console.log(vm.favourited);
+            }
+        }
 
         function bookApartment(book,bookButton) {
             if(bookButton=="Submit") {
@@ -73,24 +90,28 @@
                 .then(function(res){
                     console.log(res.data);
                     vm.reviews = res.data;
+
                 });
         }
         showReviews();
 
         function addReview(review)
         {
-            var user = UserService.getCurrentUser();
-            var newReview = {
-                apartmentId : apartmentId,
-                description : review.description,
-                rating : review.rating,
-                reviewed_by : user._id
-            };
-            ReviewService
-                .addReview(newReview)
-                .then(addReviewCallback);
+            if(review.description) {
+                var user = UserService.getCurrentUser();
+                var newReview = {
+                    apartmentId : apartmentId,
+                    description : review.description,
+                    rating : review.rating,
+                    reviewed_by : user._id
+                };
+                ReviewService
+                    .addReview(newReview)
+                    .then(addReviewCallback);
 
-            vm.review = null;
+                vm.review = null;
+            }
+
             //$scope.apartments.push(newApartment);
         }
 
@@ -99,14 +120,18 @@
             vm.apartment = apartmentDetails.place.place_details;
             vm.pricing = apartmentDetails.place.pricing;
             makeSlides();
+            checkIfFavourite();
         }
 
         function addApartmentToFavourites() {
-            var user = UserService.getCurrentUser();
-            user.favourites.push(apartmentId);
-            UserService
-                .updateUser(user._id, user)
-                .then(addApartmentToFavouritesCallback);
+            if(!vm.favourited) {
+                var user = UserService.getCurrentUser();
+                user.favourites.push(apartmentId);
+                UserService
+                    .updateUser(user._id, user)
+                    .then(addApartmentToFavouritesCallback);
+            }
+
 
         }
 

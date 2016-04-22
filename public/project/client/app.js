@@ -5,5 +5,5 @@
 (function()
 {
     angular
-        .module("RentOutApp", ["ngRoute","ui.bootstrap","file-model","autocomplete"]);
+        .module("RentOutApp", ["ngRoute","ui.bootstrap","file-model","autocomplete","angular-input-stars"]);
 })();

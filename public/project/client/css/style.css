@@ -1,3 +1,6 @@
+.red {
+    color:red;
+}
 .my-styling {
     font-size: 30px;
     color:#0033cc;
@@ -36,6 +39,15 @@
     line-height: 28px;
 }
 
+.form_label_li {
+    color: #666464;
+    font-family: "lato-bold", Helvetica, Arial, sans-serif;
+    font-size: 14px!important;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-left: 20px;
+}
+
 .tab_label {
     color: #666464;
     font-family: "lato-bold", Helvetica, Arial, sans-serif;
@@ -70,6 +82,8 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+
 
 @media (max-width:790px) {
     .truncate_property_title {
