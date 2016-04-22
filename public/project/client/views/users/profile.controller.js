@@ -136,12 +136,14 @@
         function getUpcomingBookings(allBookings) {
             var upcoming = [];
             for(var i = 0;i<allBookings.length;i++) {
-                console.log(Date.parse(allBookings[i].startDate));
-                console.log(Date.now());
-                if(Date.parse(allBookings[i].startDate) > Date.now()) {
+                console.log(moment(allBookings[i].startDate));
+                console.log(moment());
+                if(moment(_.split(allBookings[i].startDate,'.')[0]).isAfter(moment())) {
                     upcoming.push(allBookings[i]);
                 }
             }
+            console.log("upcoming")
+            console.log(upcoming);
             vm.userBooking = upcoming;
         }
 

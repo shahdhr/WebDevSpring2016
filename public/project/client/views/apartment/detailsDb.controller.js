@@ -7,7 +7,7 @@
         .module("RentOutApp")
         .controller("ApartmentDetailsDBController",ApartmentDetailsDBController);
 
-    function ApartmentDetailsDBController( $routeParams, ApartmentService,UserService,ReviewService,BookingService,MessageService) {
+    function ApartmentDetailsDBController( $sce,$routeParams, ApartmentService,UserService,ReviewService,BookingService,MessageService) {
         var vm = this;
 
         var today = new Date().toISOString().split('T')[0];
@@ -23,11 +23,34 @@
         vm.alertClosed = alertClosed;
         vm.sendMessage = sendMessage;
 
+        vm.deliberatelyTrustDangerousSnippet = deliberatelyTrustDangerousSnippet;
+
+
         vm.favouriteButton = "Mark as favourite";
         console.log(apartmentId);
-        ApartmentService.findApartmentDetailsByDbId(apartmentId)
-            .then(renderDetails);
+        function init() {
+            ApartmentService.findApartmentDetailsByDbId(apartmentId)
+                .then(renderDetails);
 
+        } init();
+
+
+        function checkIfFavourite() {
+            var currentUser = UserService.getCurrentUser();
+            if(currentUser) {
+                for(var i = 0;i<currentUser.favourites.length;i++) {
+                    if(currentUser.favourites[i]==vm.apartment._id) {
+                        vm.favourited = true;
+                    }
+                }
+                console.log(vm.favourited);
+            }
+        }
+
+
+        function deliberatelyTrustDangerousSnippet(text) {
+            return $sce.trustAsHtml(text);
+        }
 
         function bookApartment(book,bookButton) {
             if(bookButton=="Submit") {
@@ -83,18 +106,21 @@
 
         function addReview(review)
         {
-            var user = UserService.getCurrentUser();
-            var newReview = {
-                apartmentId : apartmentId,
-                description : review.description,
-                rating : review.rating,
-                reviewed_by : user._id
-            };
-            ReviewService
-                .addReview(newReview)
-                .then(addReviewCallback);
+            if(review.description) {
+                var user = UserService.getCurrentUser();
+                var newReview = {
+                    apartmentId : apartmentId,
+                    description : review.description,
+                    rating : review.rating,
+                    reviewed_by : user._id
+                };
+                ReviewService
+                    .addReview(newReview)
+                    .then(addReviewCallback);
 
-            vm.review = null;
+                vm.review = null;
+            }
+
             //$scope.apartments.push(newApartment);
         }
 
@@ -106,14 +132,23 @@
             };
             console.log(vm.pricing);
             makeSlides();
+            checkIfFavourite();
         }
 
         function addApartmentToFavourites() {
-            var user = UserService.getCurrentUser();
-            user.favourites.push(apartmentId);
-            UserService
-                .updateUser(user._id, user)
-                .then(addApartmentToFavouritesCallback);
+            var currentUser = UserService.getCurrentUser();
+            if(currentUser) {
+                    if(!vm.favourited) {
+                        var user = UserService.getCurrentUser();
+                        user.favourites.push(apartmentId);
+                        UserService
+                            .updateUser(user._id, user)
+                            .then(addApartmentToFavouritesCallback);
+                    }
+            } else {
+                UserService.loginFirst();
+            }
+
 
         }
 

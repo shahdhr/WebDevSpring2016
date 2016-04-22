@@ -7,8 +7,14 @@
         .module("RentOutApp")
         .controller("ApartmentDetailsController",ApartmentDetailsController);
 
-    function ApartmentDetailsController( $routeParams, ApartmentService,UserService,ReviewService,BookingService,MessageService) {
+    function ApartmentDetailsController( $sce, $routeParams, ApartmentService,UserService,ReviewService,BookingService,MessageService) {
         var vm = this;
+
+        vm.deliberatelyTrustDangerousSnippet = deliberatelyTrustDangerousSnippet;
+
+        function deliberatelyTrustDangerousSnippet(text) {
+            return $sce.trustAsHtml(text);
+        }
 
         var today = new Date().toISOString().split('T')[0];
         vm.minDate = today;
@@ -124,13 +130,19 @@
         }
 
         function addApartmentToFavourites() {
-            if(!vm.favourited) {
-                var user = UserService.getCurrentUser();
-                user.favourites.push(apartmentId);
-                UserService
-                    .updateUser(user._id, user)
-                    .then(addApartmentToFavouritesCallback);
+            var currentUser = UserService.getCurrentUser();
+            if(currentUser) {
+                if(!vm.favourited) {
+                    var user = UserService.getCurrentUser();
+                    user.favourites.push(apartmentId);
+                    UserService
+                        .updateUser(user._id, user)
+                        .then(addApartmentToFavouritesCallback);
+                }
+            } else {
+                UserService.loginFirst();
             }
+
 
 
         }

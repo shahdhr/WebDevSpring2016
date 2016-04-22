@@ -6,16 +6,15 @@
         </uib-slide>
     </uib-carousel>
     <div class="container-fluid margin_top_header">
-        <h1 class="form_page_header text-center ">{{model.apartment.name}} <a
-                ng-click="model.addApartmentToFavourites()"
-                ng-show="newUser" ng-class="model.favourited?'glyphicon glyphicon-heart red':'glyphicon glyphicon-heart-empty red'"
-                ng-show="model.favouriteButton === 'marked'"></a></h1>
+        <h1 class="form_page_header text-center ">{{model.apartment.name}}
+            <a ng-click="model.addApartmentToFavourites()"
+               ng-class="model.favourited?'glyphicon glyphicon-heart red':'glyphicon glyphicon-heart-empty red'"></a></h1>
         <h3 class="form_page_header text-center "></h3>
 
     <div class = "col-xs-12">
         <div class="col-xs-12 col-md-4 margin_top_header" >
             <h5 class="form_page_header "><small>Description</small></h5>
-            <p class="form_label">{{model.apartment.description}}</p>
+            <div class="form_label" ng-bind-html="model.deliberatelyTrustDangerousSnippet(model.apartment.description)"></div>
             <h5 class="form_page_header "><small>Amenities</small></h5>
             <ul>
                 <li class="form_label_li" ng-repeat="amenities in model.apartment.amenities_list track by $index">
