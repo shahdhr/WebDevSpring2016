@@ -60,7 +60,7 @@
                 //$location.path('/profile');
             }
             else {
-
+                UserService.loginFirst();
             }
 
         }
