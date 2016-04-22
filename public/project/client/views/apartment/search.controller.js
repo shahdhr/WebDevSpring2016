@@ -18,22 +18,30 @@
         };
         vm.previousPage = previousPage;
         vm.nextPage = nextPage;
+        vm.findDetailsByDBId = findDetailsByDBId;
+        vm.searchPlaces = searchPlaces;
+        vm.findDetailsById = findDetailsById;
 
 
 
 
         function init() {
             ApartmentService.findApartmentsByQuery(searchQuery,renderDetails);
+            ApartmentService.getAllApartments()
+                .then(searchDBApartments);
         }
         init();
 
 
-        vm.searchPlaces = searchPlaces;
-        vm.findDetailsById = findDetailsById;
+
         function searchPlaces(search) {
             vm.places = null;
             var query = search.place;
+            searchQuery = query;
+            $routeParams.searchPlace = query;
             ApartmentService.findApartmentsByQuery(query,renderDetails);
+            ApartmentService.getAllApartments()
+                .then(searchDBApartments);
 
         }
 
@@ -56,7 +64,10 @@
         }
 
         function  renderDetails(response) {
-            setMapMarkers(response.places);
+            if(response.places.length > 0) {
+                setMapMarkers(response.places);
+            }
+
             vm.places = response.places;
             //vm.pages = response.total_pages;
             vm.total_entries = response.total_entries;
@@ -89,6 +100,20 @@
                 bounds.push(bound);
             }
             mymap.fitBounds(bounds);
+        }
+
+        function searchDBApartments(res) {
+            if (searchQuery.length > 0) {
+                vm.dbApartments = _.filter(res.data, function (apartment) {
+                    return (apartment.title +" "+apartment.city+" "+apartment.country)
+                            .toLowerCase().indexOf(searchQuery.toLowerCase()) >= 0;
+                });
+
+            }
+        }
+
+        function findDetailsByDBId(id) {
+            $location.path("/details/rentOut/"+id);
         }
 
 

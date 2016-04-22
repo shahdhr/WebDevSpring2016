@@ -43,10 +43,11 @@
 
     </form>
 </div>
-<div class="container margin_top_header" id="map"></div>
+
+<div class="container margin_top_header" id="map" ></div>
 <div class="container margin_top_header" >
     <h1 class="form_page_header text-center ">Search Results</h1>
-    <h6 class="form_page_header text-center ">{{model.total_entries}} Results</h6>
+    <h6 class="form_page_header text-center " ng-show="model.total_entries > '0'|| model.dbApartments.length > '0'">{{model.total_entries + model.dbApartments.length}} Results</h6>
 </div>
 <section class="listings">
     <div class="wrapper">
@@ -65,23 +66,26 @@
                 </div>
 
             </li>
+            <li ng-repeat="place in model.dbApartments" ng-click="model.findDetailsByDBId(place._id)">
+
+                <a ng-click="model.findDetailsByDBId(place._id)">
+                    <img ng-src="./img/rentout-search.jpg" alt="" title="" class="property_img"/>
+                </a>
+                <span class="price">${{place.price}}</span>
+                <div class="property_details">
+                    <h1>
+                        <a class="truncate_property_title">{{place.title}}</a>
+                    </h1>
+                    <h2>Bedroom : {{place.number_of_bedrooms}}, Bath : {{place.number_of_bathrooms}}</h2>
+                </div>
+
+            </li>
         </ul>
-        <!--<nav ng-show="model.pages">-->
-            <!--<ul class="pagination">-->
-                <!--<li>-->
-                    <!--<a href="#" aria-label="Previous">-->
-                        <!--<span aria-hidden="true">&laquo;</span>-->
-                    <!--</a>-->
-                <!--</li>-->
-                <!--<li ng-repeat="t in model.getTimes() track by $index"><a href>{{$index}}</a></li>-->
-                <!--<li>-->
-                    <!--<a href="#" aria-label="Next">-->
-                        <!--<span aria-hidden="true">&raquo;</span>-->
-                    <!--</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</nav>-->
-        <nav ng-show="model.current_page">
+        <ul class="properties_list" >
+
+        </ul>
+
+        <nav ng-show="model.total_entries > '0'">
             <ul class="pager">
                 <li class="previous"><a href ng-click="model.previousPage()"><span aria-hidden="true">&larr;</span> Previous</a></li>
                 <li class="next"><a href ng-click="model.nextPage()">Next <span aria-hidden="true">&rarr;</span></a></li>

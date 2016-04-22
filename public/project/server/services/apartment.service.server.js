@@ -9,6 +9,7 @@ module.exports = function (app, model,upload) {
     app.get("/api/project/apartment/:apartmentId",findApartmentByDbId);
     app.get("/api/project/cities",getAllCities);
     app.get("/api/admin/apartment",findAllApartments);
+    app.get("/api/project/apartment",getAllApartments);
     app.post('/api/project/apartment/pic/:id', upload.single('file'), updateApartmentPic);
 
 
@@ -104,6 +105,15 @@ module.exports = function (app, model,upload) {
     }
 
     function findAllApartments(req,res) {
+        model.findAllApartments()
+            .then(function (doc) {
+                res.json(doc);
+            }, function (err) {
+                res.status(400).send(err);
+            });
+    }
+
+    function getAllApartments(req,res) {
         model.findAllApartments()
             .then(function (doc) {
                 res.json(doc);
