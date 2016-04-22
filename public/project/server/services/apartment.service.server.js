@@ -1,14 +1,15 @@
 /**
  * Created by Dhruv on 3/25/2016.
  */
-module.exports = function (app, model,uuid) {
+module.exports = function (app, model,upload) {
     app.get("/api/project/user/:userId/apartment", findAllApartmentsForUser);
     app.put("/api/project/apartment/:apartmentId",updateApartmentById);
     app.post("/api/project/user/:userId/apartment",addApartment);
     app.delete("/api/project/apartment/:apartmentId",deleteApartmentById);
     app.get("/api/project/apartment/:apartmentId",findApartmentByDbId);
     app.get("/api/project/cities",getAllCities);
-    app.get("/api/admin/apartment",findAllApartments)
+    app.get("/api/admin/apartment",findAllApartments);
+    app.post('/api/project/apartment/pic/:id', upload.single('file'), updateApartmentPic);
 
 
     function addApartment (req, res) {
@@ -66,6 +67,19 @@ module.exports = function (app, model,uuid) {
         //    return;
         //}
         //res.json({message: "User not found"});
+    }
+
+    function updateApartmentPic(req, res) {
+        var apartmentPic = req.file.path;
+        model.updateApartmentPic(req.params.id, apartmentPic.replace('public\/', '\/'))
+            .then(
+                function(stats) {
+                    res.json(apartmentPic.replace('public\/', '\/'));
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            )
     }
 
     function deleteApartmentById (req, res) {

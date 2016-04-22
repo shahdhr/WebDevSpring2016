@@ -154,7 +154,7 @@
 
         function addApartmentToFavouritesCallback(user) {
             console.log(user.data.favourites);
-            vm.favouriteButton = "Marked";
+            vm.favourited = true;
         }
 
         function addReviewCallback(review) {
@@ -180,7 +180,7 @@
                 for(var  i = 0;i<loop;i++) {
                     //console.log(slidesNew[i].place_photo.url);
 
-                    slidesNew[i].place_photo.url = slidesNew[i].place_photo.url.replace("/medium.","/large.");
+                    //slidesNew[i].place_photo.url = slidesNew[i].place_photo.url.replace("/medium.","/large.");
                     slides.push(slidesNew[i]);
                 }
 

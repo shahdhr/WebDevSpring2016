@@ -150,6 +150,7 @@
         function addApartmentToFavouritesCallback(user) {
             console.log(user.data.favourites);
             vm.favouriteButton = "Marked";
+            vm.favourited=true;
         }
 
         function addReviewCallback(review) {

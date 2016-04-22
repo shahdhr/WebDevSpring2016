@@ -25,13 +25,14 @@
                 .findAllApartmentsForUser(currentUser._id)
                 .then(findAllApartmentsForUserCallback);
         }
-        init();
+        //init();
 
         vm.addApartment = addApartment;
         vm.removeApartment = removeApartment;
         vm.selectApartment = selectApartment;
         vm.updateApartment = updateApartment;
         vm.checkedValues = checkedValues;
+        vm.updateApartmentPic = updateApartmentPic;
         var checkedAmenities = [];
         vm.amenities = [
             {"label": "Heating/Air Conditioner", "value": "HEATING"},
@@ -105,6 +106,8 @@
 
         function addApartmentCallback(apartment) {
             console.log(apartment.data);
+            vm.apartmentId = apartment.data._id;
+            vm.hideForm=true;
             //init();
         }
 
@@ -114,6 +117,16 @@
 
         function updateApartmentCallback(apartment) {
             init();
+        }
+
+        function updateApartmentPic() {
+            ApartmentService.updateApartmentPicture(
+                vm.apartmentId,
+                vm.fileModel
+            ).then(function successCallback(response) {
+                //$rootScope.user.profilePicUrl = response.data;
+                vm.apartment.picUrl = response.data
+            });
         }
 
     }

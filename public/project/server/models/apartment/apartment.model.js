@@ -18,7 +18,8 @@ module.exports = function(db,mongoose) {
         updateApartmentById : updateApartmentById,
         findApartmentByDbId : findApartmentByDbId,
         getAllCities : getAllCities,
-        findAllApartments:findAllApartments
+        findAllApartments:findAllApartments,
+        updateApartmentPic : updateApartmentPic
 
     };
     return api;
@@ -146,5 +147,19 @@ module.exports = function(db,mongoose) {
             }
         });
         return deferred.promise;
+    }
+
+    function updateApartmentPic(id,apartmentPic) {
+        var deferred = q.defer();
+
+        ApartmentModel.update({_id:id},{$set:{featured_photo:apartmentPic}}, function (err, doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+
     }
 };

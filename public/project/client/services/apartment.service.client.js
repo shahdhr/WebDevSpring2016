@@ -21,13 +21,23 @@
             setSearchQuery : setSearchQuery,
             getSearchQuery : getSearchQuery,
             getAllCities : getAllCities,
-            findAllApartments: findAllApartments
+            findAllApartments: findAllApartments,
+            updateApartmentPicture:updateApartmentPicture
         };
         return api;
 
         function findApartmentsByQuery(query,callback) {
             $http.get("/api/search/place/"+query)
                 .success(callback);
+        }
+
+        function updateApartmentPicture(apartmentId, file) {
+            var fd = new FormData();
+            fd.append('file', file);
+            return $http.post('/api/project/apartment/pic/'+apartmentId, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            });
         }
 
         function findApartmentDetailsById(id,callback) {

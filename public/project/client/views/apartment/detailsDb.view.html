@@ -2,7 +2,7 @@
     <img class="details_img_middle" ng-hide="model.newSlides"  ng-src="{{model.noImage}}">
     <uib-carousel active="active" interval="myInterval" ng-show="model.newSlides" no-wrap="noWrapSlides">
         <uib-slide ng-repeat="slide in model.newSlides track by $index" index = "$index" >
-            <img align="middle"  ng-src="{{slide.place_photo.url}}">
+            <img align="middle"  ng-src="{{slide}}">
         </uib-slide>
     </uib-carousel>
     <div class="container-fluid margin_top_header">
