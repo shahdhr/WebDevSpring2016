@@ -35,14 +35,13 @@
 
 
         function searchPlaces(search) {
-            vm.places = null;
-            var query = search.place;
-            searchQuery = query;
-            $routeParams.searchPlace = query;
-            ApartmentService.findApartmentsByQuery(query,renderDetails);
-            ApartmentService.getAllApartments()
-                .then(searchDBApartments);
-
+            //vm.places = null;
+            //var query = search.place;
+            //searchQuery = query;
+            //ApartmentService.findApartmentsByQuery(query,renderDetails);
+            //ApartmentService.getAllApartments()
+            //    .then(searchDBApartments);
+            $location.path("/search/"+search.place);
         }
 
         function previousPage() {
