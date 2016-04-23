@@ -11,24 +11,49 @@
 
         var api = {
             findUserByCredentials: findUserByCredentials,
-            findAllUsers: findAllUsers,
-            createUser:createUser,
-            deleteUserById:deleteUserById,
+            //findAllUsers: findAllUsers,
+            findAllUsersAdmin: findAllUsersAdmin,
+            updateUserAdmin:updateUserAdmin,
+            deleteUserAdmin:deleteUserAdmin,
+            createUserAdmin:createUserAdmin,
+            //deleteUserById:deleteUserById,
             updateUser:updateUser,
             setCurrentUser:setCurrentUser,
             getCurrentUser:getCurrentUser,
             getCurrentSessionUser:getCurrentSessionUser,
-            logout:logout
+            logout:logout,
+            register: register
         };
         return api;
+
+        function createUserAdmin(user) {
+            return $http.post("/api/assignment/admin/user",user);
+        }
+
+        function deleteUserAdmin(userId) {
+            return $http.delete ("/api/assignment/admin/user/"+userId);
+        }
+
+        function updateUserAdmin(userId,user) {
+            return $http.put("/api/assignment/admin/user/"+userId,user);
+        }
+
+        function findAllUsersAdmin() {
+            return $http.get("/api/assignment/admin/user");
+        }
+
+
+        function register(user) {
+            return $http.post("/api/assignment/register", user);
+        }
 
         function findUserByCredentials(username, password) {
             var user = {
                 username : username,
                 password : password
             };
-            //return $http.post("/api/assignment/login",user);
-            return $http.get("/api/assignment/user?username="+ username +"&password="+ password);
+            return $http.post("/api/assignment/login",user);
+            //return $http.get("/api/assignment/user?username="+ username +"&password="+ password);
         }
 
         function findUserByUsername(username) {

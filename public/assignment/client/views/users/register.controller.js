@@ -18,7 +18,7 @@
         //Event handler implementations
         function register (user) {
             UserService
-                .createUser(user)
+                .register(user)
                 .then(registerCallback);
         }
 

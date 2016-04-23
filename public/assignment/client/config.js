@@ -22,8 +22,10 @@
                 })
                 .when("/admin", {
                     templateUrl: "views/admin/admin.view.html",
+                    controller: "AdminController",
+                    controllerAs: "model",
                     resolve: {
-                        checkLoggedIn : checkLoggedIn
+                        verifyLoggedInAsAdmin : verifyLoggedInAsAdmin
                     }
                 })
                 .when("/forms", {
@@ -52,7 +54,10 @@
 
                 })
                 .when("/home", {
-                    templateUrl: "views/home/home.view.html"
+                    templateUrl: "views/home/home.view.html",
+                    resolve: {
+                        getLoggedIn : getLoggedIn
+                    }
 
 
 
@@ -70,31 +75,64 @@
             .getCurrentSessionUser()
             .then(function (response) {
                 var currentUser = response.data;
+                console.log("getLoggedIn");
+                console.log(currentUser);
                 if (currentUser !== '0')
                 {
                     UserService.setCurrentUser(currentUser);
                     deferred.resolve();
                 } else {
                     UserService.setCurrentUser(null);
-                    deferred.reject();
+                    deferred.resolve();
                 }
 
             });
         return deferred.promise;
     }
 
-    function checkLoggedIn(UserService, $q, $location) {
+
+    var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope)
+    {
         var deferred = $q.defer();
-        UserService
-            .getCurrentSessionUser()
+
+        $http.get('/api/assignment/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user.data !== '0')
+            {
+                $rootScope.newUser = user;
+                deferred.resolve();
+            }
+            // User is Not Authenticated
+            else
+            {
+                $rootScope.errorMessage = 'You need to log in.';
+                deferred.reject();
+                $location.url('/login');
+            }
+        });
+
+        return deferred.promise;
+    };
+
+    function verifyLoggedInAsAdmin(UserService, $q, $location, $rootScope) {
+        var deferred = $q.defer();
+        UserService.getCurrentSessionUser()
             .then(function (response){
-                var currentUser = response.data;
-                if(currentUser) {
-                    UserService.setCurrentUser(currentUser);
-                    deferred.resolve();
-                } else {
+                if (response.data === '0') {
+                    delete $rootScope.user;
                     deferred.reject();
-                    $location.url("/home");
+                    $location.url("/");
+                } else {
+                    var user = response.data;
+                    $rootScope.user = response.data;
+                    if (user.roles.indexOf('admin') === -1) {
+                        deferred.reject();
+                        $location.url("/");
+                    } else {
+                        deferred.resolve();
+                    }
                 }
             });
         return deferred.promise;

@@ -4,86 +4,43 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Admin</h1>
             <h2>User</h2>
-            <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <tr>
-                    <th>
-                        <a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Username
-                    </th>
-                    <th>
-                        <a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Password
-                    </th>
-                    <th>
-                        <a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Role
-                    </th>
-                    <th>
-                         &nbsp; Action
-                    </th>
-                </tr>
-
-                <tr>
-                    <td>
-                       <input type="text" class="form-control" id="inputUsername" placeholder="username">
-                    </td>
-                    <td>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="password">
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" id="inputRole" placeholder="role1, role2">
-                    </td>
-                    <td>
-                        <a href="#" class="glyphicon glyphicon-plus my-styling" title="Add "></a>
-                        <a href="#" class="glyphicon glyphicon-ok my-styling" title="Update "></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        alice
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-                        student
-                    </td>
-                    <td>
-                        <a href="#" class="glyphicon glyphicon-remove my-styling" title="delete " ></a>
-                        <a href="#" class="glyphicon glyphicon-pencil my-styling" title="edit " ></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        bob
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-                        faculty | admin
-                    </td>
-                    <td>
-                        <span class="text-nowrap">
-                        <a href="#" class="glyphicon glyphicon-remove my-styling" title="delete "></a>
-                        <a href="#" class="glyphicon glyphicon-pencil my-styling" title="edit "></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        charlie
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-                        <a href="#" class="glyphicon glyphicon-remove my-styling" title="delete" ></a>
-                        <a href="#" class="glyphicon glyphicon-pencil my-styling" title="edit " ></a>
-                    </td>
-                </tr>
-            </table>
+            <div class="table-responsive margin_top_header panel panel-default">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th><a ng-click="model.sortUsername()">Username <span ng-show="model.usernameAsc" class="glyphicon glyphicon-triangle-top"></span><span ng-show="model.usernameDesc" class="glyphicon glyphicon-triangle-bottom"></span></a></th>
+                        <th>Password</th>
+                        <th>Roles</th>
+                        <th><a ng-click="model.sortfirstName()" class="no-breaking">First Name<span ng-show="model.firstNameAsc" class="glyphicon glyphicon-triangle-top"></span><span ng-show="model.firstNameDesc" class="glyphicon glyphicon-triangle-bottom"></span></a></th>
+                        <th><a ng-click="model.sortlastName()" class="no-breaking">Last Name<span ng-show="model.lastNameAsc" class="glyphicon glyphicon-triangle-top"></span><span ng-show="model.lastNameDesc" class="glyphicon glyphicon-triangle-bottom"></span></a></th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <th><input type="text" ng-model="model.user.username" class="form-control"/></th>
+                        <th><input type="password" ng-model="model.user.password" class="form-control"/></th>
+                        <th><input  ng-model="model.user.roles"  class="form-control"/></th>
+                        <th><input type="text" ng-model="model.user.firstName" class="form-control"/></th>
+                        <th><input type="text" ng-model="model.user.lastName" class="form-control"/></th>
+                        <th class="no-breaking">
+                            <button ng-click="model.addUser(model.user)" class="btn form_button_background  glyphicon glyphicon-plus"></button>
+                            <button ng-click="model.updateUser(model.user)" class="btn form_button_background  glyphicon glyphicon-ok"></button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="user in model.users">
+                        <td>{{user.username}}</td>
+                        <td></td>
+                        <td>{{user.roles}}</td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
+                        <td>
+                            <button ng-click="model.removeUser($index)" class="btn form_button_background  glyphicon glyphicon-remove"></button>
+                            <button ng-click="model.selectUser($index)" class="btn form_button_background  glyphicon glyphicon-cog"></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
         </div>
