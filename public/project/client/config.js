@@ -13,10 +13,6 @@
 
                 })
 
-                //.when("/admin", {
-                //        templateUrl: "views/admin/admin.view.html"
-                //    })
-
 
                 .when("/home", {
                     templateUrl: "views/home/home.view.html",
@@ -105,8 +101,6 @@
                         loggedin : checkLoggedIn
                     }
                 })
-
-
 
                 .otherwise({
                     redirectTo: "/"

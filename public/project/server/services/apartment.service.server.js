@@ -21,7 +21,6 @@ module.exports = function (app, model,upload) {
             }, function (err) {
                 res.status(400).send(err);
             });
-        //res.send (apartment);
     }
 
     function findApartmentByDbId(req,res) {
@@ -44,9 +43,6 @@ module.exports = function (app, model,upload) {
             }, function (err) {
                 res.status(400).send(err);
             });
-        //res.json(apartments);
-
-
     }
 
     function updateApartmentById (req, res) {
@@ -63,11 +59,6 @@ module.exports = function (app, model,upload) {
             }, function (err) {
                 res.status(400).send(err);
             });
-        //if(apartment) {
-        //    res.json(apartment);
-        //    return;
-        //}
-        //res.json({message: "User not found"});
     }
 
     function updateApartmentPic(req, res) {
@@ -91,12 +82,6 @@ module.exports = function (app, model,upload) {
             }, function (err) {
                 res.status(400).send(err);
             });
-        //console.log(apartments);
-        //if(apartments) {
-        //    res.send(apartments);
-        //    return;
-        //}
-        //res.json ({message: "User not found"});
     }
 
     function getAllCities(req,res) {

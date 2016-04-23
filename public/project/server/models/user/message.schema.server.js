@@ -2,8 +2,6 @@
  * Created by Dhruv on 4/20/2016.
  */
 module.exports = function(mongoose) {
-
-
     var MessageSchema = mongoose.Schema({
         message: String,
         message_to: String,

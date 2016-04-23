@@ -37,8 +37,6 @@
         }
 
         function logout() {
-            //$location.path("/home");
-            //UserService.setCurrentUser(null);
             UserService
                 .logout()
                 .then(
@@ -49,7 +47,6 @@
                 function(err) {
                     //TODO : Show error on UI.
                 });
-
         }
 
         //Callback functions
@@ -57,12 +54,10 @@
             if(user!=null) {
                 UserService.setCurrentUser(user.data);
                 console.log(user);
-                //$location.path('/profile');
             }
             else {
                 UserService.loginFirst();
             }
-
         }
 
     }

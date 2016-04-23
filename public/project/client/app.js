@@ -5,5 +5,10 @@
 (function()
 {
     angular
-        .module("RentOutApp", ["ngRoute","ui.bootstrap","file-model","autocomplete","angular-input-stars"]);
+        .module("RentOutApp", [
+            "ngRoute",
+            "ui.bootstrap",
+            "file-model",
+            "autocomplete",
+            "angular-input-stars"]);
 })();

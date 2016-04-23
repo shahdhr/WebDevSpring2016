@@ -27,7 +27,6 @@ module.exports = function (app, model) {
             }, function (err) {
                 res.status(400).send(err);
             });
-        //res.json(reviews);
     }
 
     function findAllReviewsForUser (req, res) {
@@ -56,11 +55,6 @@ module.exports = function (app, model) {
             },function (err) {
                 res.status(400).send(err);
             });
-        //if(review) {
-        //    res.json(review);
-        //    return;
-        //}
-        //res.json({message: "User not found"});
     }
 
     function deleteReviewById (req, res) {
@@ -71,10 +65,5 @@ module.exports = function (app, model) {
             }, function (err) {
                 res.status(400).send(err);
             });
-        //if(reviews) {
-        //    res.send(reviews);
-        //    return;
-        //}
-        //res.json ({message: "User not found"});
     }
 };

@@ -10,27 +10,11 @@
 
     function ApartmentController(ApartmentService, $location, UserService)
     {
+        //Declarations
         var vm = this;
-        //currently logged in user
         var currentUser = UserService.getCurrentUser();
         vm.$location = $location;
-        //$scope.apartments = [
-        //    {title: "12 Woodward", bedrooms: 5, address: new Date(2015,1,1), amenities:"", description:""},
-        //    {title: "403 Matruchhaya", bedrooms: 2, address: new Date(2015,1,1), amenities:"", description:""},
-        //    {title: "1016 CityView", bedrooms: 3,  address: new Date(2015,1,1), amenities:"", description:""},
-        //];
-        function init() {
-            var currentUser = UserService.getCurrentUser();
-            ApartmentService
-                .findAllApartmentsForUser(currentUser._id)
-                .then(findAllApartmentsForUserCallback);
-        }
-        //init();
-
         vm.addApartment = addApartment;
-        vm.removeApartment = removeApartment;
-        vm.selectApartment = selectApartment;
-        vm.updateApartment = updateApartment;
         vm.checkedValues = checkedValues;
         vm.updateApartmentPic = updateApartmentPic;
         var checkedAmenities = [];
@@ -41,42 +25,12 @@
             {"label": "TV", "value": "TV"},
             {"label": "Washing Machine", "value": "WASHING"}];
 
-        function updateApartment(apartment)
-        {
-            console.log(apartment.id);
-            ApartmentService
-                .updateApartmentById(apartment._id,apartment)
-                .then(updateApartmentCallback);
-            vm.apartment = null;
 
-        }
 
+        //Implementations
         function checkedValues(index,value) {
             checkedAmenities.push(value);
             console.log(value);
-        }
-
-        function selectApartment(index)
-        {
-            vm.selectedApartmentIndex = index;
-            vm.apartment = {
-                _id: vm.apartments[index]._id,
-                title: vm.apartments[index].title,
-                bedrooms: vm.apartments[index].bedrooms,
-                description: vm.apartments[index].description
-            };
-
-            //$scope.apartment = $scope.apartments[index];
-        }
-
-        function removeApartment(index)
-        {
-
-            var apartmentId = vm.apartments[index]._id;
-            ApartmentService
-                .deleteApartmentById(apartmentId)
-                .then(removeApartmentCallback);
-            //$scope.apartments.splice(index, 1);
         }
 
         function addApartment(apartment)
@@ -92,31 +46,6 @@
                         .then(addApartmentCallback);
                 }
             }
-
-            //$scope.apartments.push(newApartment);
-        }
-
-        //callback functions
-
-        function findAllApartmentsForUserCallback(apartmentsCurrentUser) {
-            vm.apartments = apartmentsCurrentUser.data;
-            console.log(apartmentsCurrentUser);
-
-        }
-
-        function addApartmentCallback(apartment) {
-            console.log(apartment.data);
-            vm.apartmentId = apartment.data._id;
-            vm.hideForm=true;
-            //init();
-        }
-
-        function removeApartmentCallback(apartments) {
-            init();
-        }
-
-        function updateApartmentCallback(apartment) {
-            init();
         }
 
         function updateApartmentPic() {
@@ -124,11 +53,16 @@
                 vm.apartmentId,
                 vm.fileModel
             ).then(function successCallback(response) {
-                //$rootScope.user.profilePicUrl = response.data;
                 vm.apartment.picUrl = response.data;
                 $location.path("/details/rentOut/"+vm.apartmentId)
             });
         }
 
+        //callbacks
+        function addApartmentCallback(apartment) {
+            console.log(apartment.data);
+            vm.apartmentId = apartment.data._id;
+            vm.hideForm=true;
+        }
     }
 })();

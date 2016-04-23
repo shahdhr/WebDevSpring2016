@@ -4,7 +4,6 @@
 "use strict";
 var q = require("q");
 module.exports = function(db,mongoose) {
-    //var users = require("./user.mock.json");
     var UserSchema = require("./user.schema.server.js")(mongoose);
     var UserModel = mongoose.model('ProjectUser', UserSchema);
     var api = {
@@ -69,7 +68,6 @@ module.exports = function(db,mongoose) {
     }
 
     function findAllUsers(){
-        //return users;
         var deferred = q.defer();
 
         UserModel.find(

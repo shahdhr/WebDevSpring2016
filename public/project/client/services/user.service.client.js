@@ -8,7 +8,6 @@
         .factory("UserService",UserService);
 
     function UserService($rootScope,$http) {
-
         var api = {
             findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
@@ -82,8 +81,6 @@
                 headers: {'Content-Type': undefined}
             });
         }
-
-
 
         function logout() {
             return $http.post("/api/project/logout");

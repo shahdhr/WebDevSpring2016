@@ -8,14 +8,13 @@
         .controller("SearchController",SearchController);
 
     function SearchController( $location, ApartmentService,$routeParams) {
-        var vm = this;
 
+        //Declarations
+        var vm = this;
         var bounds = [];
         var searchQuery = $routeParams.searchPlace;
         console.log(searchQuery);
-        vm.search = {
-            place:searchQuery
-        };
+        vm.search = { place:searchQuery};
         vm.previousPage = previousPage;
         vm.nextPage = nextPage;
         vm.findDetailsByDBId = findDetailsByDBId;
@@ -23,8 +22,7 @@
         vm.findDetailsById = findDetailsById;
 
 
-
-
+        //Initialization Method
         function init() {
             ApartmentService.findApartmentsByQuery(searchQuery,renderDetails);
             ApartmentService.getAllApartments()
@@ -33,14 +31,8 @@
         init();
 
 
-
+        //Implementations
         function searchPlaces(search) {
-            //vm.places = null;
-            //var query = search.place;
-            //searchQuery = query;
-            //ApartmentService.findApartmentsByQuery(query,renderDetails);
-            //ApartmentService.getAllApartments()
-            //    .then(searchDBApartments);
             $location.path("/search/"+search.place);
         }
 
@@ -66,14 +58,10 @@
             if(response.places.length > 0) {
                 setMapMarkers(response.places);
             }
-
             vm.places = response.places;
-            //vm.pages = response.total_pages;
             vm.total_entries = response.total_entries;
             vm.current_page = response.current_page;
             vm.total_pages = response.total_pages;
-
-
         }
 
         function findDetailsById(id) {
@@ -114,11 +102,5 @@
         function findDetailsByDBId(id) {
             $location.path("/details/rentOut/"+id);
         }
-
-
-
-
-
-
     }
 })();

@@ -30,9 +30,6 @@ module.exports = function (app, model,uuid) {
             }, function (err) {
                 res.status(400).send(err);
             });
-        //res.json(bookings);
-
-
     }
 
     function updateBookingById (req, res) {
@@ -40,20 +37,15 @@ module.exports = function (app, model,uuid) {
         var booking = req.body;
         booking = model.updateBookingById(id, booking)
             .then(function (doc) {
-               model.findBookingById(id)
-                   .then(function (doc) {
-                       res.json(doc);
-                   }, function (err) {
-                       res.status(400).send(err);
-                   });
+                model.findBookingById(id)
+                    .then(function (doc) {
+                        res.json(doc);
+                    }, function (err) {
+                        res.status(400).send(err);
+                    });
             }, function (err) {
                 res.status(400).send(err);
             });
-        //if(booking) {
-        //    res.json(booking);
-        //    return;
-        //}
-        //res.json({message: "User not found"});
     }
 
     function deleteBookingById (req, res) {

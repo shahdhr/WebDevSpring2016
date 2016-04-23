@@ -2,8 +2,6 @@
  * Created by Dhruv on 4/16/2016.
  */
 module.exports = function(mongoose) {
-
-
     var ApartmentSchema = mongoose.Schema({
         title: String,
         number_of_bedrooms: String,

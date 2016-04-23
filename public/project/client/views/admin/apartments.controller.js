@@ -10,10 +10,16 @@
 
     function ApartmentController(ApartmentService, $location, UserService)
     {
+        //Declarations
         var vm = this;
-        //currently logged in user
         var currentUser = UserService.getCurrentUser();
         vm.$location = $location;
+        vm.addApartment = addApartment;
+        vm.removeApartment = removeApartment;
+        vm.selectApartment = selectApartment;
+        vm.updateApartment = updateApartment;
+
+        //Initialization method
         function init() {
             ApartmentService
                 .findAllApartments()
@@ -21,11 +27,7 @@
         }
         init();
 
-        vm.addApartment = addApartment;
-        vm.removeApartment = removeApartment;
-        vm.selectApartment = selectApartment;
-        vm.updateApartment = updateApartment;
-
+        //IMplementations
         function updateApartment(apartment)
         {
             console.log(apartment.id);
@@ -50,18 +52,14 @@
                 number_of_bedrooms: vm.apartments[index].number_of_bedrooms,
                 number_of_bathrooms: vm.apartments[index].number_of_bathrooms
             };
-
-            //$scope.apartment = $scope.apartments[index];
         }
 
         function removeApartment(index)
         {
-
             var apartmentId = vm.apartments[index]._id;
             ApartmentService
                 .deleteApartmentById(apartmentId)
                 .then(removeApartmentCallback);
-            //$scope.apartments.splice(index, 1);
         }
 
         function addApartment(apartment)
@@ -81,7 +79,6 @@
             ApartmentService
                 .addApartment(newApartment)
                 .then(addApartmentCallback);
-            //$scope.apartments.push(newApartment);
         }
 
         //callback functions

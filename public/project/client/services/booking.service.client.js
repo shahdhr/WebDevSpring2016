@@ -8,8 +8,6 @@
         .factory("BookingService",BookingService);
 
     function BookingService($http) {
-
-
         var api = {
 
             addBooking : addBooking,
@@ -19,14 +17,10 @@
         };
         return api;
 
-
-
         function findAllBookingsForUser (bookedby) {
             return $http.get("/api/project/user/"+bookedby+"/booking");
 
         }
-
-
 
         function addBooking(booking)  {
             console.log("iyan aayvu");
@@ -41,12 +35,5 @@
         function updateBookingById(bookingId, newBooking) {
             return $http.put("/api/project/booking/"+bookingId,newBooking);
         }
-
-
-
-
-
-
-
     }
 })();

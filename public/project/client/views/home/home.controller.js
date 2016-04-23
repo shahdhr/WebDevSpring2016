@@ -12,6 +12,7 @@
 
     function HomeController( $location, ApartmentService) {
 
+        //Declarations
         var vm = this;
         var SEARCH_URL = "https://api.9flats.com/api/v4/places?client_id=9SDO9JGSYZiwc9S89yjW5c883Lbj0AopNdVnhS3l&search[query]=SEARCHQUERY";
         vm.searchPlaces = searchPlaces;
@@ -25,6 +26,7 @@
 
 
 
+        //Implementations
         function getAllCities() {
             ApartmentService.getAllCities()
                 .then(function(res) {
@@ -40,8 +42,6 @@
         function searchPlaces(search) {
             ApartmentService.setSearchQuery(search);
             $location.path("/search/"+search.place);
-            //ApartmentService.findApartmentsByQuery(query,renderDetails);
-
         }
 
         function updateCities(searchTerm) {
@@ -67,8 +67,6 @@
 
         function  renderDetails(response) {
             console.log(response);
-
-            //vm.places = response.places;
         }
 
         function findDetailsById(id) {

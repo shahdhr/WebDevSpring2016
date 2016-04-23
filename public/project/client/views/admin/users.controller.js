@@ -10,11 +10,16 @@
 
     function AdminController( $location, UserService)
     {
-        //currently logged in user
+        //Declarations
         var vm = this;
-
         var currentUser = UserService.getCurrentUser();
         vm.$location = $location;
+        vm.addUser = addUser;
+        vm.removeUser = removeUser;
+        vm.selectUser = selectUser;
+        vm.updateUser = updateUser;
+
+        //Initialization method
         function init() {
             UserService
                 .findAllUsers()
@@ -23,11 +28,7 @@
         }
         init();
 
-        vm.addUser = addUser;
-        vm.removeUser = removeUser;
-        vm.selectUser = selectUser;
-        vm.updateUser = updateUser;
-
+        //Implementations
         function updateUser(user)
         {
             console.log(user._id);
@@ -54,8 +55,6 @@
                 firstName:vm.users[index].firstName,
                 lastName:vm.users[index].lastName
             };
-
-            //$scope.apartment = $scope.apartments[index];
         }
 
         function removeUser(index)
@@ -64,7 +63,6 @@
             UserService
                 .deleteUserById(userId)
                 .then(removeUserCallback);
-            //$scope.apartments.splice(index, 1);
         }
 
         function addUser(user)
@@ -78,7 +76,6 @@
             UserService
                 .createUser(newUser)
                 .then(addUserCallback);
-            //$scope.apartments.push(newApartment);
         }
 
         //callback functions
@@ -101,8 +98,5 @@
         function updateUserCallback(user) {
             init();
         }
-
-
-
     }
 })();

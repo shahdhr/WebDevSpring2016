@@ -8,14 +8,10 @@
         .controller("ApartmentDetailsController",ApartmentDetailsController);
 
     function ApartmentDetailsController( $sce, $routeParams, ApartmentService,UserService,ReviewService,BookingService,MessageService) {
+
+        //Declarations
         var vm = this;
-
         vm.deliberatelyTrustDangerousSnippet = deliberatelyTrustDangerousSnippet;
-
-        function deliberatelyTrustDangerousSnippet(text) {
-            return $sce.trustAsHtml(text);
-        }
-
         var today = new Date().toISOString().split('T')[0];
         vm.minDate = today;
         var apartmentId = $routeParams.apartmentId;
@@ -27,15 +23,20 @@
         vm.bookButton = "Submit";
         vm.alertClosed = alertClosed;
         vm.sendMessage = sendMessage;
-
-
         vm.favouriteButton = "Mark as favourite";
         console.log(apartmentId);
+
+
+        //Initialization method
         function init() {
-
             ApartmentService.findApartmentDetailsById(apartmentId, renderDetails);
-
         } init();
+
+
+        //Implementations
+        function deliberatelyTrustDangerousSnippet(text) {
+            return $sce.trustAsHtml(text);
+        }
 
 
         function checkIfFavourite() {
@@ -117,8 +118,6 @@
 
                 vm.review = null;
             }
-
-            //$scope.apartments.push(newApartment);
         }
 
         function renderDetails(apartmentDetails) {
@@ -167,20 +166,17 @@
 
 
         function makeSlides() {
-          var slidesNew = vm.apartment.additional_photos;
+            var slidesNew = vm.apartment.additional_photos;
             var loop = slidesNew.length;
             if(loop > 10) {
                 loop = 10;
             }
-          for(var  i = 0;i<loop;i++) {
-              //console.log(slidesNew[i].place_photo.url);
-
-              slidesNew[i].place_photo.url = slidesNew[i].place_photo.url.replace("/medium.","/large.");
-              slides.push(slidesNew[i]);
-          }
+            for(var  i = 0;i<loop;i++) {
+                slidesNew[i].place_photo.url = slidesNew[i].place_photo.url.replace("/medium.","/large.");
+                slides.push(slidesNew[i]);
+            }
 
             vm.newSlides = slides;
-
         }
 
         function alertClosed() {
@@ -207,4 +203,4 @@
         }
 
     }
-    })();
+})();

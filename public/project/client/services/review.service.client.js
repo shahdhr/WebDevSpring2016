@@ -11,7 +11,6 @@
         .factory("ReviewService",ReviewService);
 
     function ReviewService($http) {
-
         var api = {
 
             addReview : addReview,
@@ -21,8 +20,6 @@
             updateReviewById : updateReviewById
         };
         return api;
-
-
 
         function findAllReviewsForUser (reviewedBy) {
             return $http.get("/api/project/user/"+reviewedBy+"/review");

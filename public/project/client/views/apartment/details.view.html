@@ -11,94 +11,88 @@
                ng-class="model.favourited?'glyphicon glyphicon-heart red':'glyphicon glyphicon-heart-empty red'"></a></h1>
         <h3 class="form_page_header text-center "></h3>
 
-    <div class = "col-xs-12">
-        <div class="col-xs-12 col-md-4 margin_top_header" >
-            <h5 class="form_page_header "><small>Description</small></h5>
-            <div class="form_label" ng-bind-html="model.deliberatelyTrustDangerousSnippet(model.apartment.description)"></div>
-            <h5 class="form_page_header "><small>Amenities</small></h5>
-            <ul>
-                <li class="form_label_li" ng-repeat="amenities in model.apartment.amenities_list track by $index">
-                    {{amenities}}
-                </li>
-            </ul>
-        </div>
-        <div class="col-xs-12 col-md-8 margin_top_header" >
-            <div class="panel panel-default">
-                <!--<div class="panel-heading panel-heading-custom">-->
-                <!--<h3 class="panel-title">Book Now</h3>-->
-                <!--</div>-->
-                <div class="panel-body ">
-                    <h3 class="form_page_header ">Book Now</h3>
-                    <div class="alert alert-success" role="alert" ng-show="model.bookingDone">
-                        <button type="button" ng-click="model.alertClosed()" class="close" ><span aria-hidden="true">&times;</span></button>
-                        {{model.bookingDone}}
-                    </div>
-                    <div class="form-group col-xs-6 ">
-                        <div class="form_label">In</div>
-                        <input placeholder="Date" onfocus="(this.type='date')" onBlur="(this.type='')" ng-model="model.book.startDate" min="{{model.minDate}}" class="form-control" id="inputStartDate">
-                    </div>
-                    <div class="form-group col-xs-6">
-                        <div class="form_label">Out</div>
-                        <input placeholder="Date" onfocus="(this.type='date')" onBlur="(this.type='')" ng-model="model.book.endDate" min="{{model.book.startDate}}" class="form-control" id="inputEndDate">
-                    </div>
-                    <div class="form-group col-xs-12" ng-show="model.book.endDate && model.book.startDate">
-                        <div class="form_label">Price/Night: {{model.pricing.price}}</div>
-                    </div>
-                    <div class="form-group col-xs-12" ng-show="model.Total">
-                        <div class="form_label">Total: {{model.Total}}</div>
-                    </div>
-                    <div class="form-group col-xs-12">
-                        <button  type="submit" ng class="btn btn-block form_button_background form_button_text" ng-click="model.bookApartment(model.book,model.bookButton)">{{model.bookButton}}</button>
-                    </div>
-                </div>
+        <div class = "col-xs-12">
+            <div class="col-xs-12 col-md-4 margin_top_header" >
+                <h5 class="form_page_header "><small>Description</small></h5>
+                <div class="form_label" ng-bind-html="model.deliberatelyTrustDangerousSnippet(model.apartment.description)"></div>
+                <h5 class="form_page_header "><small>Amenities</small></h5>
+                <ul>
+                    <li class="form_label_li" ng-repeat="amenities in model.apartment.amenities_list track by $index">
+                        {{amenities}}
+                    </li>
+                </ul>
             </div>
-            <div class="panel panel-default">
-                <!--<div class="panel-heading panel-heading-custom">-->
-                <!--<h3 class="panel-title">Contact Owner</h3>-->
-                <!--</div>-->
-                <div class="panel-body ">
-                    <h3 class="form_page_header ">Contact Owner</h3>
-                    <div class="alert alert-success" role="alert" ng-show="model.messageDone">
-                        <button type="button" ng-click="model.alertClosed()" class="close" ><span aria-hidden="true">&times;</span></button>
-                        {{model.messageDone}}
-                    </div>
-                    <div class="form-group ">
-                        <label class="control-label form_label" for="inputMessage">Message</label>
-                        <textarea rows="3" class="form-control" ng-model = "model.message" id="inputMessage"></textarea>
-                    </div>
-                    <div class="form-group col-xs-12">
-                        <button  type="submit"  class="btn btn-block form_button_background form_button_text" ng-click="model.sendMessage(model.message)">Send</button>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-body ">
-                    <h3 class="form_page_header ">Reviews</h3>
-                    <div class="properties_list" ng-show="model.reviews">
-                        <div ng-repeat="review in model.reviews track by $index">
-                            <div class="property_details">
-                                <div class="form_label">
-                                    <div class="property_title">{{review.description}}</div>
-                                </div>
-                                <input-stars max="5" ng-model="review.rating" readonly></input-stars>
-                                <hr>
-                            </div>
-
+            <div class="col-xs-12 col-md-8 margin_top_header" >
+                <div class="panel panel-default">
+                    <div class="panel-body ">
+                        <h3 class="form_page_header ">Book Now</h3>
+                        <div class="alert alert-success" role="alert" ng-show="model.bookingDone">
+                            <button type="button" ng-click="model.alertClosed()" class="close" ><span aria-hidden="true">&times;</span></button>
+                            {{model.bookingDone}}
+                        </div>
+                        <div class="form-group col-xs-6 ">
+                            <div class="form_label">In</div>
+                            <input placeholder="Date" onfocus="(this.type='date')" onBlur="(this.type='')" ng-model="model.book.startDate" min="{{model.minDate}}" class="form-control" id="inputStartDate">
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <div class="form_label">Out</div>
+                            <input placeholder="Date" onfocus="(this.type='date')" onBlur="(this.type='')" ng-model="model.book.endDate" min="{{model.book.startDate}}" class="form-control" id="inputEndDate">
+                        </div>
+                        <div class="form-group col-xs-12" ng-show="model.book.endDate && model.book.startDate">
+                            <div class="form_label">Price/Night: {{model.pricing.price}}</div>
+                        </div>
+                        <div class="form-group col-xs-12" ng-show="model.Total">
+                            <div class="form_label">Total: {{model.Total}}</div>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <button  type="submit" ng class="btn btn-block form_button_background form_button_text" ng-click="model.bookApartment(model.book,model.bookButton)">{{model.bookButton}}</button>
                         </div>
                     </div>
-                    <div class="form-group ">
-                        <label class="control-label form_label" for="inputReview">Write a review</label>
-                        <textarea rows="3" class="form-control" placeholder="type your review here..." ng-model = "model.review.description" id="inputReview"></textarea>
-                        <input-stars max="5" ng-model="model.review.rating"></input-stars>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body ">
+                        <h3 class="form_page_header ">Contact Owner</h3>
+                        <div class="alert alert-success" role="alert" ng-show="model.messageDone">
+                            <button type="button" ng-click="model.alertClosed()" class="close" ><span aria-hidden="true">&times;</span></button>
+                            {{model.messageDone}}
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label form_label" for="inputMessage">Message</label>
+                            <textarea rows="3" class="form-control" ng-model = "model.message" id="inputMessage"></textarea>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <button  type="submit"  class="btn btn-block form_button_background form_button_text" ng-click="model.sendMessage(model.message)">Send</button>
+                        </div>
                     </div>
-                    <div class="form-group col-xs-12">
-                        <button  type="submit"  class="btn btn-block form_button_background form_button_text" ng-click="model.addReview(model.review)">Add Review</button>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body ">
+                        <h3 class="form_page_header ">Reviews</h3>
+                        <div class="properties_list" ng-show="model.reviews">
+                            <div ng-repeat="review in model.reviews track by $index">
+                                <div class="property_details">
+                                    <div class="form_label">
+                                        <div class="property_title">{{review.description}}</div>
+                                    </div>
+                                    <input-stars max="5" ng-model="review.rating" readonly></input-stars>
+                                    <hr>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label form_label" for="inputReview">Write a review</label>
+                            <textarea rows="3" class="form-control" placeholder="type your review here..." ng-model = "model.review.description" id="inputReview"></textarea>
+                            <input-stars max="5" ng-model="model.review.rating"></input-stars>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <button  type="submit"  class="btn btn-block form_button_background form_button_text" ng-click="model.addReview(model.review)">Add Review</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
 
     </div>
 </div>

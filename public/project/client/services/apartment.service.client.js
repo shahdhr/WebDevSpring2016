@@ -8,8 +8,6 @@
         .factory("ApartmentService",ApartmentService);
 
     function ApartmentService($http, $rootScope) {
-
-
         var api = {
             findApartmentsByQuery: findApartmentsByQuery,
             findApartmentDetailsById: findApartmentDetailsById,
@@ -87,9 +85,5 @@
         function getAllCities() {
             return $http.get("/api/project/cities");
         }
-
-
-
-
     }
 })();

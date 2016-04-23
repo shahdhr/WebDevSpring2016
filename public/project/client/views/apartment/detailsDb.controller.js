@@ -8,8 +8,9 @@
         .controller("ApartmentDetailsDBController",ApartmentDetailsDBController);
 
     function ApartmentDetailsDBController( $sce,$routeParams, ApartmentService,UserService,ReviewService,BookingService,MessageService) {
-        var vm = this;
 
+        //Declarations
+        var vm = this;
         var today = new Date().toISOString().split('T')[0];
         vm.minDate = today;
         var apartmentId = $routeParams.apartmentId;
@@ -22,19 +23,23 @@
         vm.bookButton = "Submit";
         vm.alertClosed = alertClosed;
         vm.sendMessage = sendMessage;
-
         vm.deliberatelyTrustDangerousSnippet = deliberatelyTrustDangerousSnippet;
-
-
         vm.favouriteButton = "Mark as favourite";
         console.log(apartmentId);
+        vm.myInterval = 5000;
+        vm.noWrapSlides = false;
+        vm.active = 0;
+        var slides = [];
+        var currIndex = 0;
+
+        //Initialization Method
         function init() {
             ApartmentService.findApartmentDetailsByDbId(apartmentId)
                 .then(renderDetails);
-
         } init();
 
 
+        //Implementations
         function checkIfFavourite() {
             var currentUser = UserService.getCurrentUser();
             if(currentUser) {
@@ -120,8 +125,6 @@
 
                 vm.review = null;
             }
-
-            //$scope.apartments.push(newApartment);
         }
 
         function renderDetails(apartmentDetails) {
@@ -163,11 +166,7 @@
         }
 
 
-        vm.myInterval = 5000;
-        vm.noWrapSlides = false;
-        vm.active = 0;
-        var slides = [];
-        var currIndex = 0;
+
 
 
         function makeSlides() {
@@ -178,12 +177,8 @@
                     loop = 10;
                 }
                 for(var  i = 0;i<loop;i++) {
-                    //console.log(slidesNew[i].place_photo.url);
-
-                    //slidesNew[i].place_photo.url = slidesNew[i].place_photo.url.replace("/medium.","/large.");
                     slides.push(slidesNew[i]);
                 }
-
                 vm.newSlides = slides;
             }else {
             vm.noImage = "http://e-makaan.com/wp-content/uploads/2015/07/rental-property-no-photo-available-600x400.jpg"

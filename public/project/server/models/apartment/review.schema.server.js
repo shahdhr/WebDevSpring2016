@@ -2,8 +2,6 @@
  * Created by Dhruv on 4/17/2016.
  */
 module.exports = function(mongoose) {
-
-
     var ReviewSchema = mongoose.Schema({
         description: String,
         rating:String,
