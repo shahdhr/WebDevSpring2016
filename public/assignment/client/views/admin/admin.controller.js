@@ -138,7 +138,9 @@
             var newUser = {
                 username : user.username,
                 roles : user.roles,
-                password : "password"
+                password : user.password,
+                firstName : user.firstName,
+                lastName : user.lastName
 
             };
             UserService

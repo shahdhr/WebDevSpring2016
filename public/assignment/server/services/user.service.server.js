@@ -4,6 +4,7 @@
 
 var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
+var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function (app, model,uuid) {
     var auth = authorized;
@@ -27,11 +28,18 @@ module.exports = function (app, model,uuid) {
     passport.use('assignment',new LocalStrategy(
         function (username, password, done) {
             model
-                .findUserByCredentials({username: username, password: password})
+                .findUserByUsername(username)
                 .then(
                     function(user) {
-                        if (!user) { return done(null, false); }
-                        return done(null, user);
+                        console.log("encrypted");
+                        console.log(bcrypt.hashSync(password));
+                        console.log("db");
+                        console.log(user.password);
+                        if (user && bcrypt.compareSync(password, user.password)) {
+                            return done(null, user);
+                        } else {
+                            return done(null, false);
+                        }
                     },
                     function(err) {
                         if (err) { return done(err); }
@@ -44,7 +52,7 @@ module.exports = function (app, model,uuid) {
 
     function createUser (req, res) {
         var user = req.body;
-
+        user.password = bcrypt.hashSync(user.password);
         model.createUser(user)
             .then(
                 function (doc) {
@@ -167,28 +175,38 @@ module.exports = function (app, model,uuid) {
     function updateUserById (req, res) {
         var id = req.params.id;
         var newUser = req.body;
-        if(req.user.roles.indexOf("admin")) {
+        if(req.user.roles.indexOf("admin") > -1) {
             delete newUser.roles;
         }
         if(typeof newUser.roles == "string") {
             newUser.roles = newUser.roles.split(",");
         }
         model
-            .updateUser(id, newUser)
+            .findUserById(req.params.id)
             .then(
-                function(stats) {
+                function(user){
+                    if(user && ((newUser.password === user.password) || (newUser.password === ''))) {
+                        delete newUser.password;
+                        return model.updateUser(user._id, newUser);
+                    } else {
+                        newUser.password = bcrypt.hashSync(newUser.password);
+                        return model.updateUser(user._id, newUser);
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(stats){
                     res.send(200);
                 },
-                function(err) {
+                function(err){
                     res.status(400).send(err);
                 }
             );
-        //if(user) {
-        //    res.json(user);
-        //    return;
-        //}
-        //res.json({message: "User not found"});
     }
+
 
     function deleteUserById (req, res) {
         var id = req.params.userId;
@@ -253,6 +271,7 @@ module.exports = function (app, model,uuid) {
                     if(user) {
                         res.json(null);
                     } else {
+                        newUser.password = bcrypt.hashSync(newUser.password);
                         return model.createUser(newUser);
                     }
                 },
@@ -279,163 +298,3 @@ module.exports = function (app, model,uuid) {
     }
 };
 
-//module.exports = function (app, model,uuid) {
-//    app.get("/api/assignment/user", getAllUsers);
-//    app.get("/api/assignment/user/:id", getUserById);
-//    app.get("/api/assignment/loggedin",loggedin);
-//    app.post("/api/assignment/logout", logout);
-//    app.get("/api/assignment/user?username=username", getUserByUsername);
-//    app.get("/api/assignment/user?username=alice&password=wonderland",getUserByCredentials);
-//    app.put("/api/assignment/user/:id",updateUserById);
-//    app.post("/api/assignment/user",createUser);
-//    app.delete("/api/assignment/user/:id",deleteUserById);
-//
-//    function createUser (req, res) {
-//        var user = req.body;
-//        //user._id=uuid.v4();
-//        //model.createUser(user);
-//        //res.send (user);
-//
-//        model.createUser(user)
-//            .then(
-//                function (doc) {
-//                    req.session.newUser = doc;
-//                    res.json(user);
-//                },
-//                function (err) {
-//                    res.status(400).send(err);
-//                }
-//            );
-//    }
-//
-//    function loggedin(req, res) {
-//        res.json(req.session.newUser);
-//    }
-//
-//    function logout(req, res) {
-//        req.session.destroy();
-//        res.send(200);
-//    }
-//
-//    function getAllUsers (req, res) {
-//
-//        if(req.query.username) {
-//            if(req.query.password) {
-//                getUserByCredentials(req,res);
-//            }
-//            else {
-//                getUserByUsername(req,res);
-//            }
-//        }
-//        else {
-//            var users = model.findAllUsers();
-//            res.json(users);
-//        }
-//
-//    }
-//
-//    function getUserById (req, res) {
-//        var id = req.params.id;
-//        //console.log(req.params);
-//        //var user = model.findUserById(id);
-//        //if(user) {
-//        //    res.json(user);
-//        //    return;
-//        //}
-//        //res.json({message: "User not found"});
-//
-//        var user = model.findUserById(id)
-//            .then(
-//                function(doc) {
-//                    res.json(doc);
-//                },
-//                function (err) {
-//                    res.status(400).send(err);
-//                }
-//            )
-//    }
-//
-//    function getUserByCredentials (req, res) {
-//        var username = req.query.username;
-//        var password = req.query.password;
-//        var credentials = {
-//            username: username,
-//            password: password
-//        };
-//        model.findUserByCredentials(credentials)
-//            .then(
-//                function(doc) {
-//                    req.session.newUser = doc;
-//                    res.json(doc);
-//                },
-//                function (err) {
-//                    res.status(400).send(err);
-//                }
-//
-//            );
-//        //if(user) {
-//        //    res.json(user);
-//        //    return;
-//        //}
-//        //res.json({message: "User not found"});
-//    }
-//
-//    function getUserByUsername (req, res) {
-//        var username = req.query.username;
-//        console.log(username);
-//        model.findUserByUsername(username)
-//            .then(
-//                function(user) {
-//                    res.json(user);
-//                },
-//                function (err) {
-//                    res.status(400).send(err);
-//                }
-//            );
-//        //if(user) {
-//        //    res.json(user);
-//        //    return;
-//        //}
-//        //res.json({message: "User not found"});
-//    }
-//
-//
-//
-//    function updateUserById (req, res) {
-//        var id = req.params.id;
-//        var user = req.body;
-//        model
-//            .updateUser(id, user)
-//            .then(
-//                function(stats) {
-//                    res.send(200);
-//                },
-//                function(err) {
-//                    res.status(400).send(err);
-//                }
-//            );
-//        //if(user) {
-//        //    res.json(user);
-//        //    return;
-//        //}
-//        //res.json({message: "User not found"});
-//    }
-//
-//    function deleteUserById (req, res) {
-//        var id = req.params.id;
-//        model.deleteUser(id)
-//            .then (
-//                function (stats) {
-//                    res.send(200);
-//                },
-//                function (err) {
-//                    res.status(400).send(err);
-//                }
-//            );
-//        //if(model.deleteUser(id)) {
-//        //    res.send(200);
-//        //    return;
-//        //}
-//        //res.json ({message: "User not found"});
-//    }
-//};
