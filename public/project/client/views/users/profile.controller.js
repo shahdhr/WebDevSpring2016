@@ -109,12 +109,26 @@
             var user = UserService.getCurrentUser();
             if(user){
                 vm.favoritedApartments = [];
+                vm.favoritedApartmentsDb = [];
                 if(user.favourites.length > 0) {
                     for(var index = 0; index<user.favourites.length;index++) {
                         ApartmentService.findApartmentDetailsById(user.favourites[index],showFavouritesCallback);
                     }
+
                 } else {
                     vm.favoritedApartments = [];
+                }
+
+                if(user.favouritesDb.length > 0) {
+                    for(var i = 0;i<user.favouritesDb.length;i++) {
+                        ApartmentService.findApartmentDetailsByDbId(user.favouritesDb[i])
+                            .then(function(res) {
+                                console.log(res.data);
+                                vm.favoritedApartmentsDb.push(res.data);
+                            });
+                    }
+                } else {
+                    vm.favoritedApartmentsDb = []
                 }
             }
         }

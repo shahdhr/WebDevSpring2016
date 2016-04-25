@@ -11,6 +11,7 @@ module.exports = function(mongoose) {
         phones: [String],
         roles: [String],
         favourites:[String],
+        favouritesDb:[String],
         profilePicUrl: String
 
     }, {collection: 'project.rentout.user'});

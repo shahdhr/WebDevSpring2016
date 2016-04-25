@@ -43,8 +43,8 @@
         function checkIfFavourite() {
             var currentUser = UserService.getCurrentUser();
             if(currentUser) {
-                for(var i = 0;i<currentUser.favourites.length;i++) {
-                    if(currentUser.favourites[i]==vm.apartment._id) {
+                for(var i = 0;i<currentUser.favouritesDb.length;i++) {
+                    if(currentUser.favouritesDb[i]==vm.apartment._id) {
                         vm.favourited = true;
                     }
                 }
@@ -143,7 +143,7 @@
             if(currentUser) {
                     if(!vm.favourited) {
                         var user = UserService.getCurrentUser();
-                        user.favourites.push(apartmentId);
+                        user.favouritesDb.push(apartmentId);
                         UserService
                             .updateUser(user._id, user)
                             .then(addApartmentToFavouritesCallback);

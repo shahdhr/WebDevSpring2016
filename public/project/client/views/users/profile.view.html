@@ -110,6 +110,21 @@
 
                             </li>
                         </ul>
+                        <ul class="properties_list" ng-show="model.favoritedApartmentsDb">
+                            <li ng-repeat="apartment in model.favoritedApartmentsDb" >
+                                <div class="property_details">
+                                    <div class="form_label">
+                                        <button type="button" ng-click="model.removeFavourite(apartment._id)" class="close" >
+                                            <span aria-hidden="true">&times;</span></button>
+                                        <a href class="truncate_property_title" ng-click="model.findApartmentDetailsById(apartment)">{{apartment.title}}</a>
+
+                                    </div>
+                                    <h6>Bedroom : {{apartment.number_of_bedrooms}}, Bath : {{apartment.number_of_bathrooms}}</h6>
+                                    <hr>
+                                </div>
+
+                            </li>
+                        </ul>
                         <span ng-hide="model.favoritedApartments.length" class="help-block form_label">No favourites</span>
                     </div>
                 </div>
