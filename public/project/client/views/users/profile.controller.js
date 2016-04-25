@@ -165,8 +165,17 @@
         function removeFavourite(id) {
             console.log(id);
             var user = UserService.getCurrentUser();
-            var index = user.favourites.indexOf(id);
-            user.favourites.splice(index,1);
+
+            var index = user.favourites.indexOf(id.toString());
+            console.log(index);
+            if(index > -1) {
+                console.log("index > -1");
+                user.favourites.splice(index,1);
+            } else {
+                index = user.favouritesDb.indexOf(id);
+                user.favouritesDb.splice(index,1);
+            }
+
             UserService.updateUser(user._id,user)
                 .then(function (res) {
                     showFavourites();
