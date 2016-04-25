@@ -3,16 +3,16 @@
     <h3 class="form_page_header text-center ">Make money by renting out your apartment</h3>
     <div class="row margin_top_header">
         <div class="col-xs-12" ng-hide="model.hideForm">
-            <div class="form-group ">
+            <div id="title-group" class="form-group ">
                 <label class="control-label form_label" for="inputApartmentTitle">Name</label>
                 <input type="text" class="form-control" ng-model = "model.apartment.title" id="inputApartmentTitle" aria-describedby="helpBlock1">
                 <span id="helpBlock1" class="help-block">Enter a short name for your space</span>
             </div>
-            <div class="form-group ">
+            <div id="description-group" class="form-group ">
                 <label class="control-label form_label" for="inputApartmentDescription">Description</label>
                 <textarea rows="3" class="form-control" ng-model = "model.apartment.description" id="inputApartmentDescription"></textarea>
             </div>
-            <div class="form-group ">
+            <div id="amenities-group" class="form-group ">
                 <label class="control-label form_label" for="inputApartmentDescription">Amenities</label>
                 <div class="checkbox" ng-repeat="option in model.amenities track by $index">
                     <label>
@@ -23,36 +23,36 @@
                 </div>
                 <span id="helpBlock2" class="help-block">Check all that applies</span>
             </div>
-            <div class="form-group ">
+            <div id="street-address-group" class="form-group">
                 <label class="control-label form_label" for="inputApartmentStreet">Street Address</label>
                 <input type="text" class="form-control" ng-model = "model.apartment.street" id="inputApartmentStreet" >
             </div>
-            <div class="form-group ">
+            <div id="city-group" class="form-group ">
                 <label class="control-label form_label" for="inputApartmentCity">City</label>
                 <input type="text" class="form-control" ng-model = "model.apartment.city" id="inputApartmentCity" >
             </div>
-            <div class="form-group ">
+            <div id="country-group" class="form-group ">
                 <label class="control-label form_label" for="inputApartmentCountry">Country</label>
                 <input type="text" class="form-control" ng-model = "model.apartment.country" id="inputApartmentCountry" >
             </div>
-            <div class="form-group ">
+            <div id="zip-group" class="form-group ">
                 <label class="control-label form_label" for="inputApartmentZip">Zip</label>
                 <input type="number" class="form-control" ng-model = "model.apartment.zipcode" id="inputApartmentZip" >
             </div>
-            <div class="form-group ">
+            <div  class="form-group ">
                 <label class="control-label form_label" for="inputApartmentPrice">Price</label>
                 <input type="text" class="form-control" ng-model = "model.apartment.price" id="inputApartmentPrice" placeholder="50$" readonly>
                 <span id="helpBlock3" class="help-block">New Apartments starts at this price. Prices will change after three months based on "RentOut" reviews</span>
             </div>
-            <div class="form-group ">
+            <div id="bedrooms-group" class="form-group ">
                 <label class="control-label form_label" for="inputApartmentBedrooms">Number of Bedrooms</label>
                 <input type="text" class="form-control" ng-model = "model.apartment.number_of_bedrooms" id="inputApartmentBedrooms" >
             </div>
-            <div class="form-group ">
+            <div id="bathrooms-group" class="form-group ">
                 <label class="control-label form_label" for="inputApartmentBathrooms">Number of Bathrooms</label>
                 <input type="text" class="form-control" ng-model = "model.apartment.number_of_bathrooms" id="inputApartmentBathrooms" >
             </div>
-            <div class="form-group ">
+            <div class="form-group">
                 <button  type="submit" ng-click="model.addApartment(model.apartment)" class="btn btn-block form_button_background form_button_text">Submit</button>
             </div>
 
