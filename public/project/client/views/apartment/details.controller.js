@@ -106,17 +106,22 @@
         {
             if(review.description) {
                 var user = UserService.getCurrentUser();
-                var newReview = {
-                    apartmentId : apartmentId,
-                    description : review.description,
-                    rating : review.rating,
-                    reviewed_by : user._id
-                };
-                ReviewService
-                    .addReview(newReview)
-                    .then(addReviewCallback);
+                if(user) {
+                    var newReview = {
+                        apartmentId : apartmentId,
+                        description : review.description,
+                        rating : review.rating,
+                        reviewed_by : user._id
+                    };
+                    ReviewService
+                        .addReview(newReview)
+                        .then(addReviewCallback);
 
-                vm.review = null;
+                    vm.review = null;
+                } else {
+                    UserService.loginFirst();
+                }
+
             }
         }
 
@@ -186,19 +191,24 @@
 
         function sendMessage(message) {
             var user = UserService.getCurrentUser();
-            var newMessage = {
-                message: message,
-                message_to: "9FlatsOwner",
-                message_by: user._id,
-                message_time : Date.now,
-                message_by_name : user.firstName +" "+user.lastName,
-                apartment : vm.apartment.name,
-                apartment_id : apartmentId
-            };
-            MessageService.addMessage(newMessage)
-                .then(function(res) {
-                    vm.messageDone = "Message sent to owner"
-                })
+            if(user) {
+                var newMessage = {
+                    message: message,
+                    message_to: "9FlatsOwner",
+                    message_by: user._id,
+                    message_time : Date.now,
+                    message_by_name : user.firstName +" "+user.lastName,
+                    apartment : vm.apartment.name,
+                    apartment_id : apartmentId
+                };
+                MessageService.addMessage(newMessage)
+                    .then(function(res) {
+                        vm.messageDone = "Message sent to owner"
+                    })
+
+            } else {
+                UserService.loginFirst();
+            }
 
         }
 
