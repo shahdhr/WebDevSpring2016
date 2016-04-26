@@ -10,5 +10,6 @@
             "ui.bootstrap",
             "file-model",
             "autocomplete",
-            "angular-input-stars"]);
+            "angular-input-stars",
+            "textAngular"]);
 })();

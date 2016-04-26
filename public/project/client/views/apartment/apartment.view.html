@@ -10,7 +10,10 @@
             </div>
             <div id="description-group" class="form-group ">
                 <label class="control-label form_label" for="inputApartmentDescription">Description</label>
-                <textarea rows="3" class="form-control" ng-model = "model.apartment.description" id="inputApartmentDescription"></textarea>
+                <!--<textarea rows="3" class="form-control" ng-model = "model.apartment.description" id="inputApartmentDescription"></textarea>-->
+                <div text-angular id="inputApartmentDescription"
+                     ng-model="model.apartment.description">
+                </div>
             </div>
             <div id="amenities-group" class="form-group ">
                 <label class="control-label form_label" for="inputApartmentDescription">Amenities</label>
