@@ -33,7 +33,15 @@
 
         //Implementations
         function searchPlaces(search) {
+            //vm.places = null;
+            //var query = search.place;
+            //searchQuery = query;
+            //ApartmentService.findApartmentsByQuery(query,renderDetails);
+            //ApartmentService.getAllApartments()
+            //    .then(searchDBApartments);
+            mymap.remove();
             $location.path("/search/"+search.place);
+
         }
 
         function previousPage() {
@@ -69,13 +77,18 @@
         }
 
         //map
-        var mymap = L.map('map');
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-            maxZoom: 18
-        }).addTo(mymap);
+
+
+
+
+        var mymap = null;
 
         function setMapMarkers(places) {
+            mymap = L.map('map');
+            L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+                maxZoom: 18
+            }).addTo(mymap);
 
             for (var i = 0; i<places.length;i++) {
 

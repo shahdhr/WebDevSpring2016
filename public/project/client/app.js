@@ -11,5 +11,6 @@
             "file-model",
             "autocomplete",
             "angular-input-stars",
-            "textAngular"]);
+            "textAngular",
+            "hm.readmore", "ngAnimate"]);
 })();
