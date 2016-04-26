@@ -39,12 +39,18 @@
             //ApartmentService.findApartmentsByQuery(query,renderDetails);
             //ApartmentService.getAllApartments()
             //    .then(searchDBApartments);
-            mymap.remove();
+            if(mymap){
+                mymap.remove();
+            }
+
             $location.path("/search/"+search.place);
 
         }
 
         function previousPage() {
+            if(mymap){
+                mymap.remove();
+            }
             if(vm.current_page > 1) {
                 var pre = vm.current_page-1;
                 var query = vm.search.place +"&search[page]="+ pre;
@@ -53,6 +59,9 @@
         }
 
         function nextPage() {
+            if(mymap){
+                mymap.remove();
+            }
             console.log("here next");
             console.log(vm.current_page);
             if(!vm.current_page < 20) {
