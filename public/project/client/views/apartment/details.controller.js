@@ -52,42 +52,48 @@
         }
 
         function bookApartment(book,bookButton) {
-            if(bookButton=="Submit") {
-                var date1 = new Date(book.startDate);
-                var date2 = new Date(book.endDate);
-                var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-                vm.Total = diffDays * Number(vm.pricing.price);
-                vm.bookButton = "Book?"
-            } else {
-                console.log("iyan aayvu");
-                var user = UserService.getCurrentUser();
-                console.log(user);
-                if(user) {
-                    var booking = {
-                        startDate:book.startDate,
-                        endDate:book.endDate,
-                        apartmentId:vm.apartment.id,
-                        apartmentName:vm.apartment.name,
-                        booked_by:user._id,
-                        amount:vm.Total
-                    };
-                    BookingService.addBooking(booking)
-                        .then(function (res) {
-                                vm.bookingDone = "Booking Done!";
-                                vm.bookButton = "Submit"
-                                vm.Total = null;
-                                vm.book=null;
-                            },
-                            function (err) {
-                                vm.bookingDone = "Booking Failed!"
-                            });
+            var user = UserService.getCurrentUser();
+            if(user) {
+                if(bookButton=="Submit") {
+                    var date1 = new Date(book.startDate);
+                    var date2 = new Date(book.endDate);
+                    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                    vm.Total = diffDays * Number(vm.pricing.price);
+                    vm.bookButton = "Book?"
                 } else {
-                    UserService.loginFirst();
+                    console.log("iyan aayvu");
+
+                    console.log(user);
+                    if(user) {
+                        var booking = {
+                            startDate:book.startDate,
+                            endDate:book.endDate,
+                            apartmentId:vm.apartment.id,
+                            apartmentName:vm.apartment.name,
+                            booked_by:user._id,
+                            amount:vm.Total
+                        };
+                        BookingService.addBooking(booking)
+                            .then(function (res) {
+                                    vm.bookingDone = "Booking Done!";
+                                    vm.bookButton = "Submit"
+                                    vm.Total = null;
+                                    vm.book=null;
+                                },
+                                function (err) {
+                                    vm.bookingDone = "Booking Failed!"
+                                });
+                    } else {
+                        UserService.loginFirst();
+                    }
+
+
                 }
-
-
+            } else {
+                UserService.loginFirst();
             }
+
 
         }
 
@@ -104,9 +110,10 @@
 
         function addReview(review)
         {
-            if(review.description) {
-                var user = UserService.getCurrentUser();
-                if(user) {
+            if(user) {
+                if(review) {
+                    var user = UserService.getCurrentUser();
+
                     var newReview = {
                         apartmentId : apartmentId,
                         description : review.description,
@@ -118,11 +125,12 @@
                         .then(addReviewCallback);
 
                     vm.review = null;
-                } else {
-                    UserService.loginFirst();
                 }
 
+            } else {
+                UserService.loginFirst();
             }
+
         }
 
         function renderDetails(apartmentDetails) {

@@ -58,43 +58,48 @@
         }
 
         function bookApartment(book,bookButton) {
-            if(bookButton=="Submit") {
-                var date1 = new Date(book.startDate);
-                var date2 = new Date(book.endDate);
-                var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-                console.log(diffDays);
-                console.log(vm.pricing.price);
-                vm.Total = diffDays * vm.pricing.price;
-                vm.bookButton = "Book?"
-            } else {
-                console.log("iyan aayvu");
-                var user = UserService.getCurrentUser();
-                console.log(user);
-                if(user) {
-                    var booking = {
-                        startDate:book.startDate,
-                        endDate:book.endDate,
-                        apartmentId:vm.apartment._id,
-                        apartmentName:vm.apartment.title,
-                        booked_by:user._id,
-                        amount:vm.Total
-                    };
-                    BookingService.addBooking(booking)
-                        .then(function (res) {
-                                vm.bookingDone = "Booking Done!";
-                                vm.bookButton = "Submit"
-                                vm.Total = null;
-                                vm.book=null;
-                            },
-                            function (err) {
-                                vm.bookingDone = "Booking Failed!"
-                            });
+            var user = UserService.getCurrentUser();
+            if(user) {
+                if(bookButton=="Submit") {
+                    var date1 = new Date(book.startDate);
+                    var date2 = new Date(book.endDate);
+                    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                    console.log(diffDays);
+                    console.log(vm.pricing.price);
+                    vm.Total = diffDays * vm.pricing.price;
+                    vm.bookButton = "Book?"
                 } else {
-                    UserService.loginFirst();
+                    console.log("iyan aayvu");
+
+                    console.log(user);
+                    if(user) {
+                        var booking = {
+                            startDate:book.startDate,
+                            endDate:book.endDate,
+                            apartmentId:vm.apartment._id,
+                            apartmentName:vm.apartment.title,
+                            booked_by:user._id,
+                            amount:vm.Total
+                        };
+                        BookingService.addBooking(booking)
+                            .then(function (res) {
+                                    vm.bookingDone = "Booking Done!";
+                                    vm.bookButton = "Submit"
+                                    vm.Total = null;
+                                    vm.book=null;
+                                },
+                                function (err) {
+                                    vm.bookingDone = "Booking Failed!"
+                                });
+                    } else {
+                        UserService.loginFirst();
+                    }
+
+
                 }
-
-
+            } else {
+                UserService.loginFirst();
             }
 
         }
@@ -111,9 +116,10 @@
 
         function addReview(review)
         {
-            if(review.description) {
-                var user = UserService.getCurrentUser();
-                if(user) {
+
+            var user = UserService.getCurrentUser();
+            if(user) {
+                if(review) {
                     var newReview = {
                         apartmentId : apartmentId,
                         description : review.description,
@@ -125,10 +131,9 @@
                         .then(addReviewCallback);
 
                     vm.review = null;
-                } else {
-                    UserService.loginFirst();
                 }
-
+            } else {
+                UserService.loginFirst();
             }
         }
 
