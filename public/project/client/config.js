@@ -89,7 +89,8 @@
                     controller: "AdminController",
                     controllerAs : "model",
                     resolve: {
-                        loggedin:checkLoggedIn
+                        loggedin:checkLoggedIn,
+                        checkAdmin:checkAdmin
                     }
                 })
 
@@ -151,5 +152,18 @@
 
         return deferred.promise;
     };
+
+    var checkAdmin = function($q,$rootScope,$location) {
+        var deferred = $q.defer();
+        if($rootScope.newUser.roles.indexOf('admin') > -1) {
+            deferred.resolve();
+        } else {
+            deferred.reject();
+            $location.url('/home');
+        }
+
+
+        return deferred.promise;
+    }
 
 })();
