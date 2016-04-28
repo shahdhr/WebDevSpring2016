@@ -110,9 +110,10 @@
 
         function addReview(review)
         {
+            var user = UserService.getCurrentUser();
             if(user) {
                 if(review) {
-                    var user = UserService.getCurrentUser();
+
 
                     var newReview = {
                         apartmentId : apartmentId,
